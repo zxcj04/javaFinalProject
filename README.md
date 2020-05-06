@@ -1,6 +1,16 @@
 # JAVA期末專案
 
+```
+git clone https://github.com/zxcj04/javaFinalProject.git
+```
+
 ## master branch 給最後用，前期產出到其他branch去
+
+切換branch
+```
+git checkout master
+```
+master可以換成其他的 Rende/Chao/Liu/test...
 
 ## 學習區
 ### 先學習Git Vim可用可不用 碰到問題去看看

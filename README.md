@@ -12,6 +12,14 @@ git checkout master
 ```
 master可以換成其他的 Rende/Chao/Liu/test...
 
+## 最基本上傳指令
+```
+git add .
+git commit -m "OUOUOUOUOUO"
+git push origin test
+```
+**test要換成所在的branch**
+
 ## 學習區
 ### 先學習Git Vim可用可不用 碰到問題去看看
 * [Git入門](https://backlog.com/git-tutorial/tw/)

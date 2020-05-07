@@ -1,0 +1,9 @@
+this.cores = cores;
+this.threads = threads;
+this.TDP = TDP;
+this.frequency = frequency;
+this.turboBoost = turboBoost;
+this.socket = socket;
+this.ramMaximumSupport = ramMaximumSupport;
+this.ramGenerationSupport = ramGenerationSupport;
+this.internalGraphic = internalGraphic;

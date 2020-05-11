@@ -25,12 +25,19 @@ public class MainGee
 
     public void init()
     {
+        cpuList.clear(); 
+        mbList.clear(); 
+        ramList.clear(); 
+        vgaList.clear(); 
+        psuList.clear(); 
+        caseList.clear();
+         
         // fetch things from mongodb for several list
 
 
         // tmp
 
-        cpuList.add(new Cpu());
+        
     }
 
 

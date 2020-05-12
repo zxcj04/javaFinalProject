@@ -1,6 +1,6 @@
 package maintmp;
 
-public class Cpu 
+public class Cpu extends Hardware
 {
     private String cores;                   // 核心數 
     private String threads;                 // 線程數
@@ -12,8 +12,10 @@ public class Cpu
     private String ramGenerationSupport;    // 支援記憶體代數
     private String internalGraphic;         // 內顯(N/A for no interVGA)   
 
-    public Cpu(String cores, String threads, String TDP, String frequency, String turboBoost, String socket, String ramMaximumSupport, String ramGenerationSupport, String internalGraphic)
+    public Cpu(String name, String cores, String threads, String TDP, String frequency, String turboBoost, String socket, String ramMaximumSupport, String ramGenerationSupport, String internalGraphic)
     {
+        super(name);
+
         this.cores = cores;
         this.threads = threads;
         this.TDP = TDP;

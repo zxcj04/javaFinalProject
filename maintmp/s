@@ -1,9 +1,69 @@
-this.cores = cores;
-this.threads = threads;
-this.TDP = TDP;
-this.frequency = frequency;
-this.turboBoost = turboBoost;
-this.socket = socket;
-this.ramMaximumSupport = ramMaximumSupport;
-this.ramGenerationSupport = ramGenerationSupport;
-this.internalGraphic = internalGraphic;
+public String getsize()
+{
+    return "贊";
+}
+
+public String getpin()
+{
+    return "贊";
+}
+
+public String getsupportCpu()
+{
+    return "贊";
+}
+
+public String getRJ45()
+{
+    return "贊";
+}
+
+public String getgraphicOutput()
+{
+    return "贊";
+}
+
+public String getusbQuantity()
+{
+    return "贊";
+}
+
+public String getpcieQuantity()
+{
+    return "贊";
+}
+
+public String getramType()
+{
+    return "贊";
+}
+
+public String getramQuantity()
+{
+    return "贊";
+}
+
+public String getramMaximum()
+{
+    return "贊";
+}
+
+public String getwifi()
+{
+    return "贊";
+}
+
+public String getsata3Quantity()
+{
+    return "贊";
+}
+
+public String getm2Type()
+{
+    return "贊";
+}
+
+public String getm2Quantity()
+{
+    return "贊";
+}

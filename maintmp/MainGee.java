@@ -68,5 +68,8 @@ public class MainGee
         return list;
     }
 
-
+    public HardWareList getList(HardWareList list)
+    {
+        return null;
+    }
 }

@@ -1,6 +1,6 @@
 package maintmp;
 
-public class Case extends Hardware
+public class Crate extends Hardware
 {
     private String mbSize;
     private String vgaLength;
@@ -8,7 +8,7 @@ public class Case extends Hardware
     private String coolerHeight;
     private String diskQuantity;
 
-    public Case(String name, String mbSize, String vgaLength, String psuSize, String coolerHeight, String diskQuantity)
+    public Crate(String name, String mbSize, String vgaLength, String psuSize, String coolerHeight, String diskQuantity)
     {
         super(name);
 

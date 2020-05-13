@@ -15,14 +15,26 @@ public class HardWareList
 
     public HardWareList()
     {
-        cpu = new ArrayList<String>();
-        mb = new ArrayList<String>();
-        cooler = new ArrayList<String>();
-        ram = new ArrayList<String>();
-        vga = new ArrayList<String>();
-        disk = new ArrayList<String>();
-        psu = new ArrayList<String>();
-        crate = new ArrayList<String>();
+        cpu     = new ArrayList<String>();
+        mb      = new ArrayList<String>();
+        cooler  = new ArrayList<String>();
+        ram     = new ArrayList<String>();
+        vga     = new ArrayList<String>();
+        disk    = new ArrayList<String>();
+        psu     = new ArrayList<String>();
+        crate   = new ArrayList<String>();
+    }
+
+    public HardWareList(ArrayList<String> cpu, ArrayList<String> mb, ArrayList<String> cooler, ArrayList<String> ram, ArrayList<String> vga, ArrayList<String> disk, ArrayList<String> psu, ArrayList<String> crate)
+    {
+        this.cpu = cpu;
+        this.mb = mb;
+        this.cooler = cooler;
+        this.ram = ram;
+        this.vga = vga;
+        this.disk = disk;
+        this.psu = psu;
+        this.crate = crate;
     }
 
     @Override

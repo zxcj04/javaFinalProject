@@ -1,69 +1,8 @@
-public String getsize()
-{
-    return "贊";
-}
-
-public String getpin()
-{
-    return "贊";
-}
-
-public String getsupportCpu()
-{
-    return "贊";
-}
-
-public String getRJ45()
-{
-    return "贊";
-}
-
-public String getgraphicOutput()
-{
-    return "贊";
-}
-
-public String getusbQuantity()
-{
-    return "贊";
-}
-
-public String getpcieQuantity()
-{
-    return "贊";
-}
-
-public String getramType()
-{
-    return "贊";
-}
-
-public String getramQuantity()
-{
-    return "贊";
-}
-
-public String getramMaximum()
-{
-    return "贊";
-}
-
-public String getwifi()
-{
-    return "贊";
-}
-
-public String getsata3Quantity()
-{
-    return "贊";
-}
-
-public String getm2Type()
-{
-    return "贊";
-}
-
-public String getm2Quantity()
-{
-    return "贊";
-}
+this.cpu = cpu;
+this.mb = mb;
+this.cooler = cooler;
+this.ram = ram;
+this.vga = vga;
+this.disk = disk;
+this.psu = psu;
+this.crate = crate;

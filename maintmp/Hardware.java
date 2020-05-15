@@ -13,4 +13,10 @@ public class Hardware
     {
         return this.name;
     }
+
+    @Override
+    public String toString()
+    {
+        return this.getName();
+    }
 }

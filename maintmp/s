@@ -1,8 +1,8 @@
-this.cpu = cpu;
-this.mb = mb;
-this.cooler = cooler;
-this.ram = ram;
-this.vga = vga;
-this.disk = disk;
-this.psu = psu;
-this.crate = crate;
+cpu
+mb
+cooler
+ram
+vga
+disk
+psu
+crate

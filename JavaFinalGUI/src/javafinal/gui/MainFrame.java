@@ -1,3 +1,5 @@
+package javafinal.gui;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
@@ -15,7 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame
 	private JPanel optionPane = new JPanel();
 	private JPanel plusPane = new JPanel();
 	private JButton[] plusButtons = new JButton[3];
+	private ArrayList<ArrayList<JButton>> subButtons = new ArrayList<ArrayList<JButton>>();
 	private JTextArea suggestion = new JTextArea();
 	
 	private ArrayList<ArrayList<ComponentPanel>> subComponentPanes = 
@@ -85,7 +87,7 @@ public class MainFrame extends JFrame
 		
 		// option Panel
 		optionPane.setLayout(new GridLayout(0, 1));
-		optionPane.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
+//		optionPane.setBorder(BorderFactory.createLineBorder(Color.white, 1));
 		
 		// components Panel
 		for(int i = 0; i < lists.size(); i++) {
@@ -100,7 +102,7 @@ public class MainFrame extends JFrame
 		
 		// plus Button Panel
 		plusPane.setLayout(new GridLayout(0, 1));
-		plusPane.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
+		plusPane.setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
 		plusPane.setBackground(new Color(231, 242, 255));
 		plusPane.setOpaque(true);
 
@@ -115,26 +117,21 @@ public class MainFrame extends JFrame
 			plusPane.add(subPlusBtnPane.get(i));
 		}
 		ImageIcon plus = new ImageIcon(getClass().getResource("plus.jpg"));
-		plusButtons[0] = new JButton(plus);
-		plusButtons[1] = new JButton(plus);
-		plusButtons[2] = new JButton(plus);
+		
+		for(int i = 0; i < 3; i++) {
+			plusButtons[i] = new JButton(plus);
+			plusButtons[i].setPreferredSize(new Dimension(30, 30));
+			plusButtons[i].addActionListener(new PlusBtnListener());
+		}
 		subPlusBtnPane.get(MEM).add(plusButtons[0]);
 		subPlusBtnPane.get(DISK).add(plusButtons[1]);
 		subPlusBtnPane.get(VGA).add(plusButtons[2]);
-
-		plusButtons[0].addActionListener(new PlusBtnListener());
-		plusButtons[1].addActionListener(new PlusBtnListener());
-		plusButtons[2].addActionListener(new PlusBtnListener());
 		
 
 		mPane = new JScrollPane(masterPane);
 		mPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		mPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		mPane.setBackground(new Color(162, 193, 233));
-//		mPane.setOpaque(true);
 		mPane.getVerticalScrollBar().setUnitIncrement(16);
-		mPane.getViewport().getView().setForeground(new Color(162, 193, 233));
-		
 
 		this.add(mPane, BorderLayout.CENTER);
 		
@@ -180,32 +177,32 @@ public class MainFrame extends JFrame
 			optionPane.removeAll();
 			plusPane.removeAll();
 			subPlusBtnPane.clear();
+			subButtons.clear();
 			
 			int i = 0;
-			String name;
 			for(ArrayList<ComponentPanel> list : subComponentPanes) {
 				index[i] = count;
 				i++;
+				subButtons.add(new ArrayList<JButton>());
 				for(ComponentPanel pane : list) {
+					(subButtons.get(i - 1)).add(pane.getSubBtn());
+					pane.getSubBtn().addActionListener(new subListener());
+					
 					optionPane.add(pane);
-					if(count == index[i-1])
-						name = names[i-1];
-					else
-						name = String.format("%s - %d", names[i-1], count - index[i-1]);
 					
 					if(count == index[i - 1]) {
-						pane.setBorder(BorderFactory.createTitledBorder(name));
+						pane.setBorder(BorderFactory.createTitledBorder(names[i - 1]));
 						((TitledBorder)pane.getBorder()).setTitleFont(title);
 					}
 					else {
-//						pane.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
-						pane.setBorder(BorderFactory.createTitledBorder("‌"));
+						pane.setBorder(BorderFactory.createTitledBorder("​"));
 						((TitledBorder)pane.getBorder()).setTitleFont(title);
 					}
 
 					subPlusBtnPane.add(new JPanel());
 					subPlusBtnPane.get(count).setLayout(new BoxLayout(subPlusBtnPane.get(count), BoxLayout.LINE_AXIS));
 					subPlusBtnPane.get(count).setAlignmentY(Component.CENTER_ALIGNMENT);
+					
 					count++;
 				}
 			}
@@ -224,6 +221,48 @@ public class MainFrame extends JFrame
 			}
 			
 			MainFrame.this.revalidate();
+		}
+		
+		private class subListener implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				int count = 0;
+				
+				for(int i = 0; i < subButtons.size(); i++) {
+					for(int j = 0; j < subButtons.get(i).size(); j++, count++) {
+						if(event.getSource() == subButtons.get(i).get(j) &&
+						   subComponentPanes.get(i).size() > 1) {
+							
+							optionPane.remove(count);
+							subComponentPanes.get(i).remove(j);
+							subButtons.get(i).remove(j);
+							
+							if(j != 0) {
+								subPlusBtnPane.remove(count);
+								plusPane.remove(count);
+							}
+							else {
+								plusPane.remove(count + 1);
+								subPlusBtnPane.remove(count + 1);
+							}
+							
+							if(j == 0) {
+								subComponentPanes.get(i).get(j).setBorder(BorderFactory.createTitledBorder(names[i]));
+								((TitledBorder)subComponentPanes.get(i).get(j).getBorder()).setTitleFont(title);
+							}
+							
+							if(subComponentPanes.get(i).size() == 1) {
+								subComponentPanes.get(i).get(0).setSubBtn(false);
+							}
+							
+							break;
+						}
+						
+					}
+				}
+				
+				MainFrame.this.revalidate();
+			}
 		}
 	}
 }

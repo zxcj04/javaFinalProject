@@ -1,5 +1,9 @@
+package javafinal.gui;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.UIManager;
 
 public class MainFrameTest
 {
@@ -21,9 +25,9 @@ public class MainFrameTest
 		    }
 		});
 		
-		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setSize(1000, 700);
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
+		mainFrame.setLocationRelativeTo(null);
 	}
 }

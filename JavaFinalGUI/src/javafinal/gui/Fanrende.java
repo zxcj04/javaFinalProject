@@ -1,3 +1,5 @@
+package javafinal.gui;
+
 import java.util.ArrayList;
 
 public class Fanrende

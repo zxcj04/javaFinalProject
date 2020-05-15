@@ -1,3 +1,5 @@
+package javafinal.gui;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -15,7 +17,6 @@ import javax.swing.SpinnerNumberModel;
 
 public class ComponentPanel extends JPanel
 {
-									// combobox, spinner, custom, sub
 	private boolean[][] visableSet = {{true, false, false, true},  // cpu
 									  {true, false,  true, true},  // cooler
 									  {true, false, false, true},  // motherboard
@@ -83,6 +84,7 @@ public class ComponentPanel extends JPanel
 		// gear Button
 		ImageIcon gear = new ImageIcon(getClass().getResource("gear.jpg"));
 		customBtn = new JButton(gear);
+		customBtn.setPreferredSize(new Dimension(30, 30));
 		
 		panel1.add(customBtn);
 		customBtn.setVisible(visableSet[cur][2]);
@@ -90,6 +92,7 @@ public class ComponentPanel extends JPanel
 		// sub Button
 		ImageIcon sub = new ImageIcon(getClass().getResource("sub.jpg"));
 		subBtn = new JButton(sub);
+		subBtn.setPreferredSize(new Dimension(30, 30));
 		
 		panel2.add(subBtn);
 		if(isOnly) {
@@ -103,5 +106,10 @@ public class ComponentPanel extends JPanel
 	public void setSubBtn(boolean visable)
 	{
 		subBtn.setVisible(visable);
+	}
+	
+	public JButton getSubBtn()
+	{
+		return subBtn;
 	}
 }

@@ -108,6 +108,7 @@ public class MainFrame extends JFrame
 			
 			
 			comboBoxes.get(i).add(subComponentPanes.get(i).get(0).getComboBox());
+			inputs.get(i).add("Hi");
 			comboBoxes.get(i).get(0).addItemListener(new comboBoxListener());	
 			
 			if(i != CPU && i != MB) {
@@ -192,11 +193,11 @@ public class MainFrame extends JFrame
 							String choosen = lists.get(i).get(comboBoxes.get(i).get(j).getSelectedIndex());
 							
 							if(!choosen.equals("請選擇"))
-								inputs.get(i).add(choosen);
+								inputs.get(i).set(j, choosen);
 							else {
-								inputs.get(i).remove(j);
+								inputs.get(i).set(j, "Hi");
 							}
-//							
+							
 //							for(ArrayList<String> list: inputs) {
 //								for(String item : list) {
 //									System.out.print(item + " ");
@@ -226,6 +227,8 @@ public class MainFrame extends JFrame
 				comboBoxes.get(MEM).add(subComponentPanes.get(MEM).get(subComponentPanes.get(MEM).size() - 1).getComboBox());
 				comboBoxes.get(MEM).get(comboBoxes.get(MEM).size() - 1).addItemListener(new comboBoxListener());
 				
+				inputs.get(MEM).add("Hi");
+				
 				gearButtons.get(MEM).add(subComponentPanes.get(MEM).get(subComponentPanes.get(MEM).size() - 1).getGear());
 				gearButtons.get(MEM).get(gearButtons.get(MEM).size() - 1).addActionListener(new memoryListener());
 			}
@@ -236,6 +239,8 @@ public class MainFrame extends JFrame
 				comboBoxes.get(DISK).add(subComponentPanes.get(DISK).get(subComponentPanes.get(DISK).size() - 1).getComboBox());
 				comboBoxes.get(DISK).get(comboBoxes.get(DISK).size() - 1).addItemListener(new comboBoxListener());
 				
+				inputs.get(DISK).add("Hi");
+				
 				gearButtons.get(DISK).add(subComponentPanes.get(DISK).get(subComponentPanes.get(DISK).size() - 1).getGear());
 				gearButtons.get(DISK).get(gearButtons.get(DISK).size() - 1).addActionListener(new diskListener());
 			}
@@ -245,6 +250,8 @@ public class MainFrame extends JFrame
 
 				comboBoxes.get(VGA).add(subComponentPanes.get(VGA).get(subComponentPanes.get(VGA).size() - 1).getComboBox());
 				comboBoxes.get(VGA).get(comboBoxes.get(VGA).size() - 1).addItemListener(new comboBoxListener());
+				
+				inputs.get(VGA).add("Hi");
 				
 				gearButtons.get(VGA).add(subComponentPanes.get(VGA).get(subComponentPanes.get(VGA).size() - 1).getGear());
 				gearButtons.get(VGA).get(gearButtons.get(VGA).size() - 1).addActionListener(new vgaListener());

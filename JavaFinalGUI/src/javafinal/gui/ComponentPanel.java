@@ -4,12 +4,16 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -116,5 +120,9 @@ public class ComponentPanel extends JPanel
 	public JButton getGear()
 	{
 		return customBtn;
+	}
+	
+	public JComboBox getComboBox() {
+		return comboBox;
 	}
 }

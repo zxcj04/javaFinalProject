@@ -23,6 +23,15 @@ public class Fanrende
 		psuList = new ArrayList<String>();
 		caseList = new ArrayList<String>();
 		
+		cpuList.add("請選擇");
+		cpuCoolerList.add("請選擇");
+		motherboardList.add("請選擇");
+		memoryList.add("請選擇");
+		hardwareList.add("請選擇");
+		vgaList.add("請選擇");
+		psuList.add("請選擇");
+		caseList.add("請選擇");
+		
 		cpuList.add("A");
 		cpuCoolerList.add("B");
 		motherboardList.add("C");

@@ -7,6 +7,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -52,7 +55,9 @@ public class MainFrame extends JFrame
 	private JPanel optionPane = new JPanel();
 	private JPanel plusPane = new JPanel();
 	private JButton[] plusButtons = new JButton[3];
+	private ArrayList<ArrayList<JComboBox>> comboBoxes = new ArrayList<ArrayList<JComboBox>>();
 	private ArrayList<ArrayList<JButton>> subButtons = new ArrayList<ArrayList<JButton>>();
+	private ArrayList<ArrayList<JButton>> gearButtons = new ArrayList<ArrayList<JButton>>();
 	private JTextArea suggestion = new JTextArea();
 	
 	private ArrayList<ArrayList<ComponentPanel>> subComponentPanes = 
@@ -81,6 +86,8 @@ public class MainFrame extends JFrame
 		for(int i = 0; i < lists.size(); i++) {
 			inputs.add(new ArrayList<String>());
 			subComponentPanes.add(new ArrayList<ComponentPanel>());
+			comboBoxes.add(new ArrayList<JComboBox>());
+			gearButtons.add(new ArrayList<JButton>());
 		}
 		
 		// set this
@@ -98,10 +105,19 @@ public class MainFrame extends JFrame
 			
 			subComponentPanes.get(i).get(0).setBorder(BorderFactory.createTitledBorder(names[i]));
 			((TitledBorder)subComponentPanes.get(i).get(0).getBorder()).setTitleFont(title);
+			
+			
+			comboBoxes.get(i).add(subComponentPanes.get(i).get(0).getComboBox());
+			comboBoxes.get(i).get(0).addItemListener(new comboBoxListener());	
+			
+			if(i != CPU && i != MB) {
+				gearButtons.get(i).add(subComponentPanes.get(i).get(0).getGear());
+			}
 		}
 		
-		subComponentPanes.get(MEM).get(0).getGear().addActionListener(new memoryListener());
-		subComponentPanes.get(DISK).get(0).getGear().addActionListener(new diskListener());
+		gearButtons.get(MEM).get(0).addActionListener(new memoryListener());
+		gearButtons.get(DISK).get(0).addActionListener(new diskListener());
+		gearButtons.get(VGA).get(0).addActionListener(new vgaListener());
 		
 		masterPane.add(optionPane, BorderLayout.CENTER);
 		
@@ -159,6 +175,43 @@ public class MainFrame extends JFrame
 		suggestionPane.add(scrollSuggestion, BorderLayout.CENTER);
 	}
 	
+	public ArrayList<ArrayList<String>> updateInputs(){
+		// when sub Button Listened
+		// when comboBox Listened
+		return inputs;
+	}
+	
+	private class comboBoxListener implements ItemListener {
+		@Override
+		public void itemStateChanged(ItemEvent event) {
+			for(int i = 0; i < comboBoxes.size(); i++) {
+				for(int j = 0; j < comboBoxes.get(i).size(); j++) {
+					if(event.getSource() == comboBoxes.get(i).get(j) &&
+					   event.getStateChange() == ItemEvent.SELECTED) {
+						try {
+							String choosen = lists.get(i).get(comboBoxes.get(i).get(j).getSelectedIndex());
+							
+							if(!choosen.equals("請選擇"))
+								inputs.get(i).add(choosen);
+							else {
+								inputs.get(i).remove(j);
+							}
+//							
+//							for(ArrayList<String> list: inputs) {
+//								for(String item : list) {
+//									System.out.print(item + " ");
+//								}
+//								System.out.println();
+//							}
+						}catch(Exception e){}
+						
+						return;
+					}
+				}
+			}
+		}
+	}
+	
 	private class PlusBtnListener implements ActionListener
 	{
 		@Override
@@ -169,16 +222,32 @@ public class MainFrame extends JFrame
 			if(event.getSource() == plusButtons[0]) {
 				subComponentPanes.get(MEM).add(new ComponentPanel(lists.get(MEM), MEM, false));
 				subComponentPanes.get(MEM).get(0).setSubBtn(true);
-				subComponentPanes.get(MEM).get(subComponentPanes.get(MEM).size() - 1).getGear().addActionListener(new memoryListener());
+				
+				comboBoxes.get(MEM).add(subComponentPanes.get(MEM).get(subComponentPanes.get(MEM).size() - 1).getComboBox());
+				comboBoxes.get(MEM).get(comboBoxes.get(MEM).size() - 1).addItemListener(new comboBoxListener());
+				
+				gearButtons.get(MEM).add(subComponentPanes.get(MEM).get(subComponentPanes.get(MEM).size() - 1).getGear());
+				gearButtons.get(MEM).get(gearButtons.get(MEM).size() - 1).addActionListener(new memoryListener());
 			}
 			else if(event.getSource() == plusButtons[1]) {
 				subComponentPanes.get(DISK).add(new ComponentPanel(lists.get(DISK), DISK, false));
 				subComponentPanes.get(DISK).get(0).setSubBtn(true);
-				subComponentPanes.get(DISK).get(subComponentPanes.get(DISK).size() - 1).getGear().addActionListener(new diskListener());
+				
+				comboBoxes.get(DISK).add(subComponentPanes.get(DISK).get(subComponentPanes.get(DISK).size() - 1).getComboBox());
+				comboBoxes.get(DISK).get(comboBoxes.get(DISK).size() - 1).addItemListener(new comboBoxListener());
+				
+				gearButtons.get(DISK).add(subComponentPanes.get(DISK).get(subComponentPanes.get(DISK).size() - 1).getGear());
+				gearButtons.get(DISK).get(gearButtons.get(DISK).size() - 1).addActionListener(new diskListener());
 			}
 			else {
 				subComponentPanes.get(VGA).add(new ComponentPanel(lists.get(VGA), VGA, false));
 				subComponentPanes.get(VGA).get(0).setSubBtn(true);
+
+				comboBoxes.get(VGA).add(subComponentPanes.get(VGA).get(subComponentPanes.get(VGA).size() - 1).getComboBox());
+				comboBoxes.get(VGA).get(comboBoxes.get(VGA).size() - 1).addItemListener(new comboBoxListener());
+				
+				gearButtons.get(VGA).add(subComponentPanes.get(VGA).get(subComponentPanes.get(VGA).size() - 1).getGear());
+				gearButtons.get(VGA).get(gearButtons.get(VGA).size() - 1).addActionListener(new vgaListener());
 			}
 			
 			optionPane.removeAll();
@@ -242,7 +311,13 @@ public class MainFrame extends JFrame
 						
 						optionPane.remove(count);
 						subComponentPanes.get(i).remove(j);
+						
+						if(i != CPU && i != MB) {
+							gearButtons.get(i).remove(j);
+						}
+						
 						subButtons.get(i).remove(j);
+						inputs.get(i).remove(j);
 						
 						if(j != 0) {
 							subPlusBtnPane.remove(count);
@@ -299,6 +374,21 @@ public class MainFrame extends JFrame
 			diskFrame.setResizable(false);
 			diskFrame.setLocationRelativeTo(MainFrame.this);
 			diskFrame.setVisible(true);
+		}
+	}
+	
+	private class vgaListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			
+			JDialog vgaFrame = new VgaSubFrame();
+			
+			vgaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			vgaFrame.setSize(300, 120);
+			vgaFrame.setResizable(false);
+			vgaFrame.setLocationRelativeTo(MainFrame.this);
+			vgaFrame.setVisible(true);
 		}
 	}
 }

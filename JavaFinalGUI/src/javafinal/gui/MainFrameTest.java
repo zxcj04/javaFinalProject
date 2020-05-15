@@ -3,6 +3,7 @@ package javafinal.gui;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 public class MainFrameTest
@@ -18,16 +19,12 @@ public class MainFrameTest
 											code.getVgaList(),
 											code.getPsuList(),
 											code.getCaseList());
-		mainFrame.addWindowListener(new WindowAdapter(){
-			@Override
-			public void windowClosing(WindowEvent e) {
-		        System.exit(0);
-		    }
-		});
+		
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainFrame.setSize(1000, 700);
 		mainFrame.setResizable(false);
-		mainFrame.setVisible(true);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setVisible(true);
 	}
 }

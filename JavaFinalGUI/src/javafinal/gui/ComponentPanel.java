@@ -112,4 +112,9 @@ public class ComponentPanel extends JPanel
 	{
 		return subBtn;
 	}
+	
+	public JButton getGear()
+	{
+		return customBtn;
+	}
 }

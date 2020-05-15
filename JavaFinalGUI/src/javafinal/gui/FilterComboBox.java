@@ -22,6 +22,9 @@ public class FilterComboBox
      * Entries to the combobox ArrayList.
      */
     private ArrayList<String> entries;
+    
+    private final JTextField textfield =
+            (JTextField) this.getEditor().getEditorComponent();
 
     public ArrayList<String> getEntries()
     {
@@ -90,5 +93,9 @@ public class FilterComboBox
         {
             this.hidePopup();
         }
+    }
+    
+    public JTextField getTextField() {
+    	return textfield;
     }
 }

@@ -23,7 +23,7 @@ public class MainFrameTest
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainFrame.setSize(1000, 700);
-		mainFrame.setResizable(false);
+//		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
 	}

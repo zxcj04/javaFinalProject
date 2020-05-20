@@ -32,9 +32,11 @@ public class MainGee
 
         // fetch things from mongodb for several list
 
-        mongoClient = MongoClients.create("mongodb://localhost:27017");
+        // mongoClient = MongoClients.create("mongodb://localhost:27017");
+        mongoClient = MongoClients.create("mongodb+srv://testJUser:test@testjavafinalproject-tlluw.gcp.mongodb.net/test?retryWrites=true&w=majority");
 
-        javaTestDB = mongoClient.getDatabase("javaTest");
+        // javaTestDB = mongoClient.getDatabase("javaTest");
+        javaTestDB = mongoClient.getDatabase("testJavaFinalProject");
 
         collectionList.setCpuCollection(javaTestDB.getCollection("cpu"));
         collectionList.setMbCollection(javaTestDB.getCollection("mb"));
@@ -65,13 +67,21 @@ public class MainGee
 
     public HardwareNameList getList(HardwareNameList selectedList)
     {
-        HardwareList nowList = new HardwareList();
+        HardwareList selectList = new HardwareList();
+        HardwareList filteredList = new HardwareList();
 
-        nowList.setHardware(selectedList, nameList, originList);
+        selectList.setHardware(selectedList, nameList, originList);
 
-        
+        filteredList.filterCpu(selectList, collectionList);
+        filteredList.filterMb(selectList, collectionList);
+        filteredList.filterCooler(selectList, collectionList);
+        filteredList.filterRam(selectList, collectionList);
+        filteredList.filterVga(selectList, collectionList);
+        filteredList.filterDisk(selectList, collectionList);
+        filteredList.filterPsu(selectList, collectionList);
+        filteredList.filterCrate(selectList, collectionList);
 
-        return null;
+        return HardwareNameList.toNameList(filteredList);
     }
 
     public HardwareList getHList(HardwareNameList selectedList)

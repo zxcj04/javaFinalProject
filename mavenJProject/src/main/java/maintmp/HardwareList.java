@@ -1,5 +1,14 @@
 package maintmp;
 
+import com.mongodb.client.MongoCollection;
+
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.*;
+
+import org.bson.BsonArray;
+import org.bson.Document;
+import org.bson.*;
+
 import java.util.ArrayList;
 
 public class HardwareList 
@@ -127,6 +136,137 @@ public class HardwareList
 
             this.clear();
         }
+    }
+
+    public void filterCpu(HardwareList selected, CollectionList db)
+    {
+        if(!selected.cpuList.isEmpty())
+        {
+            this.cpuList.addAll(selected.cpuList);
+
+            return;
+        }
+
+        MongoCollection<Document> collection = db.getCpuCollection();
+
+        // System.out.println(this.cpuList.get(0).getSocket());
+
+        if(!selected.mbList.isEmpty())
+        {
+            for(Document d: collection.find(eq("socket", selected.mbList.get(0).getPin())))
+            {
+                this.cpuList.add(Cpu.toObject(d));
+            }
+        }
+    }
+
+    public void filterMb(HardwareList selected, CollectionList db)
+    {
+        if(!selected.mbList.isEmpty())
+        {
+            this.mbList.addAll(selected.mbList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getMbCollection();
+
+        BsonArray filters = new BsonArray();
+
+        // filters.add();
+
+        // eq("pin", selected.cpuList.get(0).getSocket());
+
+        if(!selected.cpuList.isEmpty())
+        {
+            // filters.add((BsonValue) eq("pin", selected.cpuList.get(0).getSocket()));
+
+            // and();
+        }
+    }
+
+    public void filterCooler(HardwareList selected, CollectionList db)
+    {
+        if(!selected.coolerList.isEmpty())
+        {
+            this.coolerList.addAll(selected.coolerList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getCoolerCollection();
+
+        
+    }
+
+    public void filterRam(HardwareList selected, CollectionList db)
+    {
+        if(!selected.ramList.isEmpty())
+        {
+            this.ramList.addAll(selected.ramList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getRamCollection();
+
+        
+    }
+
+    public void filterVga(HardwareList selected, CollectionList db)
+    {
+        if(!selected.vgaList.isEmpty())
+        {
+            this.vgaList.addAll(selected.vgaList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getVgaCollection();
+
+        
+    }
+
+    public void filterDisk(HardwareList selected, CollectionList db)
+    {
+        if(!selected.diskList.isEmpty())
+        {
+            this.diskList.addAll(selected.diskList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getDiskCollection();
+
+        
+    }
+    
+    public void filterPsu(HardwareList selected, CollectionList db)
+    {
+        if(!selected.psuList.isEmpty())
+        {
+            this.psuList.addAll(selected.psuList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getPsuCollection();
+
+        
+    }
+
+    public void filterCrate(HardwareList selected, CollectionList db)
+    {
+        if(!selected.crateList.isEmpty())
+        {
+            this.crateList.addAll(selected.crateList);
+
+            return;
+        }
+        
+        MongoCollection<Document> collection = db.getCrateCollection();
+
+        
     }
 
     @Override

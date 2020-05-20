@@ -35,7 +35,7 @@ public class MainTest
         HardwareNameList select = new HardwareNameList();
 
         select.cpu      .add("test3Cpu");
-        select.mb       .add("testMb");
+        // select.mb       .add("testMb");
         select.cooler   .add("testCooler");
         select.ram      .add("test6Ram");
         select.vga      .add("testVga");
@@ -55,5 +55,18 @@ public class MainTest
 
         System.out.println(b - a);
         System.out.println(selc);
+
+        HardwareNameList selcName = gee.getList(select);
+
+        System.out.print(selcName.fullDisplay());
+
+        // System.out.println(selcName.cpu.get(0));
+        // System.out.println(selcName.mb.get(0));
+        // System.out.println(selcName.cooler.get(0));
+        // System.out.println(selcName.ram.get(0));
+        // System.out.println(selcName.vga.get(0));
+        // System.out.println(selcName.disk.get(0));
+        // System.out.println(selcName.psu.get(0));
+        // System.out.println(selcName.crate.get(0));
     }
 }

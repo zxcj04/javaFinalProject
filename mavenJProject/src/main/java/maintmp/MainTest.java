@@ -14,18 +14,22 @@ public class MainTest
 
         MainGee gee;
 
-        try 
-        {        
+        // try 
+        // {        
             gee = new MainGee();    
 
             gee.init();
-        }
-        catch (Exception e) 
-        {
-            System.out.println("exiting...");
+        // }
+        // catch (Exception e) 
+        // {
+        //     System.out.println("exiting...");
 
-            return;
-        }
+        //     System.out.println(e.getLocalizedMessage());
+        //     System.out.println(e.getCause());
+        //     System.out.println(e.getStackTrace());            
+
+        //     return;
+        // }
 
         double a = System.currentTimeMillis();
 
@@ -47,14 +51,14 @@ public class MainTest
 
         HardwareNameList select = new HardwareNameList();
 
-        select.cpu      .add("test3Cpu");
-        // select.mb       .add("testMb");
+        // select.cpu      .add("test3Cpu"); 
+        select.mb       .add("testMb");
         // select.cooler   .add("testCooler");
         select.ram      .add("test6Ram");
-        select.vga      .add("testVga");
+        // select.vga      .add("testVga");
         select.disk     .add("testDisk");
-        select.psu      .add("testPsu");
-        select.crate    .add("testCrate");
+        select.psu      .add("test1Psu");
+        // select.crate    .add("test1Crate");
 
         a = System.currentTimeMillis();
 
@@ -72,14 +76,5 @@ public class MainTest
         HardwareNameList selcName = gee.getList(select);
 
         System.out.print(selcName.fullDisplay());
-
-        // System.out.println(selcName.cpu.get(0));
-        // System.out.println(selcName.mb.get(0));
-        // System.out.println(selcName.cooler.get(0));
-        // System.out.println(selcName.ram.get(0));
-        // System.out.println(selcName.vga.get(0));
-        // System.out.println(selcName.disk.get(0));
-        // System.out.println(selcName.psu.get(0));
-        // System.out.println(selcName.crate.get(0));
     }
 }

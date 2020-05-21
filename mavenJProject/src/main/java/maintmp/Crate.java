@@ -6,11 +6,12 @@ public class Crate extends Hardware
 {
     private String mbSize;
     private int vgaLength;
-    private int psuSize;
+    private String psuSize;
     private int coolerHeight;
     private int diskQuantity;
+    private int psuLength;
 
-    public Crate(String name, String mbSize, int vgaLength, int psuSize, int coolerHeight, int diskQuantity)
+    public Crate(String name, String mbSize, int vgaLength, String psuSize, int coolerHeight, int diskQuantity, int psuLength)
     {
         super(name);
 
@@ -19,11 +20,12 @@ public class Crate extends Hardware
         this.psuSize = psuSize;
         this.coolerHeight = coolerHeight;
         this.diskQuantity = diskQuantity;
+        this.psuLength = psuLength;
     }
 
     public static Crate toObject(Document doc)
     {
-        Crate object = new Crate((String)doc.get("name"), (String)doc.get("mbSize"), (int)doc.get("vgaLength"), (int)doc.get("psuSize"), (int)doc.get("coolerHeight"), (int)doc.get("diskQuantity"));
+        Crate object = new Crate((String)doc.get("name"), (String)doc.get("mbSize"), (int)doc.get("vgaLength"), (String)doc.get("psuSize"), (int)doc.get("coolerHeight"), (int)doc.get("diskQuantity"), (int)doc.get("psuLength"));
 
         return object;
     }
@@ -38,7 +40,7 @@ public class Crate extends Hardware
         return this.vgaLength;
     }
 
-    public int getPsuSize()
+    public String getPsuSize()
     {
         return this.psuSize;
     }
@@ -53,4 +55,8 @@ public class Crate extends Hardware
         return this.diskQuantity;
     }
 
+    public int getPsuLength()
+    {
+        return this.psuLength;
+    }
 }

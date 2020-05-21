@@ -3,12 +3,9 @@ package maintmp;
 import com.mongodb.client.MongoCollection;
 
 import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Updates.*;
 
-import org.bson.BsonArray;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.bson.*;
 
 import java.util.ArrayList;
 
@@ -141,34 +138,54 @@ public class HardwareList
 
     public void filterCpu(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.cpuList.isEmpty())
-        {
-            this.cpuList.addAll(origin.cpuList);
+        // if(!selected.cpuList.isEmpty())
+        // {
+        //     this.cpuList.addAll(origin.cpuList);
 
-            return;
-        }
+        //     return;
+        // }
 
         MongoCollection<Document> collection = db.getCpuCollection();
 
-        // System.out.println(this.cpuList.get(0).getPin());
+        ArrayList<Bson> filters = new ArrayList<Bson>();
 
         if(!selected.mbList.isEmpty())
         {
-            for(Document d: collection.find(eq("pin", selected.mbList.get(0).getPin())))
+            filters.add(eq("pin", selected.mbList.get(0).getPin()));
+        }
+
+        if(!selected.ramList.isEmpty())
+        {
+            int ramCapacity = 0;
+
+            for(Ram r : selected.ramList)
             {
-                this.cpuList.add(Cpu.toObject(d));
+                ramCapacity += r.getCapacity();
             }
+
+            filters.add(gte("ramMaximumSupport", ramCapacity));
+            filters.add(eq("ramGenerationSupport", selected.ramList.get(0).getRamType()));
+        }
+        
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
+        }
+
+        for(Document d: collection.find(and(filters)))
+        {
+            this.cpuList.add(Cpu.toObject(d));
         }
     }
 
     public void filterMb(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.mbList.isEmpty())
-        {
-            this.mbList.addAll(origin.mbList);
+        // if(!selected.mbList.isEmpty())
+        // {
+        //     this.mbList.addAll(origin.mbList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getMbCollection();
 
@@ -257,12 +274,24 @@ public class HardwareList
                 case "itx":
                     crateFilters.add(eq("size", "itx"));
 
+                    break;
+
                 default:
 
                     break;
             }
 
+            if(crateFilters.isEmpty())
+            {
+                crateFilters.add(or(eq("", ""), ne("", "")));
+            }
+            
             filters.add(or(crateFilters));
+        }
+        
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
         }
 
         for(Document d : collection.find(and(filters)))
@@ -273,12 +302,12 @@ public class HardwareList
 
     public void filterCooler(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.coolerList.isEmpty())
-        {
-            this.coolerList.addAll(origin.coolerList);
+        // if(!selected.coolerList.isEmpty())
+        // {
+        //     this.coolerList.addAll(origin.coolerList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getCoolerCollection();
 
@@ -287,6 +316,11 @@ public class HardwareList
         if(!selected.crateList.isEmpty())
         {
             filters.add(lte("height", selected.crateList.get(0).getCoolerHeight()));        
+        }
+        
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
         }
 
         for(Document d : collection.find(and(filters)))
@@ -297,122 +331,227 @@ public class HardwareList
 
     public void filterRam(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.ramList.isEmpty())
-        {
-            this.ramList.addAll(origin.ramList);
+        // if(!selected.ramList.isEmpty())
+        // {
+        //     this.ramList.addAll(origin.ramList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getRamCollection();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
-        // if(!selected.cpuList.isEmpty())
-        // {
-        //     filters.add(eq("pin", selected.cpuList.get(0).getPin()));        
-        // }
+        if(!selected.cpuList.isEmpty())
+        {
+            filters.add(eq("ramType", selected.cpuList.get(0).getRamGenerationSupport()));        
+        }
 
-        // for(Document d : collection.find(and(filters)))
-        // {
-        //     mbList.add(Mb.toObject(d));
-        // }
+        if(!selected.mbList.isEmpty())
+        {
+            filters.add(eq("ramType", selected.mbList.get(0).getRamType()));
+        }
+
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
+        }
+
+        for(Document d : collection.find(and(filters)))
+        {
+            ramList.add(Ram.toObject(d));
+        }
     }
 
     public void filterVga(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.vgaList.isEmpty())
-        {
-            this.vgaList.addAll(origin.vgaList);
+        // if(!selected.vgaList.isEmpty())
+        // {
+        //     this.vgaList.addAll(origin.vgaList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getVgaCollection();
 
-        // ArrayList<Bson> filters = new ArrayList<Bson>();
+        ArrayList<Bson> filters = new ArrayList<Bson>();
         
-        // if(!selected.cpuList.isEmpty())
-        // {
-        //     filters.add(eq("pin", selected.cpuList.get(0).getPin()));        
-        // }
+        if(!selected.mbList.isEmpty())
+        {
+            if(selected.mbList.get(0).getPcieQuantity() < 1)
+                return;
+        }
 
-        // for(Document d : collection.find(and(filters)))
-        // {
-        //     mbList.add(Mb.toObject(d));
-        // }
+        if(!selected.crateList.isEmpty())
+        {
+            filters.add(lte("length", selected.crateList.get(0).getVgaLength()));
+        }
+
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
+        }
+        
+        for(Document d : collection.find(and(filters)))
+        {
+            vgaList.add(Vga.toObject(d));
+        }
     }
 
     public void filterDisk(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.diskList.isEmpty())
-        {
-            this.diskList.addAll(origin.diskList);
+        // if(!selected.diskList.isEmpty())
+        // {
+        //     this.diskList.addAll(origin.diskList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getDiskCollection();
 
-        // ArrayList<Bson> filters = new ArrayList<Bson>();
+        ArrayList<Bson> filters = new ArrayList<Bson>();
         
-        // if(!selected.cpuList.isEmpty())
-        // {
-        //     filters.add(eq("pin", selected.cpuList.get(0).getPin()));        
-        // }
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
+        }
 
-        // for(Document d : collection.find(and(filters)))
-        // {
-        //     mbList.add(Mb.toObject(d));
-        // }
+        for(Document d : collection.find(and(filters)))
+        {
+            diskList.add(Disk.toObject(d));
+        }
     }
     
     public void filterPsu(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.psuList.isEmpty())
-        {
-            this.psuList.addAll(origin.psuList);
+        // if(!selected.psuList.isEmpty())
+        // {
+        //     this.psuList.addAll(origin.psuList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getPsuCollection();
 
-        // ArrayList<Bson> filters = new ArrayList<Bson>();
+        ArrayList<Bson> filters = new ArrayList<Bson>();
         
-        // if(!selected.cpuList.isEmpty())
-        // {
-        //     filters.add(eq("pin", selected.cpuList.get(0).getPin()));        
-        // }
+        if(!selected.cpuList.isEmpty() && !selected.vgaList.isEmpty())
+        {
+            int costTDP = 0;
 
-        // for(Document d : collection.find(and(filters)))
-        // {
-        //     mbList.add(Mb.toObject(d));
-        // }
+            costTDP += selected.cpuList.get(0).getTDP();
+
+            for(Vga v : selected.vgaList)
+            {
+                costTDP += v.getTDP();
+            }
+
+            filters.add(eq("watts", costTDP));        
+        }
+
+        if(!selected.crateList.isEmpty())
+        {
+            filters.add(eq("size", selected.crateList.get(0).getPsuSize()));
+            filters.add(lte("length", selected.crateList.get(0).getPsuLength()));
+        }
+        
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
+        }
+
+        for(Document d : collection.find(and(filters)))
+        {
+            psuList.add(Psu.toObject(d));
+        }
     }
 
     public void filterCrate(HardwareList selected, CollectionList db, HardwareList origin)
     {
-        if(!selected.crateList.isEmpty())
-        {
-            this.crateList.addAll(origin.crateList);
+        // if(!selected.crateList.isEmpty())
+        // {
+        //     this.crateList.addAll(origin.crateList);
 
-            return;
-        }
+        //     return;
+        // }
         
         MongoCollection<Document> collection = db.getCrateCollection();
 
-        // ArrayList<Bson> filters = new ArrayList<Bson>();
+        ArrayList<Bson> filters = new ArrayList<Bson>();
         
-        // if(!selected.cpuList.isEmpty())
-        // {
-        //     filters.add(eq("pin", selected.cpuList.get(0).getPin()));        
-        // }
+        if(!selected.mbList.isEmpty())
+        {
+            ArrayList<Bson> mbFilters = new ArrayList<Bson>();
 
-        // for(Document d : collection.find(and(filters)))
-        // {
-        //     mbList.add(Mb.toObject(d));
-        // }
+            switch(selected.mbList.get(0).getSize())
+            {
+                case "itx":
+                    mbFilters.add(eq("mbSize", "itx"));
+
+                case "matx":
+                    mbFilters.add(eq("mbSize", "matx"));
+
+                case "atx":
+                    mbFilters.add(eq("mbSize", "atx"));
+
+                case "eatx":
+                    mbFilters.add(eq("mbSize", "eatx"));
+
+                    break;
+
+                default:
+
+                    break;
+            }
+            
+            if(mbFilters.isEmpty())
+            {
+                mbFilters.add(or(eq("", ""), ne("", "")));
+            }
+
+            filters.add(or(mbFilters));        
+        }
+
+        if(!selected.coolerList.isEmpty())
+        {
+            filters.add(gte("coolerHeight", selected.coolerList.get(0).getHeight()));
+        }
+
+        if(!selected.vgaList.isEmpty())
+        {
+            filters.add(gte("vgaLength", selected.vgaList.get(0).getLength()));
+        }
+
+        if(!selected.diskList.isEmpty())
+        {
+            int disk35 = 0;
+
+            for(Disk d : selected.diskList)
+            {
+                if(d.getDiskType() == "3.5")
+                {
+                    disk35 += 1;
+                }
+            }
+
+            filters.add(gte("diskQuantity", disk35));
+        }
+
+        if(!selected.psuList.isEmpty())
+        {
+            filters.add(gte("psuLength", selected.psuList.get(0).getLength()));
+            filters.add(eq("psuSize", selected.psuList.get(0).getSize()));
+        }
+        
+        if(filters.isEmpty())
+        {
+            filters.add(or(eq("", ""), ne("", "")));
+        }
+
+        for(Document d : collection.find(and(filters)))
+        {
+            crateList.add(Crate.toObject(d));
+        }
     }
 
     @Override

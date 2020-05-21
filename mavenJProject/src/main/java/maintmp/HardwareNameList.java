@@ -9,8 +9,8 @@ public class HardwareNameList
     public ArrayList<String> cooler;
     public ArrayList<String> mb;
     public ArrayList<String> ram;
-    public ArrayList<String> vga;
     public ArrayList<String> disk;
+    public ArrayList<String> vga;
     public ArrayList<String> psu;
     public ArrayList<String> crate;
 
@@ -20,22 +20,22 @@ public class HardwareNameList
         cooler  = new ArrayList<String>();
         mb      = new ArrayList<String>();
         ram     = new ArrayList<String>();
-        vga     = new ArrayList<String>();
         disk    = new ArrayList<String>();
+        vga     = new ArrayList<String>();
         psu     = new ArrayList<String>();
         crate   = new ArrayList<String>();
     }
 
     public HardwareNameList(ArrayList<String> cpu, ArrayList<String> cooler, ArrayList<String> mb,
-            ArrayList<String> ram, ArrayList<String> vga, ArrayList<String> disk, ArrayList<String> psu,
+            ArrayList<String> ram, ArrayList<String> disk, ArrayList<String> vga, ArrayList<String> psu,
             ArrayList<String> crate)
     {
         this.cpu = cpu;
         this.cooler = cooler;
         this.mb = mb;
         this.ram = ram;
-        this.vga = vga;
         this.disk = disk;
+        this.vga = vga;
         this.psu = psu;
         this.crate = crate;
     }
@@ -46,8 +46,8 @@ public class HardwareNameList
         cooler.clear();
         mb.clear();
         ram.clear();
-        vga.clear();
         disk.clear();
+        vga.clear();
         psu.clear();
         crate.clear();
     }

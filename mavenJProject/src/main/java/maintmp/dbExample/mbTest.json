@@ -5,13 +5,13 @@
     "supportCpu" : "ryzen", 
     "RJ45" : "1", 
     "graphicOutput" : "dvi/hdmi", 
-    "usbQuantity" : "4", 
-    "pcieQuantity" : "2", 
+    "usbQuantity" : 4, 
+    "pcieQuantity" : 2, 
     "ramType" : "ddr4", 
-    "ramQuantity" : "4", 
-    "ramMaximum" : "64g", 
+    "ramQuantity" : 4, 
+    "ramMaximum" : 64, 
     "wifi" : "0", 
-    "sata3Quantity" : "6", 
+    "sata3Quantity" : 6, 
     "m2Type" : "pcie", 
-    "m2Quantity" : "1"
+    "m2Quantity" : 1
 }

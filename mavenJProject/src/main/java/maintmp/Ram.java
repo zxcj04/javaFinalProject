@@ -5,9 +5,9 @@ import org.bson.Document;
 public class Ram extends Hardware
 {
     private String ramType;  
-    private String capacity;
+    private int capacity;
     
-    public Ram(String name, String ramType, String capacity)
+    public Ram(String name, String ramType, int capacity)
     {
         super(name);
         
@@ -20,14 +20,14 @@ public class Ram extends Hardware
         return this.ramType;
     }
 
-    public String getCapacity()
+    public int getCapacity()
     {
         return this.capacity;
     }
 
     public static Ram toObject(Document doc)
     {
-        Ram object = new Ram((String)doc.get("name"), (String)doc.get("ramType"), (String)doc.get("capacity"));
+        Ram object = new Ram((String)doc.get("name"), (String)doc.get("ramType"), (int)doc.get("capacity"));
 
         return object;
     }

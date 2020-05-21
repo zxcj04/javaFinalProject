@@ -1,5 +1,5 @@
 {
-    "name" : "test8Ram", 
+    "name" : "testRam", 
     "ramType" : "ddr4", 
-    "capacity" : "16g"
+    "capacity" : 16
 }

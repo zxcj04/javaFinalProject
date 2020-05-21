@@ -6,8 +6,8 @@ import static java.util.stream.Collectors.toList;
 public class HardwareNameList
 {
     public ArrayList<String> cpu;
-    public ArrayList<String> mb;
     public ArrayList<String> cooler;
+    public ArrayList<String> mb;
     public ArrayList<String> ram;
     public ArrayList<String> vga;
     public ArrayList<String> disk;
@@ -17,8 +17,8 @@ public class HardwareNameList
     public HardwareNameList()
     {
         cpu     = new ArrayList<String>();
-        mb      = new ArrayList<String>();
         cooler  = new ArrayList<String>();
+        mb      = new ArrayList<String>();
         ram     = new ArrayList<String>();
         vga     = new ArrayList<String>();
         disk    = new ArrayList<String>();
@@ -26,13 +26,13 @@ public class HardwareNameList
         crate   = new ArrayList<String>();
     }
 
-    public HardwareNameList(ArrayList<String> cpu, ArrayList<String> mb, ArrayList<String> cooler,
+    public HardwareNameList(ArrayList<String> cpu, ArrayList<String> cooler, ArrayList<String> mb,
             ArrayList<String> ram, ArrayList<String> vga, ArrayList<String> disk, ArrayList<String> psu,
             ArrayList<String> crate)
     {
         this.cpu = cpu;
-        this.mb = mb;
         this.cooler = cooler;
+        this.mb = mb;
         this.ram = ram;
         this.vga = vga;
         this.disk = disk;
@@ -43,8 +43,8 @@ public class HardwareNameList
     public void clear()
     {
         cpu.clear();
-        mb.clear();
         cooler.clear();
+        mb.clear();
         ram.clear();
         vga.clear();
         disk.clear();

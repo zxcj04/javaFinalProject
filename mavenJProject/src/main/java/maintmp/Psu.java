@@ -4,11 +4,11 @@ import org.bson.Document;
 
 public class Psu extends Hardware
 {
-    private String length;
-    private String watts;
+    private int length;
+    private int watts;
     private String size;
 
-    public Psu(String name, String length, String watts, String size)
+    public Psu(String name, int length, int watts, String size)
     {
         super(name);
 
@@ -17,12 +17,12 @@ public class Psu extends Hardware
         this.size = size;
     }
 
-    public String getLength()
+    public int getLength()
     {
         return this.length;
     }
 
-    public String getWatts()
+    public int getWatts()
     {
         return this.watts;
     }
@@ -34,7 +34,7 @@ public class Psu extends Hardware
 
     public static Psu toObject(Document doc)
     {
-        Psu object = new Psu((String)doc.get("name"), (String)doc.get("length"), (String)doc.get("watts"), (String)doc.get("size"));
+        Psu object = new Psu((String)doc.get("name"), (int)doc.get("length"), (int)doc.get("watts"), (String)doc.get("size"));
 
         return object;
     }

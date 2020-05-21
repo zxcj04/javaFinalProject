@@ -4,23 +4,30 @@ import org.bson.Document;
 
 public class Vga extends Hardware
 {
-    private String length;
+    private int length;
+    private int TDP;
 
-    public Vga(String name, String length)
+    public Vga(String name, int length, int TDP)
     {
         super(name);
 
         this.length = length;
+        this.TDP = TDP;
     }
 
-    public String getLength()
+    public int getLength()
     {
         return this.length;
     }
 
+    public int getTDP()
+    {
+        return this.TDP;
+    }
+
     public static Vga toObject(Document doc)
     {
-        Vga object = new Vga((String)doc.get("name"), (String)doc.get("length"));
+        Vga object = new Vga((String)doc.get("name"), (int)doc.get("length"), (int)doc.get("TDP"));
 
         return object;
     }

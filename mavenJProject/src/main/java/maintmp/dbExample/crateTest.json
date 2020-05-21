@@ -1,8 +1,8 @@
 {
     "name" : "testCrate", 
     "mbSize" : "matx", 
-    "vgaLength" : "20cm", 
-    "psuSize" : "17cm", 
-    "coolerHeight" : "13cm", 
-    "diskQuantity" : "3"
+    "vgaLength" : 20, 
+    "psuSize" : 17, 
+    "coolerHeight" : 13, 
+    "diskQuantity" : 3
 }

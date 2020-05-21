@@ -5,12 +5,12 @@ import org.bson.Document;
 public class Crate extends Hardware
 {
     private String mbSize;
-    private String vgaLength;
-    private String psuSize;
-    private String coolerHeight;
-    private String diskQuantity;
+    private int vgaLength;
+    private int psuSize;
+    private int coolerHeight;
+    private int diskQuantity;
 
-    public Crate(String name, String mbSize, String vgaLength, String psuSize, String coolerHeight, String diskQuantity)
+    public Crate(String name, String mbSize, int vgaLength, int psuSize, int coolerHeight, int diskQuantity)
     {
         super(name);
 
@@ -23,7 +23,7 @@ public class Crate extends Hardware
 
     public static Crate toObject(Document doc)
     {
-        Crate object = new Crate((String)doc.get("name"), (String)doc.get("mbSizeme"), (String)doc.get("vgaLength"), (String)doc.get("psuSize"), (String)doc.get("coolerHeight"), (String)doc.get("diskQuantity"));
+        Crate object = new Crate((String)doc.get("name"), (String)doc.get("mbSize"), (int)doc.get("vgaLength"), (int)doc.get("psuSize"), (int)doc.get("coolerHeight"), (int)doc.get("diskQuantity"));
 
         return object;
     }
@@ -33,22 +33,22 @@ public class Crate extends Hardware
         return this.mbSize;
     }
 
-    public String getVgaLength()
+    public int getVgaLength()
     {
         return this.vgaLength;
     }
 
-    public String getPsuSize()
+    public int getPsuSize()
     {
         return this.psuSize;
     }
 
-    public String getCoolerHeight()
+    public int getCoolerHeight()
     {
         return this.coolerHeight;
     }
 
-    public String getDiskQuantity()
+    public int getDiskQuantity()
     {
         return this.diskQuantity;
     }

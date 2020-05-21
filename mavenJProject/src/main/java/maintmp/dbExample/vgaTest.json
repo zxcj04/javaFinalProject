@@ -1,4 +1,5 @@
 {
     "name" : "testVga", 
-    "length" : "17cm"
+    "length" : 17,
+    "TDP" : 120
 }

@@ -6,16 +6,16 @@ public class Cpu extends Hardware
 {
     private String cores;                   // 核心數 
     private String threads;                 // 線程數
-    private String TDP;                     // TDP
+    private int TDP;                     // TDP
     private String frequency;               // 基本頻率
     private String turboBoost;              // boost頻率
-    private String socket;                  // 腳位
-    private String ramMaximumSupport;       // 支援記憶體大小
+    private String pin;                  // 腳位
+    private int ramMaximumSupport;       // 支援記憶體大小
     private String ramGenerationSupport;    // 支援記憶體代數
     private String internalGraphic;         // 內顯(N/A for no interVGA)   
 
-    public Cpu(String name, String cores, String threads, String TDP, String frequency
-             , String turboBoost, String socket, String ramMaximumSupport, String ramGenerationSupport, String internalGraphic)
+    public Cpu(String name, String cores, String threads, int TDP, String frequency
+             , String turboBoost, String pin, int ramMaximumSupport, String ramGenerationSupport, String internalGraphic)
     {
         super(name);
 
@@ -24,7 +24,7 @@ public class Cpu extends Hardware
         this.TDP = TDP;
         this.frequency = frequency;
         this.turboBoost = turboBoost;
-        this.socket = socket;
+        this.pin = pin;
         this.ramMaximumSupport = ramMaximumSupport;
         this.ramGenerationSupport = ramGenerationSupport;
         this.internalGraphic = internalGraphic;
@@ -32,9 +32,9 @@ public class Cpu extends Hardware
  
     public static Cpu toObject(Document doc)
     {
-        Cpu object = new Cpu((String)doc.get("name"), (String)doc.get("cores"), (String)doc.get("threads"), (String)doc.get("TDP")
-                           , (String)doc.get("frequency"), (String)doc.get("turboBoost"), (String)doc.get("socket")
-                           , (String)doc.get("ramMaximumSupport"), (String)doc.get("ramGenerationSupport"), (String)doc.get("internalGraphic"));
+        Cpu object = new Cpu((String)doc.get("name"), (String)doc.get("cores"), (String)doc.get("threads"), (int)doc.get("TDP")
+                           , (String)doc.get("frequency"), (String)doc.get("turboBoost"), (String)doc.get("pin")
+                           , (int)doc.get("ramMaximumSupport"), (String)doc.get("ramGenerationSupport"), (String)doc.get("internalGraphic"));
 
         return object;
     }
@@ -49,7 +49,7 @@ public class Cpu extends Hardware
         return threads;
     }
 
-    public String getTDP()
+    public int getTDP()
     {
         return TDP;
     }
@@ -64,12 +64,12 @@ public class Cpu extends Hardware
         return turboBoost;
     }
 
-    public String getSocket()
+    public String getPin()
     {
-        return socket;
+        return pin;
     }
 
-    public String getRamMaximumSupport()
+    public int getRamMaximumSupport()
     {
         return ramMaximumSupport;
     }

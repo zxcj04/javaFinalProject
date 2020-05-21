@@ -9,20 +9,20 @@ public class Mb extends Hardware
     private String supportCpu;
     private String RJ45;
     private String graphicOutput;
-    private String usbQuantity;
-    private String pcieQuantity;
+    private int usbQuantity;
+    private int pcieQuantity;
     private String ramType;
-    private String ramQuantity;
-    private String ramMaximum;
+    private int ramQuantity;
+    private int ramMaximum;
     private String wifi;
-    private String sata3Quantity;
+    private int sata3Quantity;
     private String m2Type;
-    private String m2Quantity;
+    private int m2Quantity;
 
     public Mb(String name, String size, String pin, String supportCpu, String RJ45
-            , String graphicOutput, String usbQuantity, String pcieQuantity, String ramType
-            , String ramQuantity, String ramMaximum, String wifi, String sata3Quantity
-            , String m2Type, String m2Quantity)
+            , String graphicOutput, int usbQuantity, int pcieQuantity, String ramType
+            , int ramQuantity, int ramMaximum, String wifi, int sata3Quantity
+            , String m2Type, int m2Quantity)
     {
         super(name);
         
@@ -46,9 +46,9 @@ public class Mb extends Hardware
     {
         Mb object = new Mb((String)doc.get("name"), (String)doc.get("size"), (String)doc.get("pin")
                          , (String)doc.get("supportCpu"), (String)doc.get("RJ45"), (String)doc.get("graphicOutput")
-                         , (String)doc.get("usbQuantity"), (String)doc.get("pcieQuantity"), (String)doc.get("ramType")
-                         , (String)doc.get("ramQuantity"), (String)doc.get("ramMaximum"), (String)doc.get("wifi")
-                         , (String)doc.get("sata3Quantity"), (String)doc.get("m2Type"), (String)doc.get("m2Quantity"));
+                         , (int)doc.get("usbQuantity"), (int)doc.get("pcieQuantity"), (String)doc.get("ramType")
+                         , (int)doc.get("ramQuantity"), (int)doc.get("ramMaximum"), (String)doc.get("wifi")
+                         , (int)doc.get("sata3Quantity"), (String)doc.get("m2Type"), (int)doc.get("m2Quantity"));
 
         return object;
     }
@@ -78,12 +78,12 @@ public class Mb extends Hardware
         return this.graphicOutput;
     }
 
-    public String getUsbQuantity()
+    public int getUsbQuantity()
     {
         return this.usbQuantity;
     }
 
-    public String getPcieQuantity()
+    public int getPcieQuantity()
     {
         return this.pcieQuantity;
     }
@@ -93,12 +93,12 @@ public class Mb extends Hardware
         return this.ramType;
     }
 
-    public String getRamQuantity()
+    public int getRamQuantity()
     {
         return this.ramQuantity;
     }
 
-    public String getRamMaximum()
+    public int getRamMaximum()
     {
         return this.ramMaximum;
     }
@@ -108,7 +108,7 @@ public class Mb extends Hardware
         return this.wifi;
     }
 
-    public String getSata3Quantity()
+    public int getSata3Quantity()
     {
         return this.sata3Quantity;
     }
@@ -118,7 +118,7 @@ public class Mb extends Hardware
         return this.m2Type;
     }
 
-    public String getM2Quantity()
+    public int getM2Quantity()
     {
         return this.m2Quantity;
     }

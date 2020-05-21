@@ -12,7 +12,20 @@ public class MainTest
 
         double init = System.currentTimeMillis();
 
-        MainGee gee = new MainGee();
+        MainGee gee;
+
+        try 
+        {        
+            gee = new MainGee();    
+
+            gee.init();
+        }
+        catch (Exception e) 
+        {
+            System.out.println("exiting...");
+
+            return;
+        }
 
         double a = System.currentTimeMillis();
 
@@ -36,7 +49,7 @@ public class MainTest
 
         select.cpu      .add("test3Cpu");
         // select.mb       .add("testMb");
-        select.cooler   .add("testCooler");
+        // select.cooler   .add("testCooler");
         select.ram      .add("test6Ram");
         select.vga      .add("testVga");
         select.disk     .add("testDisk");

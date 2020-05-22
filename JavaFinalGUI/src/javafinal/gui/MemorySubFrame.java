@@ -21,7 +21,7 @@ public class MemorySubFrame extends JDialog {
 	FilterComboBox capacity;
 	JButton set = new JButton("確定");
 	
-	public MemorySubFrame() {
+	public MemorySubFrame(MainFrame parent) {
 		this.setTitle("自訂記憶體");
 		
 		this.setModal(true);
@@ -76,6 +76,15 @@ public class MemorySubFrame extends JDialog {
 		set.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
+				String chosen = "custom ";
+				
+				chosen += type.getTextField().getText();
+				chosen += " ";
+				chosen += capacity.getTextField().getText();
+				chosen += "G";
+				
+				parent.setFeedback(chosen);
+				
 				MemorySubFrame.this.dispose();
 			}
 		});

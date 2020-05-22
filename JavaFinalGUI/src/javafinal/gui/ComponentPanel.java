@@ -18,27 +18,27 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class ComponentPanel extends JPanel
 {
-	private boolean[][] visableSet = {{true, false, false, true},  // cpu
-									  {true, false,  true, true},  // cooler
-									  {true, false, false, true},  // motherboard
-									  {true,  true,  true, true},  // memory
-									  {true, false,  true, true},  // disk
-									  {true, false,  true, true},  // vga
-									  {true, false,  true, true},  // psu
-									  {true, false,  true, true},};// case
-	private int cur;
+	private final boolean[][] visableSet = {{true, false, false, true},  // cpu
+											{true, false,  true, true},  // cooler
+											{true, false, false, true},  // motherboard
+											{true,  true,  true, true},  // memory
+											{true, false,  true, true},  // disk
+											{true, false,  true, true},  // vga
+											{true, false,  true, true},  // psu
+											{true, false,  true, true},};// case
+
 	private FilterComboBox comboBox;
 	private JSpinner counter;
 	private JButton customBtn;
 	private JButton subBtn;
 	
-	public ComponentPanel(ArrayList<String> list, int cur, boolean isOnly) {
+	public ComponentPanel(ArrayList<String> list, int cur) {
 		super();
-		
-		this.cur = cur;
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(new Color(231, 242, 255));
@@ -68,13 +68,14 @@ public class ComponentPanel extends JPanel
 		// comboBox
 		comboBox = new FilterComboBox(list);
 
-		comboBox.setPreferredSize(new Dimension(300, 25));
+		comboBox.setPreferredSize(new Dimension(420, 25));
 		panel1.add(comboBox);
 		comboBox.setVisible(visableSet[cur][0]);
 		
 		// spinner
 		SpinnerModel spinnerModel = new SpinnerNumberModel(1, 1, 16, 1);
 		counter = new JSpinner(spinnerModel);
+		
 		counter.setPreferredSize(new Dimension(100, 25));
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setEditable(false);
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
@@ -99,12 +100,7 @@ public class ComponentPanel extends JPanel
 		subBtn.setPreferredSize(new Dimension(30, 30));
 		
 		panel2.add(subBtn);
-		if(isOnly) {
-			subBtn.setVisible(false);
-		}
-		else {
-			subBtn.setVisible(true);
-		}
+		subBtn.setVisible(true);
 	}
 	
 	public void setSubBtn(boolean visable)
@@ -122,7 +118,11 @@ public class ComponentPanel extends JPanel
 		return customBtn;
 	}
 	
-	public JComboBox getComboBox() {
+	public FilterComboBox getComboBox() {
 		return comboBox;
+	}
+	
+	public JSpinner getSpinner() {
+		return counter;
 	}
 }

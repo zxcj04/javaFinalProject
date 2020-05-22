@@ -95,6 +95,12 @@ public class FilterComboBox
         }
     }
     
+    public void updateEntries(ArrayList<String> entries) {
+    	this.entries = new ArrayList<String>(entries);
+    	
+        this.setModel(new DefaultComboBoxModel(entries.toArray()));
+    }
+    
     public JTextField getTextField() {
     	return textfield;
     }

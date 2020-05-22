@@ -56,6 +56,9 @@ public class HardwareList
         crateList.clear();
     }
 
+    /**
+     * From NameList to HardwareList
+     */
     public void setHardware(HardwareNameList selectedList,HardwareNameList nameList , HardwareList originList)
     {
         try
@@ -67,10 +70,6 @@ public class HardwareList
                     this.cpuList.add(originList.cpuList.get(nameList.cpu.indexOf(i)));
                 }
             }
-            // else
-            // {
-            //     this.cpuList.addAll(originList.cpuList);
-            // }
 
             if(!selectedList.mb.isEmpty())
             {
@@ -84,6 +83,17 @@ public class HardwareList
             {
                 for(String i : selectedList.cooler)
                 {
+                    if(i.indexOf("custom") == 0)
+                    {
+                        // custom 14cm
+
+                        String name[] = i.split(" ");
+
+                        this.coolerList.add(new Cooler(i, Integer.parseInt(name[1].substring(0, name[2].length() - 2))));
+
+                        continue;
+                    }
+
                     this.coolerList.add(originList.coolerList.get(nameList.cooler.indexOf(i)));
                 }
             }
@@ -92,6 +102,15 @@ public class HardwareList
             {
                 for(String i : selectedList.ram)
                 {
+                    // if(i.indexOf("custom") == 0)
+                    // {
+                    //     // custom cooler 14cm
+
+                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+
+                    //     continue;
+                    // }
+                    
                     this.ramList.add(originList.ramList.get(nameList.ram.indexOf(i)));
                 }
             }
@@ -100,6 +119,15 @@ public class HardwareList
             {
                 for(String i : selectedList.vga)
                 {
+                    // if(i.indexOf("custom") == 0)
+                    // {
+                    //     // custom cooler 14cm
+
+                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+
+                    //     continue;
+                    // }
+                    
                     this.vgaList.add(originList.vgaList.get(nameList.vga.indexOf(i)));
                 }
             }
@@ -108,6 +136,15 @@ public class HardwareList
             {
                 for(String i : selectedList.disk)
                 {
+                    // if(i.indexOf("custom") == 0)
+                    // {
+                    //     // custom cooler 14cm
+
+                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+
+                    //     continue;
+                    // }
+                    
                     this.diskList.add(originList.diskList.get(nameList.disk.indexOf(i)));
                 }
             }
@@ -116,6 +153,15 @@ public class HardwareList
             {
                 for(String i : selectedList.psu)
                 {
+                    // if(i.indexOf("custom") == 0)
+                    // {
+                    //     // custom cooler 14cm
+
+                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+
+                    //     continue;
+                    // }
+                    
                     this.psuList.add(originList.psuList.get(nameList.psu.indexOf(i)));
                 }
             }
@@ -124,19 +170,35 @@ public class HardwareList
             {
                 for(String i : selectedList.crate)
                 {
+                    // if(i.indexOf("custom") == 0)
+                    // {
+                    //     // custom cooler 14cm
+
+                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+
+                    //     continue;
+                    // }
+                    
                     this.crateList.add(originList.crateList.get(nameList.crate.indexOf(i)));
                 }
             }
         }
         catch(Exception e)
         {
-            System.out.println("ERROR: No such hardware!");
+            System.out.println("ERROR: ");
+
+            for(StackTraceElement i : e.getStackTrace())
+            {
+                System.out.println(i);
+            }
+
+            System.out.println(e.getMessage());
 
             this.clear();
         }
     }
 
-    public void filterCpu(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterCpu(HardwareList selected, CollectionList db)
     {
         // if(!selected.cpuList.isEmpty())
         // {
@@ -178,7 +240,7 @@ public class HardwareList
         }
     }
 
-    public void filterMb(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterMb(HardwareList selected, CollectionList db)
     {
         // if(!selected.mbList.isEmpty())
         // {
@@ -300,7 +362,7 @@ public class HardwareList
         }
     }
 
-    public void filterCooler(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterCooler(HardwareList selected, CollectionList db)
     {
         // if(!selected.coolerList.isEmpty())
         // {
@@ -329,7 +391,7 @@ public class HardwareList
         }
     }
 
-    public void filterRam(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterRam(HardwareList selected, CollectionList db)
     {
         // if(!selected.ramList.isEmpty())
         // {
@@ -363,7 +425,7 @@ public class HardwareList
         }
     }
 
-    public void filterVga(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterVga(HardwareList selected, CollectionList db)
     {
         // if(!selected.vgaList.isEmpty())
         // {
@@ -398,7 +460,7 @@ public class HardwareList
         }
     }
 
-    public void filterDisk(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterDisk(HardwareList selected, CollectionList db)
     {
         // if(!selected.diskList.isEmpty())
         // {
@@ -422,7 +484,7 @@ public class HardwareList
         }
     }
     
-    public void filterPsu(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterPsu(HardwareList selected, CollectionList db)
     {
         // if(!selected.psuList.isEmpty())
         // {
@@ -466,7 +528,7 @@ public class HardwareList
         }
     }
 
-    public void filterCrate(HardwareList selected, CollectionList db, HardwareList origin)
+    public void filterCrate(HardwareList selected, CollectionList db)
     {
         // if(!selected.crateList.isEmpty())
         // {

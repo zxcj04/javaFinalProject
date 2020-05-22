@@ -41,40 +41,54 @@ public class MainTest
 
         double c = System.currentTimeMillis();
 
-        // System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n"
-        //                 , geeList.cpu, geeList.mb, geeList.cooler, geeList.ram
-        //                 , geeList.vga, geeList.disk, geeList.psu, geeList.crate);
+        System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n"
+                        , geeList.cpu, geeList.mb, geeList.cooler, geeList.ram
+                        , geeList.vga, geeList.disk, geeList.psu, geeList.crate);
         
         System.out.printf("%f%n", a - init);
         System.out.printf("%f %f%n", b - a, c - b);
         System.out.println(geeList);
 
-        HardwareNameList select = new HardwareNameList();
+        for(int i = 0 ; i < 1 ; i++)
+        {
 
-        // select.cpu      .add("test3Cpu"); 
-        select.mb       .add("testMb");
-        // select.cooler   .add("testCooler");
-        select.ram      .add("test6Ram");
-        // select.vga      .add("testVga");
-        select.disk     .add("testDisk");
-        select.psu      .add("test1Psu");
-        // select.crate    .add("test1Crate");
+            HardwareNameList select = new HardwareNameList();
 
-        a = System.currentTimeMillis();
+            // select.cpu      .add("test3Cpu"); 
+            select.mb       .add("testMb");
+            // select.cooler   .add("testCooler");
+            select.cooler   .add("custom cooler 10cm");
+            select.ram      .add("test6Ram");
+            // select.vga      .add("testVga");
+            select.disk     .add("testDisk");
+            // select.psu      .add("test1Psu");
+            // select.crate    .add("test1Crate");
 
-        HardwareList selc = gee.getHList(select);
+            a = System.currentTimeMillis();
 
-        b = System.currentTimeMillis();
+            HardwareList selc = gee.getHList(select);
 
-        System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n"
-                        , selc.cpuList, selc.mbList, selc.coolerList, selc.ramList
-                        , selc.vgaList, selc.diskList, selc.psuList, selc.crateList);
+            b = System.currentTimeMillis();
 
-        System.out.println(b - a);
-        System.out.println(selc);
+            System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n"
+                            , selc.cpuList, selc.mbList, selc.coolerList, selc.ramList
+                            , selc.vgaList, selc.diskList, selc.psuList, selc.crateList);
 
-        HardwareNameList selcName = gee.getList(select);
+            System.out.println(b - a);
+            System.out.println(selc);
 
-        System.out.print(selcName.fullDisplay());
+            a = System.currentTimeMillis();
+
+            HardwareNameList selcName = gee.getList(select);
+
+            b = System.currentTimeMillis();
+
+            System.out.println(b - a);
+
+            System.out.print(selcName.fullDisplay());
+
+            System.out.println(selcName);
+
+        }   
     }
 }

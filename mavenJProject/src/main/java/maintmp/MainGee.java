@@ -46,9 +46,11 @@ public class MainGee
             }
             else
             {
-                mongoClient = MongoClients.create("mongodb+srv://testJUser:test@testjavafinalproject-tlluw.gcp.mongodb.net/test?retryWrites=true&w=majority");
+                mongoClient = MongoClients.create("mongodb://rende:rende0304@ds017636.mlab.com:17636/heroku_g27s6wk1");
     
-                javaTestDB = mongoClient.getDatabase("testJavaFinalProject");
+                javaTestDB = mongoClient.getDatabase("heroku_g27s6wk1");
+
+                System.out.println("Remote Okay!");
             }
 
             collectionList.setCpuCollection(javaTestDB.getCollection("cpu"));
@@ -111,14 +113,14 @@ public class MainGee
 
         selectList.setHardware(selectedList, nameList, originList);
 
-        filteredList.filterCpu(selectList, collectionList, originList);
-        filteredList.filterMb(selectList, collectionList, originList);
-        filteredList.filterCooler(selectList, collectionList, originList);
-        filteredList.filterRam(selectList, collectionList, originList);
-        filteredList.filterVga(selectList, collectionList, originList);
-        filteredList.filterDisk(selectList, collectionList, originList);
-        filteredList.filterPsu(selectList, collectionList, originList);
-        filteredList.filterCrate(selectList, collectionList, originList);
+        filteredList.filterCpu(selectList, collectionList);
+        filteredList.filterMb(selectList, collectionList);
+        filteredList.filterCooler(selectList, collectionList);
+        filteredList.filterRam(selectList, collectionList);
+        filteredList.filterVga(selectList, collectionList);
+        filteredList.filterDisk(selectList, collectionList);
+        filteredList.filterPsu(selectList, collectionList);
+        filteredList.filterCrate(selectList, collectionList);
 
         return HardwareNameList.toNameList(filteredList);
     }

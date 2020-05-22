@@ -22,7 +22,7 @@ public class test {
 		//Motherboard g= new Motherboard();
 		//Battery h= new Battery();
 		//Fan i= new Fan();
-		HD j= new HD();
+		 HD j= new HD();
 	}
 
 }

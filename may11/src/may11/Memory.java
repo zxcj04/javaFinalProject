@@ -14,7 +14,6 @@ public class Memory extends Crawler{
 	public Memory() throws IOException {
 		super("https://www.coolpc.com.tw/eachview.php?IGrp=6");
 		Elements span =  doc.select("span");
-		 ArrayList<String> tmp= new ArrayList<String>();
 		 for (Element currentspan : span ) {
 			 tmp.clear();
 			 Elements t = currentspan.select(".t");

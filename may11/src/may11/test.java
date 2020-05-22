@@ -19,7 +19,10 @@ public class test {
 		//Memory d=new Memory();
 		//GPU e=new GPU();
 		//PSU f=new PSU();
-		Motherboard g= new Motherboard();
+		//Motherboard g= new Motherboard();
+		//Battery h= new Battery();
+		//Fan i= new Fan();
+		HD j= new HD();
 	}
 
 }

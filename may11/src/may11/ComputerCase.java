@@ -58,16 +58,5 @@ public class ComputerCase extends Crawler {
 		}
 }
 
-	private void canAdd(int size, int i,String data) {
-		if(size <= i) {
-			while(size < i) {
-				tmp.add(size,"NA");
-				size++;
-			}
-			tmp.add(i,data);
-		}
-		else {
-			tmp.set(i,data);
-		}
-	}
+	
 }

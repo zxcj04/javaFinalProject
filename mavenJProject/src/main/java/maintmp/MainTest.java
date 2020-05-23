@@ -57,12 +57,19 @@ public class MainTest
             // select.cpu      .add("test3Cpu"); 
             select.mb       .add("testMb");
             // select.cooler   .add("testCooler");
-            select.cooler   .add("custom cooler 10cm");
+            select.cooler   .add("custom 10cm");
             select.ram      .add("test6Ram");
+            // select.ram      .add("custom ddr3 16g");
+            // select.ram      .add("custom ddr3 16g");
+            // select.ram      .add("custom ddr3 8g");
+            // select.ram      .add("custom ddr3 8g");
             // select.vga      .add("testVga");
+            select.vga      .add("custom 17cm 200W");
             select.disk     .add("testDisk");
             // select.psu      .add("test1Psu");
+            // select.psu      .add("custom 15cm 650W ATX");
             // select.crate    .add("test1Crate");
+            select.crate    .add("custom ATX 30cm ATX 17cm 14cm 3個");
 
             a = System.currentTimeMillis();
 

@@ -87,9 +87,9 @@ public class HardwareList
                     {
                         // custom 14cm
 
-                        String name[] = i.split(" ");
+                        String name[] = i.toLowerCase().split(" ");
 
-                        this.coolerList.add(new Cooler(i, Integer.parseInt(name[1].substring(0, name[2].length() - 2))));
+                        this.coolerList.add(new Cooler(i, Integer.parseInt(name[1].substring(0, name[1].length() - 2))));
 
                         continue;
                     }
@@ -102,14 +102,17 @@ public class HardwareList
             {
                 for(String i : selectedList.ram)
                 {
-                    // if(i.indexOf("custom") == 0)
-                    // {
-                    //     // custom cooler 14cm
+                    if(i.indexOf("custom") == 0)
+                    {
+                    //     // custom ddr3 8g
 
-                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+                        String name[] = i.toLowerCase().split(" ");
 
-                    //     continue;
-                    // }
+                        this.ramList.add(new Ram(i, name[1]
+                                , Integer.parseInt(name[2].substring(0, name[2].length() - 1))));
+
+                        continue;
+                    }
                     
                     this.ramList.add(originList.ramList.get(nameList.ram.indexOf(i)));
                 }
@@ -119,14 +122,17 @@ public class HardwareList
             {
                 for(String i : selectedList.vga)
                 {
-                    // if(i.indexOf("custom") == 0)
-                    // {
-                    //     // custom cooler 14cm
+                    if(i.indexOf("custom") == 0)
+                    {
+                    //     // custom 1cm 1W
 
-                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+                        String name[] = i.toLowerCase().split(" ");
 
-                    //     continue;
-                    // }
+                        this.vgaList.add(new Vga(i, Integer.parseInt(name[1].substring(0, name[1].length() - 2))
+                                    , Integer.parseInt(name[2].substring(0, name[2].length() - 1))));
+
+                        continue;
+                    }
                     
                     this.vgaList.add(originList.vgaList.get(nameList.vga.indexOf(i)));
                 }
@@ -136,14 +142,21 @@ public class HardwareList
             {
                 for(String i : selectedList.disk)
                 {
-                    // if(i.indexOf("custom") == 0)
-                    // {
-                    //     // custom cooler 14cm
+                    if(i.indexOf("custom") == 0)
+                    {
+                        // custom m.2 pcie 1G
 
-                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+                        String name[] = i.toLowerCase().split(" ");
 
-                    //     continue;
-                    // }
+                        int capacity = Integer.parseInt(name[3].substring(0, name[3].length() -1));
+
+                        capacity = (name[3].indexOf("t") == -1)? capacity: 1000 * capacity;
+
+                        this.diskList.add(new Disk(i, name[1], capacity, name[2]));
+                        //         Integer.parseInt(name[2].substring(0, name[2].length() - 1))));
+
+                        continue;
+                    }
                     
                     this.diskList.add(originList.diskList.get(nameList.disk.indexOf(i)));
                 }
@@ -153,14 +166,16 @@ public class HardwareList
             {
                 for(String i : selectedList.psu)
                 {
-                    // if(i.indexOf("custom") == 0)
-                    // {
-                    //     // custom cooler 14cm
+                    if(i.indexOf("custom") == 0)
+                    {
+                        // custom 1cm 1W ATX
 
-                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+                        String name[] = i.toLowerCase().split(" ");
 
-                    //     continue;
-                    // }
+                        this.psuList.add(new Psu(i, Integer.parseInt(name[1].substring(0, name[1].length() - 2)), Integer.parseInt(name[2].substring(0, name[2].length() - 1)), name[3]));
+
+                        continue;
+                    }
                     
                     this.psuList.add(originList.psuList.get(nameList.psu.indexOf(i)));
                 }
@@ -170,14 +185,21 @@ public class HardwareList
             {
                 for(String i : selectedList.crate)
                 {
-                    // if(i.indexOf("custom") == 0)
-                    // {
-                    //     // custom cooler 14cm
+                    if(i.indexOf("custom") == 0)
+                    {
+                        // custom ATX 1cm ATX 1cm 1cm 1個
 
-                    //     this.coolerList.add(new Cooler("custom cooler 14cm", 14));
+                        String name[] = i.toLowerCase().split(" ");
 
-                    //     continue;
-                    // }
+                        this.crateList.add(new Crate(i, name[1]
+                                        , Integer.parseInt(name[2].substring(0, name[2].length() - 2))
+                                        , name[3]
+                                        , Integer.parseInt(name[5].substring(0, name[5].length() - 2))
+                                        , Integer.parseInt(name[6].substring(0, name[6].length() - 1))
+                                        , Integer.parseInt(name[4].substring(0, name[4].length() - 2))));
+
+                        continue;
+                    }
                     
                     this.crateList.add(originList.crateList.get(nameList.crate.indexOf(i)));
                 }
@@ -285,20 +307,20 @@ public class HardwareList
 
             for(Disk d : selected.diskList)
             {
-                if(d.getDiskType() == "sata")
+                if(d.getDiskType() == "sata" && d.getSize() != "m.2")
                 {
                     sataDisk += 1;
                 }
 
-                if(d.getDiskType() == "m.2")
+                if(d.getSize() == "m.2")
                 {
                     m2Disk += 1;
 
                     if(m2Type == "default")
                     {
-                        m2Type = d.getSize();
+                        m2Type = d.getDiskType();
                     }
-                    else if(m2Type != d.getSize())
+                    else if(m2Type != d.getDiskType())
                     {
                         m2Type = "pcie/sata";
                     }
@@ -590,7 +612,7 @@ public class HardwareList
 
             for(Disk d : selected.diskList)
             {
-                if(d.getDiskType() == "3.5")
+                if(d.getSize() == "3.5")
                 {
                     disk35 += 1;
                 }

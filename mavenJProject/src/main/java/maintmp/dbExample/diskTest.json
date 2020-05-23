@@ -1,6 +1,6 @@
 {
     "name" : "testDisk", 
-    "diskType" : "ssd", 
+    "diskType" : "sata", 
     "capacity" : 512, 
     "size" : "2.5"
 }

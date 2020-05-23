@@ -81,6 +81,15 @@ public class MainFrame extends JFrame
 		
 		this.source = source;
 		this.content = content;
+	}
+	
+	public void init() {
+		try {
+			Thread.sleep(5000);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		
 		// initialize variables
 		lists = new ArrayList<ArrayList<String>>();
@@ -144,14 +153,14 @@ public class MainFrame extends JFrame
 						
 						toRefresh = false;
 						toInit = true;
-						init();
+						optionsInit();
 					}
 					else if(option == JOptionPane.NO_OPTION) {
 						smartModeBtn.setIcon(toggleOff);
 						
 						toRefresh = false;
 						toInit = false;
-						init();
+						optionsInit();
 						updateComboBoxes();
 					}
 				}
@@ -162,7 +171,7 @@ public class MainFrame extends JFrame
 					if(option == JOptionPane.YES_OPTION) {
 						smartModeBtn.setIcon(toggleOn);
 						toInit = true;
-						init();
+						optionsInit();
 						toRefresh = true;
 					}
 				}
@@ -309,7 +318,7 @@ public class MainFrame extends JFrame
 		return matched;
 	}
 	
-	public void init() {
+	public void optionsInit() {
 		lists = new ArrayList<ArrayList<String>>();
 		
 		lists.add(new ArrayList<String>(content.cpu)); 		lists.add(new ArrayList<String>(content.cooler));

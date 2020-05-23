@@ -1,4 +1,4 @@
-package maintmp;
+package mainlogic;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;

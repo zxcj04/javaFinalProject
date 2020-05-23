@@ -85,7 +85,7 @@
               <arguments>
                   <argument>-classpath</argument>
                   "<classpath /> "
-                  <argument>maintmp.MainTest</argument>
+                  <argument>mainlogic.MainTest</argument>
               </arguments>
           </configuration>
         </plugin>

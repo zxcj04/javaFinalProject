@@ -1,4 +1,4 @@
-package maintmp;
+package mainlogic;
 
 public class Hardware 
 {

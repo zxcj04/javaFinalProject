@@ -2,3 +2,4 @@ mavenJProject/target/
 mavenJProject/dbOutput/
 .vscode/
 .DS_Store
+test/

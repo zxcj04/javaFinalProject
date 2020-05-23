@@ -1,6 +1,0 @@
-{
-    "name" : "testDisk", 
-    "diskType" : "ssd", 
-    "capacity" : "512g", 
-    "size" : "2.5"
-}

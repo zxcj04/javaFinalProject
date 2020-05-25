@@ -2,55 +2,55 @@
 package may11;
 import java.io.IOException;
 	import java.util.ArrayList;
+import java.util.regex.Pattern;
 
-	import org.jsoup.Jsoup;
+import org.jsoup.Jsoup;
 	import org.jsoup.nodes.Document;
 	import org.jsoup.nodes.Element;
 	import org.jsoup.select.Elements;
 public class PSU extends Crawler{
 	public PSU() throws IOException {
 		super("https://www.coolpc.com.tw/eachview.php?IGrp=15");
-		Elements span = doc.select("span");
-		for(Element currentspan : span) {
-			 tmp.clear();
-			 Elements tex=currentspan.select(".t");
-			 String inf=tex.text();
-			 Elements price=currentspan.select(".x");
-			 String[] money=price.text().split("NT")[1].split("』秨絚癚阶");
-			 int i=1,watt=0,awg=0;
-			 tmp.add(0,inf);
-			 int wattIt=inf.lastIndexOf("0W");
-			 while(i<wattIt-1) {
-				 if(inf.charAt(wattIt-i)-'0' >= 0 && inf.charAt(wattIt-i)-'0' <= 9)
-					 watt+= (inf.charAt(wattIt-i)-'0')*Math.pow(10, i-1);
-				 else
-					 break;
-				 i++;
-			 }
-				 tmp.add(1,watt+"0W");
-			int awgIt=inf.lastIndexOf("AWG"); 
-			i=1;
-			while(i<awgIt-1) {
-				 if(inf.charAt(awgIt-i)-'0' >= 0 && inf.charAt(awgIt-i)-'0' <= 9)
-					 awg+= (inf.charAt(awgIt-i)-'0')*Math.pow(10, i-1);
-				 else
-					 break;
-				 i++;
-			 }
-			tmp.add(2,awg+"AWG");
-			Elements div=currentspan.select("div");
-			String[] eletricLon =div.get(1).text().split("筿方");
-			if(!(eletricLon.length > 1 ))
-				eletricLon=div.get(2).text().split("筿方");
-			if(eletricLon.length > 1)
-				tmp.add(3,eletricLon[1]); 
-			else
-				tmp.add(3,"NA");
-			
-			tmp.add(4,money[0]); 
-			obj.add(tmp);
-			System.out.println(tmp);
+		Elements tbody = doc.select(".main");
+		for(Element currenttbody : tbody) {	
+			Elements span= currenttbody.select("span");
+			for(Element currentspan : span) {	
+				 tmp.clear();
+				 
+
+				 Elements div = currentspan.select("div");
+				 Elements name = currentspan.select(".t");
+				 Elements x = currentspan.select(".x");
+				 tmp.add(0,name.text());//cpu
+				 
+				if(name.text().contains("SFX"))
+					canAdd( tmp.size(),3,"sfx");
+				else 
+					canAdd( tmp.size(),3,"atx");
+				
+				 for(Element currentdiv : div) { 
+					if(currentdiv.text().split("筿方").length >1) {
+						canAdd( tmp.size(),1,currentdiv.text().split("筿方")[1]);//cpu
+					}
+				 }	
+				 
+				 int i=1,watt=0;
+				 int wattIt=name.text().lastIndexOf("0W");
+				 while(i<wattIt-1) {
+					 if(name.text().charAt(wattIt-i)-'0' >= 0 && name.text().charAt(wattIt-i)-'0' <= 9)
+						 watt+= (name.text().charAt(wattIt-i)-'0')*Math.pow(10, i-1);
+					 else
+						 break;
+					 i++;
+				 }
+				 canAdd( tmp.size(),2,watt+"0W");
+				 
+				 String[] money=x.text().split("』秨絚癚阶");
+				 canAdd( tmp.size(),4,money[0]);
+				 System.out.println(tmp);
+				 obj.add(tmp);
 			//Name WATT AWG 筿方  Money
+		}
 		}
 	}
 }

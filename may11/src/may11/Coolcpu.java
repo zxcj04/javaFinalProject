@@ -28,7 +28,7 @@ public class Coolcpu extends Crawler {
 					 }
 				     if(tmp.size()>2){	
 				    	 obj.add(tmp);
-				     //System.out.println(tmp);
+				     System.out.println(tmp);
 				     }
 				}
 			}

@@ -51,7 +51,6 @@ public class Motherboard extends Crawler{
 					 obj.add(tmp);
 				 }
 			}
-			 tmp.add(currenttbody.html());
 		 }
 
 	}

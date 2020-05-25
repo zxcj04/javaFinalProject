@@ -35,29 +35,28 @@ public class HD extends Crawler{
 					 i++;
 				 }
 				 Inches/=Math.pow(10, dot-1);
-					 tmp.add(1,Inches+"¦T");
 					 
 				 int mmIt=name.text().lastIndexOf("mm");
 				 if(mmIt!=-1 && (name.text().charAt(mmIt-1)-'0' >= 0 && name.text().charAt(mmIt-1)-'0' <= 9))
-					 tmp.add(2,name.text().charAt(mmIt-1)+"mm");
+					 canAdd( tmp.size(),3,Inches+"¦T"+name.text().charAt(mmIt-1)+"mm");
 				 else 
-					 tmp.add(2,"7mm");
-				 Pattern pattern = Pattern.compile("([0-9]+)G");
-				 Matcher m = pattern.matcher(name.text());
+					 canAdd( tmp.size(),3,Inches+"¦T"+"7mm");
+				 pattern = Pattern.compile("([0-9]+)G");
+				 m = pattern.matcher(name.text());
 				 if (m.find( )) {
-					 tmp.add(m.group());
+					 canAdd( tmp.size(),2,m.group());
 				 }
 				 else
 				 {
 					 pattern = Pattern.compile("([0-9]+)T");
 					 m = pattern.matcher(name.text());
 					 if (m.find( )) {
-						 tmp.add(m.group());
+						 canAdd( tmp.size(),2,m.group());
 					 }
 				 }
 				 
 				 String[] money=x.text().split("NT")[1].split("¡»¶}½c°Q½×");
-				 tmp.add(money[0]);
+				 canAdd( tmp.size(),4,money[0]);
 				 System.out.println(tmp);
 				 obj.add(tmp);
 			}

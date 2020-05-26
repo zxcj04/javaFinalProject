@@ -1,9 +1,0 @@
-{
-    "name" : "test3Crate", 
-    "mbSize" : "eatx", 
-    "vgaLength" : 35, 
-    "psuSize" : "atx", 
-    "coolerHeight" : 13, 
-    "diskQuantity" : 3, 
-    "psuLength" : 25
-}

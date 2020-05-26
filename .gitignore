@@ -1,5 +1,5 @@
-mavenJProject/target/
-mavenJProject/dbOutput/
+mainProject/target/
+mainProject/dbOutput/
 .vscode/
 .DS_Store
 test/

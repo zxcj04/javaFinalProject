@@ -3,3 +3,4 @@ mavenJProject/dbOutput/
 .vscode/
 .DS_Store
 test/
+/.metadata/

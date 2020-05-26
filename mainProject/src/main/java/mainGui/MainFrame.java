@@ -391,7 +391,7 @@ public class MainFrame extends JFrame
 		loading.setVisible(true);
 		
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(500);
 		}
 		catch(Exception e) {
 			System.out.println(e);

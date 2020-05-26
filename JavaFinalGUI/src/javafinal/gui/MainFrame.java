@@ -73,6 +73,8 @@ public class MainFrame extends JFrame
 	private JButton[] plusButtons; // buttons inside subPlusBtnPanes
 	
 	private String subFrameFeedback; // custom chosen
+	private String memoryType;
+	private boolean memoryIsCustomized;
 	private JTextArea suggestion; // at Frame's right side
 	
 	public MainFrame(MainGee source, HardwareNameList content)
@@ -85,7 +87,7 @@ public class MainFrame extends JFrame
 	
 	public void init() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -384,10 +386,26 @@ public class MainFrame extends JFrame
 	public void refresh() {
 		updateInputs();
 		
+		//
+		CircleLoading loading = new CircleLoading(this);
+		loading.setVisible(true);
+		
+		try {
+			Thread.sleep(3000);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		//
+		
 		if(toRefresh) {
 			updateLists();
 		}
 		updateComboBoxes();
+		
+		//
+		loading.dispose();
+		//
 	}
 	
 	public void updateComboBoxes() {
@@ -419,6 +437,14 @@ public class MainFrame extends JFrame
 				}
 			}
 		}
+		
+		memoryIsCustomized = false;
+		for(String s: lists.get(MEM)) {
+			if(s.contains("custom")) {
+				memoryIsCustomized = true;
+				break;
+			}
+		}
 	}
 	
 	
@@ -439,6 +465,11 @@ public class MainFrame extends JFrame
 		lists.add(newLists.mb);		lists.add(newLists.ram);
 		lists.add(newLists.disk);	lists.add(newLists.vga);
 		lists.add(newLists.psu);	lists.add(newLists.crate);
+	}
+	
+	public boolean test()
+	{
+		return true;
 	}
 	
 	public void updateInputs(){
@@ -605,6 +636,7 @@ public class MainFrame extends JFrame
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
+			setFeedback("");
 			
 			for(int i = 0; i < gearButtons.size(); i++) {
 				for(int j = 0; j < gearButtons.get(i).size(); j++) {
@@ -617,6 +649,10 @@ public class MainFrame extends JFrame
 								break;
 							case MEM:
 								runMemorySubFrame();
+								if(!memoryIsCustomized && !subFrameFeedback.isEmpty()) {
+									memoryType = subFrameFeedback.substring(7,11);
+									memoryIsCustomized = true;
+								}
 								break;
 							case DISK:
 								runDiskSubFrame();
@@ -632,8 +668,11 @@ public class MainFrame extends JFrame
 								break;
 						}
 						
-						comboBoxes.get(i).get(j).getTextField().setText(subFrameFeedback);
-						refresh();
+						if(!subFrameFeedback.isEmpty()) {
+							comboBoxes.get(i).get(j).getTextField().setText(subFrameFeedback);
+							setFeedback("");
+							refresh();
+						}
 					}
 				}
 			}
@@ -654,7 +693,7 @@ public class MainFrame extends JFrame
 	
 	private void runMemorySubFrame(){
 			
-		JDialog memFrame = new MemorySubFrame(MainFrame.this);
+		JDialog memFrame = new MemorySubFrame(MainFrame.this, memoryIsCustomized, memoryType);
 		
 		memFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

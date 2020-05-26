@@ -21,7 +21,7 @@ public class MemorySubFrame extends JDialog {
 	FilterComboBox capacity;
 	JButton set = new JButton("確定");
 	
-	public MemorySubFrame(MainFrame parent) {
+	public MemorySubFrame(MainFrame parent, boolean memoryIsCustomized, String memoryType) {
 		this.setTitle("自訂記憶體");
 		
 		this.setModal(true);
@@ -39,9 +39,18 @@ public class MemorySubFrame extends JDialog {
 		typeList.add("ddr2");
 		typeList.add("ddr1");
 		
+		if(memoryIsCustomized) {
+			typeList.remove(typeList.indexOf(memoryType));
+			typeList.add(0, memoryType);
+		}
+		
 		type = new FilterComboBox(typeList);
 		type.getTextField().setEditable(false);
 		type.setPreferredSize(new Dimension(145, 32));
+		
+		if(memoryIsCustomized) {
+			type.setEnabled(false);
+		}
 		
 		typePane.add(type);
 		this.add(typePane);

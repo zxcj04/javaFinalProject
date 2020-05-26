@@ -3,26 +3,23 @@ package javafinal.gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Dialog.ModalityType;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class LoadingFrame extends JFrame
+public class LoadingPanel extends JPanel
 {
-	public LoadingFrame() {
-		super("Loading");
+	public LoadingPanel() {
+		this.setLayout(new BorderLayout());
 		
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(500, 500);
+		JPanel iconPane = new JPanel();
+		iconPane.setLayout(new BorderLayout());
 		
 		ImageIcon loadingGif = new ImageIcon(getClass().getResource("loading.gif"));
 		JLabel loading = new JLabel(loadingGif);
 		
-		this.add(loading, BorderLayout.CENTER);
+		iconPane.add(loading, BorderLayout.CENTER);
 		
 		JPanel textPane = new JPanel();
 		textPane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -33,6 +30,7 @@ public class LoadingFrame extends JFrame
 		
 		textPane.add(text);
 		
+		this.add(iconPane, BorderLayout.CENTER);
 		this.add(textPane, BorderLayout.SOUTH);
 	}
 }

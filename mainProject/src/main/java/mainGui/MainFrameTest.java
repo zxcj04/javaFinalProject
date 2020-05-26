@@ -17,8 +17,6 @@ public class MainFrameTest
 		mainFrame.setLocationRelativeTo(null);
 		
 		LoadingFrame loading = new LoadingFrame();
-		loading.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		loading.setSize(500, 500);
 		loading.setLocationRelativeTo(mainFrame);
 		loading.setVisible(true);
 		

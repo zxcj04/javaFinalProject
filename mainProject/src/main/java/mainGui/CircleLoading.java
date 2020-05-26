@@ -3,18 +3,28 @@ package maingui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Dialog.ModalityType;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CircleLoading extends JFrame
+public class CircleLoading extends JDialog
 {
-	public CircleLoading() {
-		super("Loading");
+	public CircleLoading(MainFrame parent) {
+		super(parent);
+		this.setTitle("Loading");
 		
-		ImageIcon loadingGif = new ImageIcon(getClass().getResource("loading.gif"));
+//		this.setModal(true);
+//		this.setModalityType(ModalityType.APPLICATION_MODAL);
+		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setSize(300, 200);
+		this.setLocationRelativeTo(parent);
+		
+		ImageIcon loadingGif = new ImageIcon(getClass().getResource("circle.gif"));
 		JLabel loading = new JLabel(loadingGif);
 		
 		this.add(loading, BorderLayout.CENTER);

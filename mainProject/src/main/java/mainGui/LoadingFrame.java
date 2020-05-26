@@ -13,13 +13,18 @@ import javax.swing.JPanel;
 
 public class LoadingFrame extends JFrame
 {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public LoadingFrame() {
 		super("Loading");
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(500, 500);
 		
-		ImageIcon loadingGif = new ImageIcon(getClass().getResource("loading.gif"));
+		ImageIcon loadingGif = new ImageIcon(getClass().getResource("/loading.gif"));
 		JLabel loading = new JLabel(loadingGif);
 		
 		this.add(loading, BorderLayout.CENTER);

@@ -256,6 +256,8 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
+        System.out.println(filters);
+
         for(Document d: collection.find(and(filters)))
         {
             this.cpuList.add(Cpu.toObject(d));

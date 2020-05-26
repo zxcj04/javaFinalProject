@@ -127,7 +127,7 @@ public class MainFrame extends JFrame
 		smartModeBtnPane.setOpaque(true);
 		this.add(smartModeBtnPane, BorderLayout.NORTH);
 		
-		ImageIcon toggle = new ImageIcon(getClass().getResource("switchOn.png"));
+		ImageIcon toggle = new ImageIcon(getClass().getResource("/switchOn.png"));
 		smartModeBtn = new JButton(toggle);
 		
 		smartModeBtn.setPreferredSize(new Dimension(95, 30));
@@ -141,8 +141,8 @@ public class MainFrame extends JFrame
 		smartModeBtn.addActionListener(new ActionListener() {
 			private Object[] optionsOn = {"YES", "NO"};
 			private Object[] optionsOff = {"YES and Clear", "YES and Retain", "NO"};
-			private ImageIcon toggleOn = new ImageIcon(getClass().getResource("switchOn.png"));
-			private ImageIcon toggleOff = new ImageIcon(getClass().getResource("switchOff.png"));
+			private ImageIcon toggleOn = new ImageIcon(getClass().getResource("/switchOn.png"));
+			private ImageIcon toggleOff = new ImageIcon(getClass().getResource("/switchOff.png"));
 			
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -238,7 +238,7 @@ public class MainFrame extends JFrame
 			
 			plusPane.add(subPlusBtnPanes.get(i));
 		}
-		ImageIcon plus = new ImageIcon(getClass().getResource("plus.jpg"));
+		ImageIcon plus = new ImageIcon(getClass().getResource("/plus.jpg"));
 		
 		plusButtons = new JButton[3];
 		for(int i = 0; i < 3; i++) {

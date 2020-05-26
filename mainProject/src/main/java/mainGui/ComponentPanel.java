@@ -87,7 +87,7 @@ public class ComponentPanel extends JPanel
 		counter.setVisible(visableSet[cur][1]);
 		
 		// gear Button
-		ImageIcon gear = new ImageIcon(getClass().getResource("gear.jpg"));
+		ImageIcon gear = new ImageIcon(getClass().getResource("/gear.jpg"));
 		customBtn = new JButton(gear);
 		customBtn.setPreferredSize(new Dimension(30, 30));
 		
@@ -95,7 +95,7 @@ public class ComponentPanel extends JPanel
 		customBtn.setVisible(visableSet[cur][2]);
 		
 		// sub Button
-		ImageIcon sub = new ImageIcon(getClass().getResource("sub.jpg"));
+		ImageIcon sub = new ImageIcon(getClass().getResource("/sub.jpg"));
 		subBtn = new JButton(sub);
 		subBtn.setPreferredSize(new Dimension(30, 30));
 		

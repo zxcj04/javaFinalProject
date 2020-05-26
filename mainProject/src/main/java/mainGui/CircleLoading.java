@@ -24,7 +24,7 @@ public class CircleLoading extends JDialog
 		this.setSize(300, 200);
 		this.setLocationRelativeTo(parent);
 		
-		ImageIcon loadingGif = new ImageIcon(getClass().getResource("circle.gif"));
+		ImageIcon loadingGif = new ImageIcon(getClass().getResource("/circle.gif"));
 		JLabel loading = new JLabel(loadingGif);
 		
 		this.add(loading, BorderLayout.CENTER);

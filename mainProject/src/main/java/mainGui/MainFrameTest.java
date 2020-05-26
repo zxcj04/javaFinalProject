@@ -9,6 +9,7 @@ public class MainFrameTest
 	public static void main(String[] args)
 	{
 		MainGee code = new MainGee();
+		code.init();
 		MainFrame mainFrame = new MainFrame(code, code.getList());
 		
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

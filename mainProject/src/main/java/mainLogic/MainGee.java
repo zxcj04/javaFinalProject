@@ -54,7 +54,8 @@ public class MainGee
             }
             else
             {
-                mongoClient = MongoClients.create("mongodb://rende:rende0304@ds017636.mlab.com:17636/heroku_g27s6wk1");
+                // mongoClient = MongoClients.create("mongodb://rende:rende0304@ds017636.mlab.com:17636/heroku_g27s6wk1");
+                mongoClient = MongoClients.create("ec2-54-248-132-195.ap-northeast-1.compute.amazonaws.com");
     
                 javaTestDB = mongoClient.getDatabase("heroku_g27s6wk1");
 

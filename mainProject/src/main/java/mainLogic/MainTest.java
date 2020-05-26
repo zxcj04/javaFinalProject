@@ -31,6 +31,8 @@ public class MainTest
         //     return;
         // }
 
+        // gee.test();
+
         double a = System.currentTimeMillis();
 
         HardwareNameList geeList = gee.getList();
@@ -54,8 +56,8 @@ public class MainTest
 
             HardwareNameList select = new HardwareNameList();
 
-            // select.cpu      .add("test3Cpu"); 
-            select.mb       .add("testMb");
+            select.cpu      .add("test3Cpu"); 
+            // select.mb       .add("test2Mb");
             // select.cooler   .add("testCooler");
             select.cooler   .add("custom 10cm");
             select.ram      .add("test6Ram");
@@ -96,6 +98,12 @@ public class MainTest
 
             System.out.println(selcName);
 
-        }   
+            for(String s : gee.getSuggestion(select))
+            {
+                System.out.println(s);
+            }
+        }
+        
+        // gee.testRemove();
     }
 }

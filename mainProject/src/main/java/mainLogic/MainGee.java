@@ -2,12 +2,17 @@ package mainlogic;
 
 import com.mongodb.client.MongoClients;
 
+import static com.mongodb.client.model.Filters.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.mongodb.MongoSocketReadException;
 import com.mongodb.MongoTimeoutException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
 
 public class MainGee 
 {
@@ -37,7 +42,7 @@ public class MainGee
 
         // fetch things from mongodb for several list
 
-        boolean localTest = true;
+        boolean localTest = false;
         
         try
         {
@@ -138,12 +143,12 @@ public class MainGee
 
         suggestion.addAll(suggestCpu(selectList));
         suggestion.addAll(suggestMb(selectList));
-        suggestion.addAll(suggestCooler(selectList));
-        suggestion.addAll(suggestRam(selectList));
-        suggestion.addAll(suggestVga(selectList));
-        suggestion.addAll(suggestDisk(selectList));
-        suggestion.addAll(suggestPsu(selectList));
-        suggestion.addAll(suggestCrate(selectList));
+        // suggestion.addAll(suggestCooler(selectList));
+        // suggestion.addAll(suggestRam(selectList));
+        // suggestion.addAll(suggestVga(selectList));
+        // suggestion.addAll(suggestDisk(selectList));
+        // suggestion.addAll(suggestPsu(selectList));
+        // suggestion.addAll(suggestCrate(selectList));
 
         return suggestion;
     }
@@ -164,9 +169,9 @@ public class MainGee
         if(selected.cpuList.isEmpty())
             return suggest;
 
-        if(!selected.mbList.isEmpty() && selected.cpuList.get(0).getPin() != selected.mbList.get(0).getPin())
+        if(!selected.mbList.isEmpty() && !selected.cpuList.get(0).getPin().equals(selected.mbList.get(0).getPin()))
         {
-            suggest.add(String.format("CPU與主機板不符合歐 cpu: %s, mb: %s"
+            suggest.add(String.format("CPU與主機板不符合歐 cpu: '%s', mb: '%s'"
                                       , selected.cpuList.get(0).getPin(), selected.mbList.get(0).getPin()));
         }
 
@@ -184,8 +189,8 @@ public class MainGee
                 suggest.add(String.format("記憶體容量超出CPU最大支援的大小囉 ram capacity: %sG, cpu ramCapacity: %sG"
                                             , ramCapacity, selected.cpuList.get(0).getRamMaximumSupport()));
             }
-
-            if(selected.cpuList.get(0).getRamGenerationSupport() != selected.ramList.get(0).getRamType())
+            
+            if(!selected.cpuList.get(0).getRamGenerationSupport().equals(selected.ramList.get(0).getRamType()))
             {
                 suggest.add(String.format("CPU支援的代數與記憶體不符合歐 cpu generation: %s, ram generation: %s"
                                             , selected.cpuList.get(0).getRamGenerationSupport(), selected.ramList.get(0).getRamType()));
@@ -199,7 +204,7 @@ public class MainGee
     {        
         ArrayList<String> suggest = new ArrayList<String>();
 
-        if(selected.cpuList.isEmpty())
+        if(selected.mbList.isEmpty())
             return suggest;
 
         if(!selected.ramList.isEmpty())
@@ -211,7 +216,7 @@ public class MainGee
                 ramCapacity += r.getCapacity();
             }
 
-            if(selected.mbList.get(0).getRamType() != selected.ramList.get(0).getRamType())
+            if(!selected.mbList.get(0).getRamType().equals(selected.ramList.get(0).getRamType()))
             {
                 suggest.add(String.format("主機板支援的代數與記憶體不符合歐 mb generation: %s, ram generation: %s"
                                             , selected.mbList.get(0).getRamType(), selected.ramList.get(0).getRamType()));
@@ -267,10 +272,10 @@ public class MainGee
                 }
             }
 
-            if(m2Type != selected.mbList.get(0).getM2Type() && selected.mbList.get(0).getM2Type() != "pcie/sata")
+            if(m2Type != selected.mbList.get(0).getM2Type() && !selected.mbList.get(0).getM2Type().equals("pcie/sata"))
             {
-                suggest.add(String.format("主機板的m.2插槽不能插這個m.2硬碟歐 mb m.2 type: %s"
-                                            , selected.mbList.get(0).getM2Type()));
+                suggest.add(String.format("主機板的m.2插槽不能插這個m.2硬碟歐 mb m.2 type: %s, disk type: %s"
+                                            , selected.mbList.get(0).getM2Type(), m2Type));
             }
 
             if(selected.mbList.get(0).getSata3Quantity() < sataDisk)
@@ -288,28 +293,62 @@ public class MainGee
         
         if(!selected.crateList.isEmpty())
         {
-            switch(selected.crateList.get(0).getMbSize())
+            ArrayList<String> mbSize = new ArrayList<String>(
+                Arrays.asList("eatx", "atx", "matx", "itx"));
+
+            if(mbSize.indexOf(selected.crateList.get(0).getMbSize()) > mbSize.indexOf(selected.mbList.get(0).getSize()))
             {
-                case "eatx":
-                    crateFilters.add(eq("size", "eatx"));
-
-                case "atx":
-                    crateFilters.add(eq("size", "atx"));
-
-                case "matx":
-                    crateFilters.add(eq("size", "matx"));
-
-                case "itx":
-                    crateFilters.add(eq("size", "itx"));
-
-                    break;
-
-                default:
-
-                    break;
+                suggest.add(String.format("機殼裝不下主機板歐 mb size: %s, case size: %s"
+                                            , selected.mbList.get(0).getSize(), selected.crateList.get(0).getMbSize()));
             }
         }
 
         return suggest;
+    }
+
+    public ArrayList<String> suggestCooler(HardwareList selected)
+    {
+        ArrayList<String> suggest = new ArrayList<String>();
+
+        if(selected.coolerList.isEmpty())
+        {
+            return suggest;
+        }
+
+        if(!selected.crateList.isEmpty() && selected.crateList.get(0).getCoolerHeight() < selected.coolerList.get(0).getHeight())
+        {
+            suggest.add(String.format("機殼裝不下CPU散熱器耶 case height: %s, cooler height: %s"
+                                , selected.crateList.get(0).getCoolerHeight(), selected.coolerList.get(0).getHeight()));
+        }
+
+        return suggest;
+    }
+
+
+
+    public void test()
+    {
+        Document d = new Document("name", "test2Mb")
+                        .append("size", "atx")
+                        .append("pin", "am4")
+                        .append("supportCpu", "ryzen")
+                        .append("RJ45", "1")
+                        .append("graphicOutput", "dvi/hdmi")
+                        .append("usbQuantity", 4)
+                        .append("pcieQuantity", 2)
+                        .append("ramType", "ddr4")
+                        .append("ramQuantity", 4)
+                        .append("ramMaximum", 64)
+                        .append("wifi", "0")
+                        .append("sata3Quantity", 6)
+                        .append("m2Type", "pcie/sata")
+                        .append("m2Quantity", 1);
+        
+        collectionList.getMbCollection().insertOne(d);
+    }
+
+    public void testRemove()
+    {
+        collectionList.getMbCollection().deleteMany(eq("name", "test2Mb"));
     }
 }

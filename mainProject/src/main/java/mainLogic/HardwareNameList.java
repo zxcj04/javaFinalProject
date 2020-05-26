@@ -64,6 +64,15 @@ public class HardwareNameList
 
     public void addAll(HardwareList originList)
     {
+        this.cpu.clear();
+        this.mb.clear();
+        this.cooler.clear();
+        this.ram.clear();
+        this.vga.clear();
+        this.disk.clear();
+        this.psu.clear();
+        this.crate.clear();
+
         this.cpu.addAll(originList.cpuList.stream().map(Hardware::getName).collect(toList()));
         this.mb.addAll(originList.mbList.stream().map(Hardware::getName).collect(toList()));
         this.cooler.addAll(originList.coolerList.stream().map(Hardware::getName).collect(toList()));

@@ -42,7 +42,7 @@ public class MainGee
 
         // fetch things from mongodb for several list
 
-        boolean localTest = false;
+        boolean localTest = true;
         
         try
         {
@@ -143,7 +143,7 @@ public class MainGee
 
         suggestion.addAll(suggestCpu(selectList));
         suggestion.addAll(suggestMb(selectList));
-        // suggestion.addAll(suggestCooler(selectList));
+        suggestion.addAll(suggestCooler(selectList));
         // suggestion.addAll(suggestRam(selectList));
         // suggestion.addAll(suggestVga(selectList));
         // suggestion.addAll(suggestDisk(selectList));

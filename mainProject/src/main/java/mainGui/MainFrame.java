@@ -432,7 +432,7 @@ public class MainFrame extends JFrame
 															  inputs.get(PSU),
 															  inputs.get(CASE));
 		
-		HardwareNameList newLists = source.getList(currentInputs, toRefresh);
+		HardwareNameList newLists = source.getList(currentInputs);
 		
 		lists = new ArrayList<ArrayList<String>>();
 		lists.add(newLists.cpu);	lists.add(newLists.cooler);

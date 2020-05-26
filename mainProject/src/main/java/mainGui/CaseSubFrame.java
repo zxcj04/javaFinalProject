@@ -1,4 +1,4 @@
-package javafinal.gui;
+package maingui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,6 +21,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class CaseSubFrame extends JDialog {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	FilterComboBox mbSize;
 	JSpinner vgaLength;
 	FilterComboBox psuSize;

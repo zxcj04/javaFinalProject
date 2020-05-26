@@ -1,4 +1,4 @@
-package javafinal.gui;
+package maingui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -31,8 +31,8 @@ import javax.swing.ImageIcon;
 
 import java.util.ArrayList;
 
-import fanrende.MainGee;
-import fanrende.HardwareNameList;
+import mainlogic.MainGee;
+import mainlogic.HardwareNameList;
 
 public class MainFrame extends JFrame
 {

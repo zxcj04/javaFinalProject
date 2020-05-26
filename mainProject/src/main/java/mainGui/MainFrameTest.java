@@ -1,8 +1,8 @@
-package javafinal.gui;
+package maingui;
 
 import javax.swing.JFrame;
 
-import fanrende.MainGee;
+import mainlogic.MainGee;
 
 public class MainFrameTest
 {

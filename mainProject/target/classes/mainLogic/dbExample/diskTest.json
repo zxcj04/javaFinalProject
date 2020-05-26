@@ -1,0 +1,6 @@
+{
+    "name" : "testDisk", 
+    "diskType" : "sata", 
+    "capacity" : 512, 
+    "size" : "2.5"
+}

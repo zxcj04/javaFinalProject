@@ -42,7 +42,7 @@ public class MainGee
 
         // fetch things from mongodb for several list
 
-        boolean localTest = false;
+        boolean localTest = true;
         
         try
         {

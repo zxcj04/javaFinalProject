@@ -603,7 +603,15 @@ public class HardwareList
 
         if(!selected.vgaList.isEmpty())
         {
-            filters.add(gte("vgaLength", selected.vgaList.get(0).getLength()));
+            int maxLength = selected.vgaList.get(0).getLength();
+
+            for(Vga v : selected.vgaList)
+            {
+                if(v.getLength() > maxLength)
+                    maxLength = v.getLength();
+            }
+
+            filters.add(gte("vgaLength", maxLength));
         }
 
         if(!selected.diskList.isEmpty())

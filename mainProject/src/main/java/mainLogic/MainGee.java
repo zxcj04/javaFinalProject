@@ -42,7 +42,7 @@ public class MainGee
 
         // fetch things from mongodb for several list
 
-        boolean localTest = true;
+        boolean localTest = false;
         
         try
         {
@@ -54,9 +54,9 @@ public class MainGee
             }
             else
             {
-                mongoClient = MongoClients.create("mongodb://rende:rende0304@ds017636.mlab.com:17636/heroku_g27s6wk1");
+                mongoClient = MongoClients.create("mongodb://ec2-54-248-132-195.ap-northeast-1.compute.amazonaws.com");
     
-                javaTestDB = mongoClient.getDatabase("heroku_g27s6wk1");
+                javaTestDB = mongoClient.getDatabase("javaTest2");
 
                 System.out.println("Remote Okay!");
             }
@@ -272,7 +272,7 @@ public class MainGee
                 }
             }
 
-            if(m2Type != selected.mbList.get(0).getM2Type() && !selected.mbList.get(0).getM2Type().equals("pcie/sata"))
+            if(m2Type != selected.mbList.get(0).getM2Type() && !selected.mbList.get(0).getM2Type().equals("pcie/sata") && !m2Type.equals("default"))
             {
                 suggest.add(String.format("主機板的m.2插槽不能插這個m.2硬碟歐 mb m.2 type: %s, disk type: %s"
                                             , selected.mbList.get(0).getM2Type(), m2Type));
@@ -324,7 +324,116 @@ public class MainGee
         return suggest;
     }
 
+    public ArrayList<String> suggestRam(HardwareList selected)
+    {
+        ArrayList<String> suggest = new ArrayList<String>();
 
+        if(selected.ramList.isEmpty())
+        {
+            return suggest;
+        }
+
+        return suggest;
+    }
+
+    public ArrayList<String> suggestVga(HardwareList selected)
+    {
+        ArrayList<String> suggest = new ArrayList<String>();
+
+        if(selected.vgaList.isEmpty())
+        {
+            return suggest;
+        }
+
+        if(!selected.crateList.isEmpty())
+        {
+            int maxLength = selected.vgaList.get(0).getLength();
+
+            for(Vga v : selected.vgaList)
+            {
+                if(v.getLength() > maxLength)
+                    maxLength = v.getLength();
+            }
+
+            if(selected.crateList.get(0).getVgaLength() < maxLength)
+            {
+                suggest.add(String.format("有顯卡塞不進機殼唷 case length: %s, graphic card length: %d"
+                        , selected.crateList.get(0).getVgaLength(), maxLength));
+            }
+        }
+
+        return suggest;
+    }
+
+    public ArrayList<String> suggestDisk(HardwareList selected)
+    {
+        ArrayList<String> suggest = new ArrayList<String>();
+
+        if(selected.diskList.isEmpty())
+        {
+            return suggest;
+        }
+
+        if(!selected.crateList.isEmpty())
+        {
+            int disk35 = 0;
+
+            for(Disk d : selected.diskList)
+            {
+                if(d.getSize() == "3.5")
+                {
+                    disk35 += 1;
+                }
+            }
+
+            if(selected.crateList.get(0).getDiskQuantity() < disk35)
+            {
+                suggest.add(String.format("機殼的3.5\"硬碟架不夠捏 case disk quantity: %s, 3.5\" disk quantity: %s"
+                                , selected.crateList.get(0).getDiskQuantity(), disk35));
+            }
+        }
+
+        return suggest;
+    }
+
+    public ArrayList<String> suggestPsu(HardwareList selected)
+    {
+        ArrayList<String> suggest = new ArrayList<String>();
+
+        if(selected.psuList.isEmpty())
+        {
+            return suggest;
+        }
+
+        if(!selected.crateList.isEmpty())
+        {
+            if(!selected.psuList.get(0).getSize().equals(selected.crateList.get(0).getPsuSize()))
+            {
+                suggest.add(String.format("機殼跟電供的size不合>< case psu size: %s, psu size: %s"
+                    , selected.crateList.get(0).getPsuSize(), selected.psuList.get(0).getSize()));
+            }
+
+            if(selected.psuList.get(0).getLength() > selected.crateList.get(0).getPsuLength())
+            {
+                suggest.add(String.format("機殼裝不下電供啦 case psu length: %s, psu length: %s"
+                    , selected.crateList.get(0).getPsuLength(), selected.psuList.get(0).getLength()));
+            }
+        }
+
+        return suggest;
+    }
+
+    public ArrayList<String> suggestCrate(HardwareList selected)
+    {
+        ArrayList<String> suggest = new ArrayList<String>();
+
+        if(selected.crateList.isEmpty())
+        {
+            return suggest;
+        }
+
+        return suggest;
+    }
 
     public void test()
     {

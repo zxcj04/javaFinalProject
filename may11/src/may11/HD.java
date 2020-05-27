@@ -22,9 +22,28 @@ public class HD extends Crawler{
 				 Elements x = currentspan.select(".x");
 				 tmp.add(0,name.text());
 
+				 if(name.text().contains("Vulcan")) {
+					 canAdd( tmp.size(),1,"sata");
+					 canAdd( tmp.size(),3,"2.5");
+				 }
+				 else if(name.text().contains("M.2")) {
+					 canAdd( tmp.size(),1,"m.2");
+					 canAdd( tmp.size(),3,"2.5");
+				 }
+				 else if(name.text().contains("SATA")) {
+					 canAdd( tmp.size(),1,"sata");
+					 canAdd( tmp.size(),3,"2.5");
+				 }
+				 else if(name.text().contains("RGB"))
+					 canAdd( tmp.size(),1,"sata");
+				 else if(name.text().contains("PCIe")) {
+					 canAdd( tmp.size(),1,"pcie");
+					 canAdd( tmp.size(),3,"2.5");
+				 }
+				 
 				 int i=1,dot=0;
 				 double Inches=0;
-				 int InchesIt=name.text().lastIndexOf("¶T") ;
+				 int InchesIt=name.text().lastIndexOf("Âêã") ;
 				 while(i<InchesIt-1) {
 					 if(name.text().charAt(InchesIt-i)-'0' >= 0 && name.text().charAt(InchesIt-i)-'0' <= 9)
 						 Inches+= (name.text().charAt(InchesIt-i)-'0')*Math.pow(10, i-1-(dot > 0 ? 1 : 0));
@@ -35,12 +54,11 @@ public class HD extends Crawler{
 					 i++;
 				 }
 				 Inches/=Math.pow(10, dot-1);
-					 
-				 int mmIt=name.text().lastIndexOf("mm");
-				 if(mmIt!=-1 && (name.text().charAt(mmIt-1)-'0' >= 0 && name.text().charAt(mmIt-1)-'0' <= 9))
-					 canAdd( tmp.size(),3,Inches+"¶T"+name.text().charAt(mmIt-1)+"mm");
-				 else 
-					 canAdd( tmp.size(),3,Inches+"¶T"+"7mm");
+				 if(tmp.size()<4 || tmp.get(3).equals("NA"))
+				 canAdd( tmp.size(),3,Double.toString(Inches));
+				 
+				 if(Inches==2.5 && tmp.get(1).equals("NA"))
+						canAdd( tmp.size(),1,"sata");
 				 pattern = Pattern.compile("([0-9]+)G");
 				 m = pattern.matcher(name.text());
 				 if (m.find( )) {
@@ -55,8 +73,6 @@ public class HD extends Crawler{
 					 }
 				 }
 				 
-				 String[] money=x.text().split("NT")[1].split("°ª∂}Ωc∞QΩ◊");
-				 canAdd( tmp.size(),4,money[0]);
 				 System.out.println(tmp);
 				 obj.add(tmp);
 			}

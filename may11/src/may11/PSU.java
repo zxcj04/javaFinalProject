@@ -29,8 +29,8 @@ public class PSU extends Crawler{
 					canAdd( tmp.size(),3,"atx");
 				
 				 for(Element currentdiv : div) { 
-					if(currentdiv.text().split("¹q·½ªø«×¡G").length >1) {
-						canAdd( tmp.size(),1,currentdiv.text().split("¹q·½ªø«×¡G")[1]);//cpu
+					if(currentdiv.text().split("é›»æºé•·åº¦ï¼š").length >1) {
+						canAdd( tmp.size(),1,currentdiv.text().split("é›»æºé•·åº¦ï¼š")[1]);//cpu
 					}
 				 }	
 				 
@@ -45,11 +45,9 @@ public class PSU extends Crawler{
 				 }
 				 canAdd( tmp.size(),2,watt+"0W");
 				 
-				 String[] money=x.text().split("¡»¶}½c°Q½×");
-				 canAdd( tmp.size(),4,money[0]);
 				 System.out.println(tmp);
 				 obj.add(tmp);
-			//Name WATT AWG ¹q·½ªø«×  Money
+			//Name WATT AWG ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  Money
 		}
 		}
 	}

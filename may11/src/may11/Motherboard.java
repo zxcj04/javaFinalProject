@@ -2,6 +2,7 @@
 package may11;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,40 +19,128 @@ public class Motherboard extends Crawler{
 				 Elements name = currentspan.select(".t");
 				 Elements x = currentspan.select(".x");
 				 tmp.add(0,name.text());//cpu
+				 if(name.text().contains("*D4")) {
+					 canAdd( tmp.size(),9,"ddr4");
+					 canAdd( tmp.size(),10,"8");
+				 }
 				 for(Element currentdiv : div) {
-					 
-					if(currentdiv.text().split("CPU¡G").length >1) {
-						 tmp.add(1,currentdiv.text().split("CPU¡G")[1]);//cpu
+					if(currentdiv.text().contains("E-ATX"))
+						canAdd( tmp.size(),1,"eatx");
+					else if(currentdiv.text().contains("M-ATX"))
+						canAdd( tmp.size(),1,"matx");
+					else if(currentdiv.text().contains("ATX"))
+						canAdd( tmp.size(),1,"atx");
+					else if(currentdiv.text().contains("XL-ATX"))
+						canAdd( tmp.size(),1,"xlatx");
+					else if(currentdiv.text().contains("mini-ITX"))
+						canAdd( tmp.size(),1,"miniitx");
+					else if(currentdiv.text().contains("ITX"))
+						canAdd( tmp.size(),1,"itx");
+					
+					
+					if(currentdiv.text().contains("1151"))
+						findstr(currentdiv.text(),"1151 \\s",2);
+					else if(currentdiv.text().contains("1150"))
+						findstr(currentdiv.text(),"1150 \\s",2);
+					else if(currentdiv.text().contains("1200"))
+						findstr(currentdiv.text(),"1200 \\s",2);
+					else if(currentdiv.text().contains("AM4"))
+						canAdd( tmp.size(),2,"am4");
+					else if(currentdiv.text().contains("2066"))
+						canAdd( tmp.size(),2,"2066");
+					else if(currentdiv.text().split("CPUï¼š").length >1) 
+						canAdd( tmp.size(),2,currentdiv.text().split("CPUï¼š")[1]);//cpu
+					if(currentdiv.text().split("CPUï¼š").length >1) 
+						canAdd( tmp.size(),3,currentdiv.text().split("CPUï¼š")[1]);
+					if(currentdiv.text().split("ç¶²è·¯ï¼š").length >1) {
+						if(currentdiv.text().split("ç¶²è·¯ï¼š")[1].contains("n"))
+							canAdd(tmp.size(),12,"n");
+						else if(currentdiv.text().split("ç¶²è·¯ï¼š")[1].contains("ac"))
+							canAdd(tmp.size(),12,"ac");
+						else if(currentdiv.text().split("ç¶²è·¯ï¼š")[1].contains("b"))
+							canAdd(tmp.size(),12,"b");
+						else if(currentdiv.text().split("ç¶²è·¯ï¼š")[1].contains("g"))
+							canAdd(tmp.size(),12,"g");
+						else if(currentdiv.text().split("ç¶²è·¯ï¼š")[1].contains("a"))
+							canAdd(tmp.size(),12,"a");
+						
+					canAdd( tmp.size(),4,currentdiv.text().split("ç¶²è·¯ï¼š")[1]);//ç¶²è·¯å­”
 					}
-					//else if(tmp.size() > 2) {
-						if(currentdiv.text().split("¤Ø¤o¡G").length >1) {
-							canAdd( tmp.size(),2,currentdiv.text().split("¤Ø¤o¡G")[1]);//¤j¤p
+					
+					if(currentdiv.text().split("é¡¯ç¤ºï¼š").length >1) {//è¼¸å‡º
+						canAdd( tmp.size(),5,currentdiv.text().split("é¡¯ç¤ºï¼š")[1]);//hdmi
+					 }
+					if(currentdiv.text().contains("USB")) {
+						pattern = Pattern.compile("\\d+\\*USB");
+						m = pattern.matcher(currentdiv.text());
+						int count=0;
+						while(m.find()) {
+							count+=m.group().charAt(0)-'0';
+							}
+						if(!m.find()){
+							pattern = Pattern.compile("USB");
+							m = pattern.matcher(currentdiv.text());
+							while(m.find()) 
+									count++;
 						}
-						if(currentdiv.text().split("ºô¸ô¡G").length >1) {
-							canAdd( tmp.size(),3,currentdiv.text().split("ºô¸ô¡G")[1]);//ºô¸ô¤Õ
-						 }
-						if(currentdiv.text().split("¤º«Ø¡G").length >1) {
-							canAdd( tmp.size(),4,currentdiv.text().split("¤º«Ø¡G")[1]);//usb
-						 }
-						if(currentdiv.text().split("Åã¥Ü¡G").length >1) {//¿é¥X
-							canAdd( tmp.size(),5,currentdiv.text().split("Åã¥Ü¡G")[1]);//usb
-						 }
-						if(currentdiv.text().split("Àx¦s¡G").length >1) {//¿é¥X
-							canAdd( tmp.size(),6,currentdiv.text().split("Àx¦s¡G")[1]);//usb
+						canAdd( tmp.size(),7, Integer.toString(count));
+					 }
+					
+					if(currentdiv.text().split("å„²å­˜ï¼š").length >1) {//è¼¸å‡º
+						canAdd( tmp.size(),8,currentdiv.text().split("å„²å­˜ï¼š")[1]);//usb
+						pattern = Pattern.compile("\\d?\\+?\\d\\*SATA3");
+						m = pattern.matcher(currentdiv.text().split("å„²å­˜ï¼š")[1]);
+						if(m.find()) {
+							int sataCount=0;
+							sataCount=m.group().charAt(0)-'0';
+							
+							if(m.group().contains("+"))
+								sataCount+=m.group().charAt(2)-'0';
+							canAdd( tmp.size(),13,Integer.toString(sataCount));
 						}
-						else if(currentdiv.text().split("Àx¦sªÅ¶¡¡G").length >1) {//¿é¥X
-							canAdd( tmp.size(),6,currentdiv.text().split("Àx¦sªÅ¶¡¡G")[1]);//usb
+						pattern = Pattern.compile("\\d\\*M\\.2");
+						m = pattern.matcher(currentdiv.text().split("å„²å­˜ï¼š")[1]);
+						if(m.find()) {
+							int m2=0;
+							m2=m.group().charAt(0)-'0';
+							canAdd( tmp.size(),15,Integer.toString(m2));
 						}
+					}
+					else if(currentdiv.text().split("å„²å­˜ç©ºé–“ï¼š").length >1) {//è¼¸å‡º
+						canAdd( tmp.size(),8,currentdiv.text().split("å„²å­˜ç©ºé–“ï¼š")[1]);//usb
+					}
+					if(currentdiv.text().split("è¨˜æ†¶é«”ï¼š").length >1) {//è¼¸å‡º
+						if(currentdiv.text().split("è¨˜æ†¶é«”ï¼š")[1].contains("DDR4"))//usb
+							canAdd( tmp.size(),9,"ddr4");
+						else if(currentdiv.text().split("è¨˜æ†¶é«”ï¼š")[1].contains("DDR3"))//usb
+							canAdd( tmp.size(),9,"ddr3");
+						if(currentdiv.text().split("è¨˜æ†¶é«”ï¼š")[1].contains("é›™é€šé“"))
+							canAdd( tmp.size(),10,"2");
+						else
+							canAdd( tmp.size(),10,"2");
+						if(tmp.get(9).equals("NA"))
+							canAdd( tmp.size(),9,"ddr4");
+						findstr("\\d+GB",currentdiv.text().split("è¨˜æ†¶é«”ï¼š")[1],11);
+					}
+				
 					//}	 
 				 }	
-				 if(tmp.size() > 3) {
-					 String[] money=x.text().split("NT")[1].split("¡»¶}½c°Q½×");
-					 tmp.add(money[0]);
+				 
+				 if(tmp.size()> 3 && tmp.get(2)!="NA") {
 					 System.out.println(tmp);
 					 obj.add(tmp);
 				 }
 			}
 		 }
 
+	}
+	private void findstr(String tocut,String cut,int it) {
+		pattern = Pattern.compile(tocut);
+		m = pattern.matcher(cut);
+		if(m.find()) {
+			//System.out.println(m.group());
+			canAdd( tmp.size(),it,m.group());
+		}
+		
 	}
 }

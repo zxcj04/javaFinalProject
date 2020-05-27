@@ -15,12 +15,11 @@ public class test {
 	public static void main(String[] args) throws IOException {
 		//Coolcpu a=new Coolcpu();
 		//IntelCPU b=new IntelCPU();
-		//ComputerCase c=new ComputerCase();
-		Memory d=new Memory();
+		ComputerCase c=new ComputerCase();
+		//Memory d=new Memory();
 		//GPU e=new GPU();
 		//PSU f=new PSU();
 		//Motherboard g= new Motherboard();
-		//Battery h= new Battery();
 		//Fan i= new Fan();
 		 //HD j= new HD();
 	}

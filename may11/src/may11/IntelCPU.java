@@ -21,10 +21,10 @@ public class IntelCPU extends Crawler {
 				if(linkhref.startsWith("/content/www/tw/zh/ark/products/")){
 					doc1 = Jsoup.connect("https://ark.intel.com/"+"linkhref").get();
 					String data=doc1.html();
-					String[] product=data.split("²£«~¨t¦C");
+					String[] product=data.split("â—†é–‹ç®±è¨Žè«–");
 					String[] it = null;
 					if((product.length >=2 )){	
-						//it=product[1].split("¥N¸¹");
+						//it=product[1].split("ï¿½Nï¿½ï¿½");
 						System.out.println(product[1]);
 					}
 						//System.out.println(linkhref);

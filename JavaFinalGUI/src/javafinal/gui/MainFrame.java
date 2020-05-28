@@ -26,6 +26,7 @@ public class MainFrame extends JFrame
 										  "PSU", "Computer Case"};
 	
 	public static final Font title =  new Font("Monospaced", Font.BOLD, 20);
+	public static final Font font =  new Font("Monospaced", Font.BOLD, 16);
 	
 	private final Container contentPane;
 	private CardLayout card;

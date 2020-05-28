@@ -40,8 +40,7 @@ public class PsuSubFrame extends JDialog {
 		lenPane.setOpaque(true);
 		
 		JLabel label = new JLabel("長度: ");
-		Font font = new Font("Monospaced", Font.BOLD, 16);
-		label.setFont(font);
+		label.setFont(MainFrame.font);
 		
 		lenPane.add(label);
 		
@@ -50,13 +49,13 @@ public class PsuSubFrame extends JDialog {
 		length.setPreferredSize(new Dimension(130, 32));
 		((JSpinner.NumberEditor)length.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)length.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)length.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		length.addChangeListener(new spinnerListener());
 		lenPane.add(length);
 		
 		JLabel unitCm = new JLabel("cm");
-		unitCm.setFont(font);
+		unitCm.setFont(MainFrame.font);
 		
 		lenPane.add(unitCm);
 		
@@ -67,7 +66,7 @@ public class PsuSubFrame extends JDialog {
 		wattPane.setOpaque(true);
 		
 		JLabel label1 = new JLabel("瓦數: ");
-		label1.setFont(font);
+		label1.setFont(MainFrame.font);
 		
 		wattPane.add(label1);
 		
@@ -76,13 +75,13 @@ public class PsuSubFrame extends JDialog {
 		watt.setPreferredSize(new Dimension(138, 32));
 		((JSpinner.NumberEditor)watt.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)watt.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)watt.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		watt.addChangeListener(new spinnerListener());
 		wattPane.add(watt);
 		
 		JLabel unitWatt = new JLabel("W");
-		unitWatt.setFont(font);
+		unitWatt.setFont(MainFrame.font);
 		
 		wattPane.add(unitWatt);
 		
@@ -94,8 +93,9 @@ public class PsuSubFrame extends JDialog {
 		
 		size = new JComboBox<String>();
 		size.setEditable(false);
-		size.setPreferredSize(new Dimension(95, 32));
+		size.setPreferredSize(new Dimension(90, 32));
 		size.setBackground(new Color(215, 225, 238));
+		size.setFont(MainFrame.font);
 
 		size.addItem("ATX");
 		size.addItem("SFX");

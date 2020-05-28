@@ -65,6 +65,7 @@ public class MainPanel extends JPanel
 			optionPanel.getSubButtons().get(current).get(optionPanel.getSubButtons().get(current).size() - 1)
 				.addActionListener(new SubBtnListener());
 			
+			parent.refresh();
 			parent.revalidate();
 		}
 		

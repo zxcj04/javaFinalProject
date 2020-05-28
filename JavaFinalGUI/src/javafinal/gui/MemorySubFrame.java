@@ -37,6 +37,7 @@ public class MemorySubFrame extends JDialog {
 		type.setEditable(false);
 		type.setPreferredSize(new Dimension(145, 32));
 		type.setBackground(new Color(215, 225, 238));
+		type.setFont(MainFrame.font);
 
 		type.addItem("ddr4");
 		type.addItem("ddr3");
@@ -72,6 +73,7 @@ public class MemorySubFrame extends JDialog {
 		capacity = new JComboBox<String>();
 		capacity.setEditable(false);
 		capacity.setBackground(new Color(215, 225, 238));
+		capacity.setFont(MainFrame.font);
 		
 		capacity.addItem("1");
 		capacity.addItem("2");
@@ -81,8 +83,7 @@ public class MemorySubFrame extends JDialog {
 		capacity.addItem("32");
 		
 		JLabel giga = new JLabel("G");
-		Font g = new Font("Monospaced", Font.BOLD, 20);
-		giga.setFont(g);
+		giga.setFont(MainFrame.font);
 
 		capPane.add(capacity);
 		capPane.add(giga);

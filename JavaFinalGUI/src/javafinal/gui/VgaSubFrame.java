@@ -2,7 +2,6 @@ package javafinal.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,8 +35,7 @@ public class VgaSubFrame extends JDialog {
 		lenPane.setOpaque(true);
 		
 		JLabel label = new JLabel("長度: ");
-		Font font = new Font("Monospaced", Font.BOLD, 16);
-		label.setFont(font);
+		label.setFont(MainFrame.font);
 		
 		lenPane.add(label);
 		
@@ -46,13 +44,13 @@ public class VgaSubFrame extends JDialog {
 		length.setPreferredSize(new Dimension(130, 32));
 		((JSpinner.NumberEditor)length.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)length.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)length.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		length.addChangeListener(new spinnerListener());
 		lenPane.add(length);
 		
 		JLabel unit = new JLabel("cm");
-		unit.setFont(font);
+		unit.setFont(MainFrame.font);
 		
 		lenPane.add(unit);
 		
@@ -63,7 +61,7 @@ public class VgaSubFrame extends JDialog {
 		tdpPane.setOpaque(true);
 		
 		JLabel label1 = new JLabel("TDP: ");
-		label1.setFont(font);
+		label1.setFont(MainFrame.font);
 		
 		tdpPane.add(label1);
 		
@@ -72,13 +70,13 @@ public class VgaSubFrame extends JDialog {
 		tdp.setPreferredSize(new Dimension(135, 32));
 		((JSpinner.NumberEditor)tdp.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)tdp.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)tdp.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		tdp.addChangeListener(new spinnerListener());
 		tdpPane.add(tdp);
 		
 		JLabel unitWatt = new JLabel("W");
-		unitWatt.setFont(font);
+		unitWatt.setFont(MainFrame.font);
 		
 		tdpPane.add(unitWatt);
 		

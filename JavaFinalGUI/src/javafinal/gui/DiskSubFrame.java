@@ -47,6 +47,7 @@ public class DiskSubFrame extends JDialog {
 		type.setEditable(false);
 		type.setPreferredSize(new Dimension(170, 32));
 		type.setBackground(new Color(215, 225, 238));
+		type.setFont(MainFrame.font);
 
 		type.addItem("m.2");
 		type.addItem("ssd");
@@ -85,6 +86,7 @@ public class DiskSubFrame extends JDialog {
 		size.setEditable(false);
 		size.setPreferredSize(new Dimension(100, 32));
 		size.setBackground(new Color(215, 225, 238));
+		size.setFont(MainFrame.font);
 
 		size.addItem("pcie");
 		size.addItem("sata");
@@ -101,8 +103,7 @@ public class DiskSubFrame extends JDialog {
 		capacity.setPreferredSize(new Dimension(100, 32));
 		((JSpinner.NumberEditor)capacity.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		Font font = new Font("Monospaced", Font.BOLD, 16);
-		((JSpinner.NumberEditor)capacity.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)capacity.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		capacity.addChangeListener(new ChangeListener() {
 			@Override
@@ -131,6 +132,7 @@ public class DiskSubFrame extends JDialog {
 		unit.setEditable(false);
 		unit.setPreferredSize(new Dimension(50, 32));
 		unit.setBackground(new Color(215, 225, 238));
+		unit.setFont(MainFrame.font);
 		
 		unit.addItem("G");
 		unit.addItem("T");

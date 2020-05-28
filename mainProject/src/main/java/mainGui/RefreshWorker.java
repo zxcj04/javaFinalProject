@@ -18,9 +18,9 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 		}
 		else {
 			parent.content.initLists();
-			parent.setSuggestion();
 		}
-		
+
+		parent.setSuggestion();
 		parent.getMainPanel().getOptionPanel().updateComboBoxes(parent.getSmartModeBtnPanel().getToRefresh());
 		return null;
 	}

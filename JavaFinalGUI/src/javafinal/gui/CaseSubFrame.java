@@ -9,19 +9,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class CaseSubFrame extends JDialog {
-	FilterComboBox mbSize;
+	JComboBox<String> mbSize;
 	JSpinner vgaLength;
-	FilterComboBox psuSize;
+	JComboBox<String> psuSize;
 	JSpinner psuLength;
 	JSpinner coolerHeight;
 	JSpinner diskQuantity;
@@ -46,16 +48,16 @@ public class CaseSubFrame extends JDialog {
 		
 		mbPane.add(label1);
 		
-		ArrayList<String> mbList = new ArrayList<String>();
-		mbList.add("ATX");
-		mbList.add("MATX");
-		mbList.add("EATX");
-		mbList.add("ITX");
-		mbList.add("MITX");
-		
-		mbSize = new FilterComboBox(mbList);
-		mbSize.getTextField().setEditable(false);
+		mbSize = new JComboBox<String>();
+		mbSize.setEditable(false);
 		mbSize.setPreferredSize(new Dimension(110, 32));
+		mbSize.setBackground(new Color(215, 225, 238));
+		
+		mbSize.addItem("ATX");		
+		mbSize.addItem("MATX");		
+		mbSize.addItem("EATX");		
+		mbSize.addItem("ITX");		
+		mbSize.addItem("MITX");
 		
 		mbPane.add(mbSize);
 		this.add(mbPane);
@@ -95,13 +97,13 @@ public class CaseSubFrame extends JDialog {
 		
 		psuPane.add(label3);
 		
-		ArrayList<String> psuList = new ArrayList<String>();
-		psuList.add("ATX");
-		psuList.add("SFX");
-		
-		psuSize = new FilterComboBox(psuList);
-		psuSize.getTextField().setEditable(false);
+		psuSize = new JComboBox<String>();
+		psuSize.setEditable(false);
 		psuSize.setPreferredSize(new Dimension(70, 32));
+		psuSize.setBackground(new Color(215, 225, 238));
+
+		psuSize.addItem("ATX");
+		psuSize.addItem("SFX");
 		
 		psuPane.add(psuSize);
 		
@@ -180,11 +182,11 @@ public class CaseSubFrame extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				String chosen = "custom ";
-				chosen += mbSize.getTextField().getText();
+				chosen += (String)mbSize.getSelectedItem();
 				chosen += " ";
 				chosen += ((JSpinner.NumberEditor)vgaLength.getEditor()).getTextField().getText();
 				chosen += "cm ";
-				chosen += psuSize.getTextField().getText();
+				chosen += (String)psuSize.getSelectedItem();
 				chosen += " ";
 				chosen += ((JSpinner.NumberEditor)psuLength.getEditor()).getTextField().getText();
 				chosen += "cm ";
@@ -225,8 +227,8 @@ public class CaseSubFrame extends JDialog {
 				if((Integer)coolerHeight.getValue() >= 1000) {
 					coolerHeight.setValue(999);
 				}
-				else if((Integer)psuLength.getValue() <= 0) {
-					psuLength.setValue(1);
+				else if((Integer)coolerHeight.getValue() <= 0) {
+					coolerHeight.setValue(1);
 				}
 			}
 			else if(event.getSource() == diskQuantity) {

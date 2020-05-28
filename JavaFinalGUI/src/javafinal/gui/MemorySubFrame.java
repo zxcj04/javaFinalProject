@@ -9,13 +9,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MemorySubFrame extends JDialog {
-	FilterComboBox type;
-	FilterComboBox capacity;
+	JComboBox<String> type;
+	JComboBox<String> capacity;
 	JButton set = new JButton("確定");
 	
 	public MemorySubFrame(MainFrame parent, OptionPanel brother, boolean memoryIsFixed, String fixedType, boolean memoryIsCustomized, String memoryType) {
@@ -31,28 +33,30 @@ public class MemorySubFrame extends JDialog {
 		typePane.setBackground(new Color(231, 242, 255));
 		typePane.setOpaque(true);
 		
-		ArrayList<String> typeList = new ArrayList<String>();
-		typeList.add("ddr4");
-		typeList.add("ddr3");
-		typeList.add("ddr2");
-		typeList.add("ddr1");
+		type = new JComboBox<String>();
+		type.setEditable(false);
+		type.setPreferredSize(new Dimension(145, 32));
+		type.setBackground(new Color(215, 225, 238));
+
+		type.addItem("ddr4");
+		type.addItem("ddr3");
+		type.addItem("ddr2");
+		type.addItem("ddr1");
 		
 		if(parent.getSmartModeBtnPanel().getToRefresh()) {
+			
 			if(memoryIsFixed) {
-				typeList.clear();
-				typeList.add(fixedType);
+				type.removeAllItems();
+				type.addItem(fixedType);
 			}
-			else {
-				if(memoryIsCustomized) {
-					typeList.remove(typeList.indexOf(memoryType));
-					typeList.add(0, memoryType);
-				}
+			else if(memoryIsCustomized) {
+				type.removeAllItems();
+				type.addItem(memoryType);
 			}
+			
+			type.revalidate();
 		}
 		
-		type = new FilterComboBox(typeList);
-		type.getTextField().setEditable(false);
-		type.setPreferredSize(new Dimension(145, 32));
 		
 		if(parent.getSmartModeBtnPanel().getToRefresh() && (memoryIsFixed || memoryIsCustomized)) {
 			type.setEnabled(false);
@@ -65,16 +69,16 @@ public class MemorySubFrame extends JDialog {
 		capPane.setBackground(new Color(231, 242, 255));
 		capPane.setOpaque(true);
 		
-		ArrayList<String> capList = new ArrayList<String>();
-		capList.add("1");
-		capList.add("2");
-		capList.add("4");
-		capList.add("8");
-		capList.add("16");
-		capList.add("32");
+		capacity = new JComboBox<String>();
+		capacity.setEditable(false);
+		capacity.setBackground(new Color(215, 225, 238));
 		
-		capacity = new FilterComboBox(capList);
-		capacity.getTextField().setEditable(false);
+		capacity.addItem("1");
+		capacity.addItem("2");
+		capacity.addItem("4");
+		capacity.addItem("8");
+		capacity.addItem("16");
+		capacity.addItem("32");
 		
 		JLabel giga = new JLabel("G");
 		Font g = new Font("Monospaced", Font.BOLD, 20);
@@ -93,9 +97,9 @@ public class MemorySubFrame extends JDialog {
 			public void actionPerformed(ActionEvent event) {
 				String chosen = "custom ";
 				
-				chosen += type.getTextField().getText();
+				chosen += (String)type.getSelectedItem();
 				chosen += " ";
-				chosen += capacity.getTextField().getText();
+				chosen += (String)capacity.getSelectedItem();
 				chosen += "G";
 				
 				brother.setFeedback(chosen);

@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -21,7 +23,7 @@ import javax.swing.event.ChangeListener;
 public class PsuSubFrame extends JDialog {
 	JSpinner length;
 	JSpinner watt;
-	FilterComboBox size;
+	JComboBox<String> size;
 	JButton set = new JButton("確定");
 	
 	public PsuSubFrame(MainFrame parent, OptionPanel brother) {
@@ -90,13 +92,13 @@ public class PsuSubFrame extends JDialog {
 		sizePane.setBackground(new Color(231, 242, 255));
 		sizePane.setOpaque(true);
 		
-		ArrayList<String> sizeList = new ArrayList<String>();
-		sizeList.add("ATX");
-		sizeList.add("SFX");
-		
-		size = new FilterComboBox(sizeList);
-		size.getTextField().setEditable(false);
+		size = new JComboBox<String>();
+		size.setEditable(false);
 		size.setPreferredSize(new Dimension(95, 32));
+		size.setBackground(new Color(215, 225, 238));
+
+		size.addItem("ATX");
+		size.addItem("SFX");
 		
 		sizePane.add(size);
 		this.add(sizePane);
@@ -113,7 +115,7 @@ public class PsuSubFrame extends JDialog {
 				chosen += "cm ";
 				chosen += ((JSpinner.NumberEditor)watt.getEditor()).getTextField().getText();
 				chosen += "W ";
-				chosen += size.getTextField().getText();
+				chosen += (String)size.getSelectedItem();
 				
 				brother.setFeedback(chosen);
 				PsuSubFrame.this.dispose();

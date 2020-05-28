@@ -10,10 +10,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -21,10 +24,10 @@ import javax.swing.event.ChangeListener;
 
 
 public class DiskSubFrame extends JDialog {
-	FilterComboBox type;
-	FilterComboBox size;
+	JComboBox<String> type;
+	JComboBox<String> size;
 	JSpinner capacity;
-	FilterComboBox unit;
+	JComboBox<String> unit;
 	JButton set = new JButton("確定");
 	
 	public DiskSubFrame(MainFrame parent, OptionPanel brother) {
@@ -40,14 +43,14 @@ public class DiskSubFrame extends JDialog {
 		typePane.setBackground(new Color(231, 242, 255));
 		typePane.setOpaque(true);
 		
-		ArrayList<String> typeList = new ArrayList<String>();
-		typeList.add("m.2");
-		typeList.add("ssd");
-		typeList.add("hdd");
-		
-		type = new FilterComboBox(typeList);
-		type.getTextField().setEditable(false);
+		type = new JComboBox<String>();
+		type.setEditable(false);
 		type.setPreferredSize(new Dimension(170, 32));
+		type.setBackground(new Color(215, 225, 238));
+
+		type.addItem("m.2");
+		type.addItem("ssd");
+		type.addItem("hdd");
 		
 		type.addItemListener(new ItemListener() {
 			@Override
@@ -58,14 +61,14 @@ public class DiskSubFrame extends JDialog {
 						sizeList.add("pcie");
 						sizeList.add("sata");
 						
-						size.updateEntries(sizeList);
+						size.setModel(new DefaultComboBoxModel(sizeList.toArray()));
 					}
 					else {
 						ArrayList<String> sizeList = new ArrayList<String>();
 						sizeList.add("2.5\"");
 						sizeList.add("3.5\"");
 						
-						size.updateEntries(sizeList);
+						size.setModel(new DefaultComboBoxModel(sizeList.toArray()));
 					}
 				}
 			}
@@ -78,13 +81,13 @@ public class DiskSubFrame extends JDialog {
 		sizePane.setBackground(new Color(231, 242, 255));
 		sizePane.setOpaque(true);
 		
-		ArrayList<String> sizeList = new ArrayList<String>();
-		sizeList.add("pcie");
-		sizeList.add("sata");
-		
-		size = new FilterComboBox(sizeList);
-		size.getTextField().setEditable(false);
+		size = new JComboBox<String>();
+		size.setEditable(false);
 		size.setPreferredSize(new Dimension(100, 32));
+		size.setBackground(new Color(215, 225, 238));
+
+		size.addItem("pcie");
+		size.addItem("sata");
 
 		sizePane.add(size);
 		this.add(sizePane);
@@ -104,16 +107,16 @@ public class DiskSubFrame extends JDialog {
 		capacity.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {
-				if(unit.getTextField().getText().equals("G") && (Integer)capacity.getValue() >= 1000) {
+				if(((JTextField)(unit.getEditor().getEditorComponent())).getText().equals("G") && (Integer)capacity.getValue() >= 1000) {
 					ArrayList<String> list = new ArrayList<String>();
 					list.add("T");
 					list.add("G");
 					
-					unit.updateEntries(list);
+					unit.setModel(new DefaultComboBoxModel(list.toArray()));
 					
 					capacity.setValue((Integer)capacity.getValue() / 1000);
 				}
-				else if(unit.getTextField().getText().equals("T") && (Integer)capacity.getValue() > 64) {
+				else if(((JTextField)(unit.getEditor().getEditorComponent())).getText().equals("T") && (Integer)capacity.getValue() > 64) {
 					capacity.setValue(64);
 				}
 				else if((Integer)capacity.getValue() <= 0) {
@@ -123,13 +126,14 @@ public class DiskSubFrame extends JDialog {
 		});
 		
 		capPane.add(capacity);
-		
-		ArrayList<String> unitList = new ArrayList<String>();
-		unitList.add("G");
-		unitList.add("T");
-		unit = new FilterComboBox(unitList);
-		unit.getTextField().setEditable(false);
+
+		unit = new JComboBox<String>();
+		unit.setEditable(false);
 		unit.setPreferredSize(new Dimension(50, 32));
+		unit.setBackground(new Color(215, 225, 238));
+		
+		unit.addItem("G");
+		unit.addItem("T");
 		
 		unit.addItemListener(new ItemListener() {
 			@Override
@@ -152,12 +156,12 @@ public class DiskSubFrame extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				String chosen = "custom ";
-				chosen += type.getTextField().getText();
+				chosen += (String)type.getSelectedItem();
 				chosen += " ";
-				chosen += size.getTextField().getText();
+				chosen += (String)size.getSelectedItem();
 				chosen += " ";
 				chosen += ((JSpinner.NumberEditor)capacity.getEditor()).getTextField().getText();
-				chosen += unit.getTextField().getText();
+				chosen += (String)unit.getSelectedItem();
 				
 				brother.setFeedback(chosen);
 				DiskSubFrame.this.dispose();

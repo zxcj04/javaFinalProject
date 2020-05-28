@@ -6,12 +6,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Dialog.ModalityType;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -24,7 +21,8 @@ public class CoolerSubFrame extends JDialog {
 	JSpinner height;
 	JButton set = new JButton("確定");
 	
-	public CoolerSubFrame(MainFrame parent) {
+	public CoolerSubFrame(MainFrame parent, OptionPanel brother) {
+		super(parent);
 		this.setTitle("自訂散熱器");
 		
 		this.setModal(true);
@@ -80,7 +78,7 @@ public class CoolerSubFrame extends JDialog {
 				chosen += ((JSpinner.NumberEditor)height.getEditor()).getTextField().getText();
 				chosen += "cm";
 				
-				parent.setFeedback(chosen);
+				brother.setFeedback(chosen);
 				CoolerSubFrame.this.dispose();
 			}
 		});

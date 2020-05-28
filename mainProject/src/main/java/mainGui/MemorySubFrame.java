@@ -2,17 +2,14 @@ package maingui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,7 +18,8 @@ public class MemorySubFrame extends JDialog {
 	FilterComboBox capacity;
 	JButton set = new JButton("確定");
 	
-	public MemorySubFrame(MainFrame parent, boolean memoryIsCustomized, String memoryType) {
+	public MemorySubFrame(MainFrame parent, OptionPanel brother, boolean memoryIsFixed, String fixedType, boolean memoryIsCustomized, String memoryType) {
+		super(parent);
 		this.setTitle("自訂記憶體");
 		
 		this.setModal(true);
@@ -34,21 +32,27 @@ public class MemorySubFrame extends JDialog {
 		typePane.setOpaque(true);
 		
 		ArrayList<String> typeList = new ArrayList<String>();
-		typeList.add("ddr4");
-		typeList.add("ddr3");
-		typeList.add("ddr2");
-		typeList.add("ddr1");
 		
-		if(memoryIsCustomized) {
-			typeList.remove(typeList.indexOf(memoryType));
-			typeList.add(0, memoryType);
+		if(memoryIsFixed) {
+			typeList.add(fixedType);
+		}
+		else {
+			typeList.add("ddr4");
+			typeList.add("ddr3");
+			typeList.add("ddr2");
+			typeList.add("ddr1");
+			
+			if(memoryIsCustomized) {
+				typeList.remove(typeList.indexOf(memoryType));
+				typeList.add(0, memoryType);
+			}
 		}
 		
 		type = new FilterComboBox(typeList);
 		type.getTextField().setEditable(false);
 		type.setPreferredSize(new Dimension(145, 32));
 		
-		if(memoryIsCustomized) {
+		if(memoryIsFixed || memoryIsCustomized) {
 			type.setEnabled(false);
 		}
 		
@@ -92,7 +96,7 @@ public class MemorySubFrame extends JDialog {
 				chosen += capacity.getTextField().getText();
 				chosen += "G";
 				
-				parent.setFeedback(chosen);
+				brother.setFeedback(chosen);
 				
 				MemorySubFrame.this.dispose();
 			}

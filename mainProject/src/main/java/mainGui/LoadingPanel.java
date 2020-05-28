@@ -3,6 +3,7 @@ package maingui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -11,12 +12,19 @@ import javax.swing.JPanel;
 public class LoadingPanel extends JPanel
 {
 	public LoadingPanel() {
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridLayout(3, 1));
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		
+		this.add(new JPanel());
+		this.add(panel);
+		this.add(new JPanel());
 		
 		JPanel iconPane = new JPanel();
 		iconPane.setLayout(new BorderLayout());
 		
-		ImageIcon loadingGif = new ImageIcon(getClass().getResource("loading.gif"));
+		ImageIcon loadingGif = new ImageIcon(getClass().getResource("/circle.gif"));
 		JLabel loading = new JLabel(loadingGif);
 		
 		iconPane.add(loading, BorderLayout.CENTER);
@@ -30,7 +38,7 @@ public class LoadingPanel extends JPanel
 		
 		textPane.add(text);
 		
-		this.add(iconPane, BorderLayout.CENTER);
-		this.add(textPane, BorderLayout.SOUTH);
+		panel.add(iconPane, BorderLayout.CENTER);
+		panel.add(textPane, BorderLayout.SOUTH);
 	}
 }

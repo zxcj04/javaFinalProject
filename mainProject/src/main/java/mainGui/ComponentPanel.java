@@ -3,23 +3,16 @@ package maingui;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class ComponentPanel extends JPanel
 {
@@ -87,7 +80,7 @@ public class ComponentPanel extends JPanel
 		counter.setVisible(visableSet[cur][1]);
 		
 		// gear Button
-		ImageIcon gear = new ImageIcon(getClass().getResource("/gear.jpg"));
+		ImageIcon gear = new ImageIcon(getClass().getResource("/gear.png"));
 		customBtn = new JButton(gear);
 		customBtn.setPreferredSize(new Dimension(30, 30));
 		
@@ -95,7 +88,7 @@ public class ComponentPanel extends JPanel
 		customBtn.setVisible(visableSet[cur][2]);
 		
 		// sub Button
-		ImageIcon sub = new ImageIcon(getClass().getResource("/sub.jpg"));
+		ImageIcon sub = new ImageIcon(getClass().getResource("/sub.png"));
 		subBtn = new JButton(sub);
 		subBtn.setPreferredSize(new Dimension(30, 30));
 		

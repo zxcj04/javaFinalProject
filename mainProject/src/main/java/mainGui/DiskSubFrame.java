@@ -8,13 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.Dialog.ModalityType;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -22,8 +19,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-// m.2 \ pcie sata
-// ssd hdd \ 2.5" 3.5"
 
 public class DiskSubFrame extends JDialog {
 	FilterComboBox type;
@@ -32,7 +27,8 @@ public class DiskSubFrame extends JDialog {
 	FilterComboBox unit;
 	JButton set = new JButton("確定");
 	
-	public DiskSubFrame(MainFrame parent) {
+	public DiskSubFrame(MainFrame parent, OptionPanel brother) {
+		super(parent);
 		this.setTitle("自訂硬碟");
 		
 		this.setModal(true);
@@ -163,7 +159,7 @@ public class DiskSubFrame extends JDialog {
 				chosen += ((JSpinner.NumberEditor)capacity.getEditor()).getTextField().getText();
 				chosen += unit.getTextField().getText();
 				
-				parent.setFeedback(chosen);
+				brother.setFeedback(chosen);
 				DiskSubFrame.this.dispose();
 			}
 		});

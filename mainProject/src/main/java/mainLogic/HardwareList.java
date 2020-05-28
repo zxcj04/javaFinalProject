@@ -438,6 +438,11 @@ public class HardwareList
             filters.add(eq("ramType", selected.mbList.get(0).getRamType()));
         }
 
+        if(!selected.ramList.isEmpty())
+        {
+            filters.add(eq("ramType", selected.ramList.get(0).getRamType()));
+        }
+
         if(filters.isEmpty())
         {
             filters.add(or(eq("", ""), ne("", "")));

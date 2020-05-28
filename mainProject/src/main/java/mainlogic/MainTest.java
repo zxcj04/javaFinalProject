@@ -58,7 +58,7 @@ public class MainTest
 
             // select.cpu      .add("test3Cpu"); 
             // select.mb       .add("test1Mb");
-            // select.cooler   .add("testCooler");
+            select.cooler   .add("testCooler");
             select.cooler   .add("custom 10cm");
             select.ram      .add("test3Ram");
             // select.ram      .add("custom ddr3 16g");

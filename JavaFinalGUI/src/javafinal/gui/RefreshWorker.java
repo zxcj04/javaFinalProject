@@ -25,6 +25,7 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 	}
 	@Override
     protected void done() {
-        parent.switchCards("MAIN");
+//      parent.switchCards("MAIN");
+		parent.enableSwitch(true);
     }
 }

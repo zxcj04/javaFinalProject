@@ -124,7 +124,8 @@ public class MainFrame extends JFrame
 
 		worker = new RefreshWorker(this);
 		worker.execute();
-		switchCards("LOAD");
+//		switchCards("LOAD");
+		enableSwitch(false);
 	}
 	
 	public void setSuggestion() {
@@ -136,6 +137,12 @@ public class MainFrame extends JFrame
 		}
 		suggestionPanel.getSuggestion().setText("");
 		suggestionPanel.getSuggestion().setText(text);
+	}
+	
+	public void enableSwitch(boolean op) {
+		mainPanel.getOptionPanel().enableSwitch(op);
+		mainPanel.getPlusBtnPanel().enableSwitch(op);
+		smartModeBtnPanel.enableSwitch(op);
 	}
 	
 	private class SmartListener implements ActionListener {

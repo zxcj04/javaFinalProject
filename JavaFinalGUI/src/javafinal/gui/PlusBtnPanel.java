@@ -39,7 +39,7 @@ public class PlusBtnPanel extends JPanel
 			subPlusBtnPanes.get(i).setBackground(new Color(231, 242, 255));
 			subPlusBtnPanes.get(i).setOpaque(true);
 			
-			subPlusBtnPanes.get(i).setBorder(BorderFactory.createLineBorder(Color.lightGray));
+//			subPlusBtnPanes.get(i).setBorder(BorderFactory.createLineBorder(Color.lightGray));
 			
 			this.add(subPlusBtnPanes.get(i));
 		}
@@ -62,7 +62,7 @@ public class PlusBtnPanel extends JPanel
 		subPlusBtnPanes.get(count - 1).setOpaque(true);
 		
 
-		subPlusBtnPanes.get(count - 1).setBorder(BorderFactory.createLineBorder(Color.lightGray));
+//		subPlusBtnPanes.get(count - 1).setBorder(BorderFactory.createLineBorder(Color.lightGray));
 		
 		this.add(subPlusBtnPanes.get(count - 1), count - 1);
 		this.setBackground(new Color(231, 242, 255));

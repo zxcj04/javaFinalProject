@@ -203,6 +203,8 @@ public class MainGee
             }
         }
 
+        ramSelected = selected.cpuList.get(0).getRamGenerationSupport();
+
         return suggest;
     }
 
@@ -309,6 +311,8 @@ public class MainGee
             }
         }
 
+        ramSelected = selected.mbList.get(0).getRamType();
+
         return suggest;
     }
 
@@ -339,7 +343,8 @@ public class MainGee
             return suggest;
         }
 
-        ramSelected = selected.ramList.get(0).getRamType();
+        if(selected.cpuList.isEmpty() && selected.mbList.isEmpty())
+            ramSelected = selected.ramList.get(0).getRamType();
 
         return suggest;
     }

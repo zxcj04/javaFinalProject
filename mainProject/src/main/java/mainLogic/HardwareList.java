@@ -436,7 +436,7 @@ public class HardwareList
             filters.add(eq("ramType", selected.mbList.get(0).getRamType()));
         }
 
-        if(!selected.ramList.isEmpty())
+        if(selected.ramList.size() > 1)
         {
             filters.add(eq("ramType", selected.ramList.get(0).getRamType()));
         }

@@ -16,14 +16,16 @@ import org.bson.Document;
 
 public class MainGee 
 {
-    HardwareList originList;
+    private HardwareList originList;
 
-    HardwareNameList nameList;
+    private HardwareNameList nameList;
 
-    MongoClient mongoClient;
-    MongoDatabase javaTestDB;
+    private MongoClient mongoClient;
+    private MongoDatabase javaTestDB;
 
-    CollectionList collectionList;
+    private CollectionList collectionList;
+
+    private String ramSelected;
 
     public MainGee()
     {
@@ -139,16 +141,20 @@ public class MainGee
         
         ArrayList<String> suggestion = new ArrayList<String>();
 
+        ramSelected = "";
+
         selectList.setHardware(selectedList, nameList, originList);
 
         suggestion.addAll(suggestCpu(selectList));
         suggestion.addAll(suggestMb(selectList));
         suggestion.addAll(suggestCooler(selectList));
-        // suggestion.addAll(suggestRam(selectList));
-        // suggestion.addAll(suggestVga(selectList));
-        // suggestion.addAll(suggestDisk(selectList));
-        // suggestion.addAll(suggestPsu(selectList));
-        // suggestion.addAll(suggestCrate(selectList));
+        suggestion.addAll(suggestRam(selectList));
+        suggestion.addAll(suggestVga(selectList));
+        suggestion.addAll(suggestDisk(selectList));
+        suggestion.addAll(suggestPsu(selectList));
+        suggestion.addAll(suggestCrate(selectList));
+
+        suggestion.add(ramSelected);
 
         return suggestion;
     }
@@ -332,6 +338,8 @@ public class MainGee
         {
             return suggest;
         }
+
+        ramSelected = selected.ramList.get(0).getRamType();
 
         return suggest;
     }

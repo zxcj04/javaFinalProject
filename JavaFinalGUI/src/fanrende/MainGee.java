@@ -115,7 +115,7 @@ public class MainGee
 	        suggestion.add("Cooler blablabla...");
 	        suggestion.add("Disk   blablabla...");
 	        suggestion.add("Grafic blablabla...");
-	        suggestion.add("ddr3");
+	        suggestion.add("ddr4");
         }
         else {
         	suggestion.add("MEM    blablabla...");

@@ -32,19 +32,21 @@ public class MemorySubFrame extends JDialog {
 		typePane.setOpaque(true);
 		
 		ArrayList<String> typeList = new ArrayList<String>();
+		typeList.add("ddr4");
+		typeList.add("ddr3");
+		typeList.add("ddr2");
+		typeList.add("ddr1");
 		
-		if(memoryIsFixed) {
-			typeList.add(fixedType);
-		}
-		else {
-			typeList.add("ddr4");
-			typeList.add("ddr3");
-			typeList.add("ddr2");
-			typeList.add("ddr1");
-			
-			if(memoryIsCustomized) {
-				typeList.remove(typeList.indexOf(memoryType));
-				typeList.add(0, memoryType);
+		if(parent.getSmartModeBtnPanel().getToRefresh()) {
+			if(memoryIsFixed) {
+				typeList.clear();
+				typeList.add(fixedType);
+			}
+			else {
+				if(memoryIsCustomized) {
+					typeList.remove(typeList.indexOf(memoryType));
+					typeList.add(0, memoryType);
+				}
 			}
 		}
 		
@@ -52,7 +54,7 @@ public class MemorySubFrame extends JDialog {
 		type.getTextField().setEditable(false);
 		type.setPreferredSize(new Dimension(145, 32));
 		
-		if(memoryIsFixed || memoryIsCustomized) {
+		if(parent.getSmartModeBtnPanel().getToRefresh() && (memoryIsFixed || memoryIsCustomized)) {
 			type.setEnabled(false);
 		}
 		

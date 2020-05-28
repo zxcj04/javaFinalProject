@@ -6,12 +6,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Dialog.ModalityType;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -26,7 +24,8 @@ public class PsuSubFrame extends JDialog {
 	FilterComboBox size;
 	JButton set = new JButton("確定");
 	
-	public PsuSubFrame(MainFrame parent) {
+	public PsuSubFrame(MainFrame parent, OptionPanel brother) {
+		super(parent);
 		this.setTitle("自訂電源供應器");
 		
 		this.setModal(true);
@@ -116,7 +115,7 @@ public class PsuSubFrame extends JDialog {
 				chosen += "W ";
 				chosen += size.getTextField().getText();
 				
-				parent.setFeedback(chosen);
+				brother.setFeedback(chosen);
 				PsuSubFrame.this.dispose();
 			}
 		});

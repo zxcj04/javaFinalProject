@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class MainGee 
 {
+	boolean switchSugg = true;
 //    HardwareList originList;
 //
 //    HardwareNameList nameList;
@@ -66,7 +67,7 @@ public class MainGee
         return new HardwareNameList();
     }
 
-    public HardwareNameList getList(HardwareNameList selectedList, boolean smart)
+    public HardwareNameList getList(HardwareNameList selectedList)
     {
 //        HardwareList nowList = new HardwareList();
 //
@@ -100,6 +101,43 @@ public class MainGee
 		crate.add("H");
 
         return new HardwareNameList(cpu, cooler, mb, ram, disk, vga, psu, crate);
+    }
+    
+    public ArrayList<String> getSuggestion(HardwareNameList selectedList)
+    {
+//        HardwareList selectList = new HardwareList();
+        
+        ArrayList<String> suggestion = new ArrayList<String>();
+
+        if(switchSugg) {
+	        suggestion.add("CPU    blablabla...");
+	        suggestion.add("MB     blablabla...");
+	        suggestion.add("Cooler blablabla...");
+	        suggestion.add("Disk   blablabla...");
+	        suggestion.add("Grafic blablabla...");
+	        suggestion.add("ddr3");
+        }
+        else {
+        	suggestion.add("MEM    blablabla...");
+	        suggestion.add("PSU    blablabla...");
+	        suggestion.add("Case   blablabla...");
+	        suggestion.add("");
+        }
+        
+        switchSugg = !switchSugg;
+
+//        selectList.setHardware(selectedList, nameList, originList);
+//
+//        suggestion.addAll(suggestCpu(selectList));
+//        suggestion.addAll(suggestMb(selectList));
+//        suggestion.addAll(suggestCooler(selectList));
+        // suggestion.addAll(suggestRam(selectList));
+        // suggestion.addAll(suggestVga(selectList));
+        // suggestion.addAll(suggestDisk(selectList));
+        // suggestion.addAll(suggestPsu(selectList));
+        // suggestion.addAll(suggestCrate(selectList));
+
+        return suggestion;
     }
 //
 //    public HardwareList getHList(HardwareNameList selectedList)

@@ -24,5 +24,6 @@ public class MainFrameTest
 		
 		loading.dispose();
 		mainFrame.setVisible(true);
+//		mainFrame.test();
 	}
 }

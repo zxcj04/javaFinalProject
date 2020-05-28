@@ -6,12 +6,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Dialog.ModalityType;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -29,7 +27,8 @@ public class CaseSubFrame extends JDialog {
 	JSpinner diskQuantity;
 	JButton set = new JButton("確定");
 	
-	public CaseSubFrame(MainFrame parent) {
+	public CaseSubFrame(MainFrame parent, OptionPanel brother) {
+		super(parent);
 		this.setTitle("自訂機殼");
 		
 		this.setModal(true);
@@ -194,7 +193,7 @@ public class CaseSubFrame extends JDialog {
 				chosen += ((JSpinner.NumberEditor)diskQuantity.getEditor()).getTextField().getText();
 				chosen += "個";
 				
-				parent.setFeedback(chosen);
+				brother.setFeedback(chosen);
 				CaseSubFrame.this.dispose();
 			}
 		});

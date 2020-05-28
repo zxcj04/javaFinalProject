@@ -6,12 +6,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Dialog.ModalityType;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -25,7 +22,8 @@ public class VgaSubFrame extends JDialog {
 	JSpinner tdp;
 	JButton set = new JButton("確定");
 	
-	public VgaSubFrame(MainFrame parent) {
+	public VgaSubFrame(MainFrame parent, OptionPanel brother) {
+		super(parent);
 		this.setTitle("自訂顯示卡");
 		
 		this.setModal(true);
@@ -99,7 +97,7 @@ public class VgaSubFrame extends JDialog {
 				chosen += ((JSpinner.NumberEditor)tdp.getEditor()).getTextField().getText();
 				chosen += "W";
 				
-				parent.setFeedback(chosen);
+				brother.setFeedback(chosen);
 				VgaSubFrame.this.dispose();
 			}
 		});

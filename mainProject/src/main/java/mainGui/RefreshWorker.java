@@ -17,6 +17,7 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 			parent.content.setLists();
 		}
 		else {
+			parent.content.initLists();
 			parent.setSuggestion();
 		}
 		

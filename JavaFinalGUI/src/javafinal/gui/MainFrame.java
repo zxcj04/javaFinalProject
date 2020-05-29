@@ -54,18 +54,11 @@ public class MainFrame extends JFrame
 	}
 	
 	public void init() {
-		try {
-			Thread.sleep(1000);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-		
 		JPanel masterPanel = new JPanel();
 		masterPanel.setLayout(new BorderLayout());
 		contentPane.add("MAIN", masterPanel);
 		
-		LoadingPanel loadingPanel = new LoadingPanel();
+		LoadingPanel loadingPanel = new LoadingPanel(this);
 		contentPane.add("LOAD", loadingPanel);
 
 		// masterPanel

@@ -3,6 +3,7 @@ package javafinal.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,9 +26,10 @@ public class SmartModeBtnPanel extends JPanel
 		this.removeAll();
 		
 		ImageIcon toggle = new ImageIcon(getClass().getResource("switchOn.png"));
-		smartModeBtn = new JButton(toggle);
+		smartModeBtn = new JButton("mart", toggle);
+		smartModeBtn.setFont(new Font("Monospaced", Font.BOLD, 40));
 		
-		smartModeBtn.setPreferredSize(new Dimension(95, 30));
+		smartModeBtn.setPreferredSize(new Dimension(150, 52));
 		smartModeBtn.setBorder(BorderFactory.createEmptyBorder());
 		smartModeBtn.setContentAreaFilled(false);
 		this.add(smartModeBtn);

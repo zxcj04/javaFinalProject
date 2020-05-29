@@ -36,11 +36,6 @@ public class Content
 		return content;
 	}
 	public void setLists() {
-		try {
-			Thread.sleep(500);
-		}
-		catch(Exception e) {}
-
 		HardwareNameList newLists = source.getList(currentInputs);
 
 		lists = new ArrayList<ArrayList<String>>();

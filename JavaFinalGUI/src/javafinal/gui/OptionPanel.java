@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -67,6 +69,17 @@ public class OptionPanel extends JPanel
 				gearButtons.get(i).get(0).addActionListener(new GearListener());
 			}
 		}
+		
+		comboBoxes.get(Content.PSU).get(0).getTextField().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent event) {
+				if(event.getKeyCode() == KeyEvent.VK_ENTER
+						&& comboBoxes.get(Content.PSU).get(0).getTextField().getText().contentEquals("sleep")) {
+					comboBoxes.get(Content.PSU).get(0).getTextField().setText("請選擇");
+					parent.switchCards("LOAD");
+				}
+			}
+		});
 		
 		spinners = new ArrayList<JSpinner>();
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());

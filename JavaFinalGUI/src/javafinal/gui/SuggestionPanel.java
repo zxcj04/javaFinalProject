@@ -20,14 +20,9 @@ public class SuggestionPanel extends JPanel
 		this.setBackground(new Color(231, 242, 255));
 		this.setOpaque(true);
 
-	}
-	
-	public void init() {
-		this.removeAll();
-		
 		suggestion = new JTextArea();
 		suggestion.setLineWrap(true);
-		suggestion.setFont(MainFrame.title);
+		suggestion.setFont(MainFrame.font);
 		suggestion.setEditable(false);
 		suggestion.setBackground(new Color(233, 233, 233));
 		suggestion.setOpaque(true);
@@ -35,6 +30,10 @@ public class SuggestionPanel extends JPanel
 		JScrollPane scrollSuggestion = new JScrollPane(suggestion);
 		
 		this.add(scrollSuggestion, BorderLayout.CENTER);
+	}
+	
+	public void init() {
+		suggestion.setText("");
 	}
 	
 	public JTextArea getSuggestion() {

@@ -12,7 +12,7 @@ public class MainFrameTest
 		MainFrame mainFrame = new MainFrame(code, code.getList());
 		
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(1000, 665);
+		mainFrame.setSize(1000, 700);
 		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		

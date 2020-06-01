@@ -108,7 +108,7 @@ public class DiskSubFrame extends JDialog {
 		capacity.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {
-				if(((JTextField)(unit.getEditor().getEditorComponent())).getText().equals("G") && (Integer)capacity.getValue() >= 1000) {
+				if(((String)(unit.getSelectedItem())).equals("G") && (Integer)capacity.getValue() >= 1000) {
 					ArrayList<String> list = new ArrayList<String>();
 					list.add("T");
 					list.add("G");
@@ -117,7 +117,7 @@ public class DiskSubFrame extends JDialog {
 					
 					capacity.setValue((Integer)capacity.getValue() / 1000);
 				}
-				else if(((JTextField)(unit.getEditor().getEditorComponent())).getText().equals("T") && (Integer)capacity.getValue() > 64) {
+				else if(((String)(unit.getSelectedItem())).equals("T") && (Integer)capacity.getValue() > 64) {
 					capacity.setValue(64);
 				}
 				else if((Integer)capacity.getValue() <= 0) {

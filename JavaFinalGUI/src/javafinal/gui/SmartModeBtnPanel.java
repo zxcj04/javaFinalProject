@@ -26,12 +26,13 @@ public class SmartModeBtnPanel extends JPanel
 		this.removeAll();
 		
 		ImageIcon toggle = new ImageIcon(getClass().getResource("switchOn.png"));
-		smartModeBtn = new JButton("mart", toggle);
+		smartModeBtn = new JButton(toggle);
 		smartModeBtn.setFont(new Font("Monospaced", Font.BOLD, 40));
 		
-		smartModeBtn.setPreferredSize(new Dimension(150, 52));
+		smartModeBtn.setPreferredSize(new Dimension(150, 60));
 		smartModeBtn.setBorder(BorderFactory.createEmptyBorder());
 		smartModeBtn.setContentAreaFilled(false);
+		smartModeBtn.setFocusable(false);
 		this.add(smartModeBtn);
 		
 		toRefresh = true;

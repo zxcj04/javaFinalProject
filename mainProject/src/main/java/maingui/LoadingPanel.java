@@ -33,11 +33,7 @@ public class LoadingPanel extends JPanel
 //		JPanel iconPane = new JPanel();
 //		iconPane.setLayout(new BorderLayout());
 		
-<<<<<<< HEAD:mainProject/src/main/java/maingui/LoadingPanel.java
-		ImageIcon loadingGif = new ImageIcon(getClass().getResource("/circle.gif"));
-=======
-		ImageIcon loadingGif = new ImageIcon(getClass().getResource("loading.gif"));
->>>>>>> Chao:JavaFinalGUI/src/javafinal/gui/LoadingPanel.java
+		ImageIcon loadingGif = new ImageIcon(getClass().getResource("/loading.gif"));
 		JLabel loading = new JLabel(loadingGif);
 		
 		loading.setFocusable(false);

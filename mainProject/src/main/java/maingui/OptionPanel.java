@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -68,6 +70,17 @@ public class OptionPanel extends JPanel
 			}
 		}
 		
+		comboBoxes.get(Content.PSU).get(0).getTextField().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent event) {
+				if(event.getKeyCode() == KeyEvent.VK_ENTER
+						&& comboBoxes.get(Content.PSU).get(0).getTextField().getText().contentEquals("sleep")) {
+					comboBoxes.get(Content.PSU).get(0).getTextField().setText("請選擇");
+					parent.switchCards("LOAD");
+				}
+			}
+		});
+		
 		spinners = new ArrayList<JSpinner>();
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());
 		spinners.get(0).addChangeListener(new SpinnerListener());
@@ -77,7 +90,6 @@ public class OptionPanel extends JPanel
 		@Override
 		public void itemStateChanged(ItemEvent event) {
 			if(event.getStateChange() == ItemEvent.SELECTED) {
-				System.out.println("comboBox");
 				
 				for(int i = 0; i < comboBoxes.size(); i++) {
 					for(int j = 0; j < comboBoxes.get(i).size(); j++) {
@@ -96,14 +108,12 @@ public class OptionPanel extends JPanel
 	private class SpinnerListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent event) {
-			System.out.println("spinner");
 			parent.refresh();
 		}
 	}
 	private class GearListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("gear");
 			setFeedback("");
 			
 			for(int i = 0; i < gearButtons.size(); i++) {
@@ -247,7 +257,6 @@ public class OptionPanel extends JPanel
 	
 	public void setFeedback(String s) {
 		subFrameFeedback = s;
-		System.out.println(s);
 	}
 	public String getFeedback() {
 		return subFrameFeedback;

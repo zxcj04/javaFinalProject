@@ -36,11 +36,6 @@ public class Content
 		return content;
 	}
 	public void setLists() {
-		try {
-			Thread.sleep(500);
-		}
-		catch(Exception e) {}
-
 		HardwareNameList newLists = source.getList(currentInputs);
 
 		lists = new ArrayList<ArrayList<String>>();
@@ -94,13 +89,6 @@ public class Content
 											 inputs.get(MB)  , inputs.get(MEM) ,
 											 inputs.get(DISK), inputs.get(VGA) ,
 											 inputs.get(PSU) , inputs.get(CASE));
-		
-		for(ArrayList<String> list: inputs) {
-			for(String s: list) {
-				System.out.print(s + " ");
-			}
-			System.out.println();
-		}
 	}
 	
 

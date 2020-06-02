@@ -2,7 +2,6 @@ package maingui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,8 +34,7 @@ public class CoolerSubFrame extends JDialog {
 		heightPane.setOpaque(true);
 		
 		JLabel label = new JLabel("高度: ");
-		Font font = new Font("Monospaced", Font.BOLD, 16);
-		label.setFont(font);
+		label.setFont(MainFrame.font);
 		
 		heightPane.add(label);
 		
@@ -45,7 +43,7 @@ public class CoolerSubFrame extends JDialog {
 		height.setPreferredSize(new Dimension(130, 32));
 		((JSpinner.NumberEditor)height.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)height.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)height.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		height.addChangeListener(new ChangeListener() {
 			@Override
@@ -61,7 +59,7 @@ public class CoolerSubFrame extends JDialog {
 		heightPane.add(height);
 		
 		JLabel unit = new JLabel("cm");
-		unit.setFont(font);
+		unit.setFont(MainFrame.font);
 		
 		heightPane.add(unit);
 		

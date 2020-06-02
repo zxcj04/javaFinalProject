@@ -43,8 +43,7 @@ public class CaseSubFrame extends JDialog {
 		mbPane.setOpaque(true);
 		
 		JLabel label1 = new JLabel("主機板大小: ");
-		Font font = new Font("Monospaced", Font.BOLD, 16);
-		label1.setFont(font);
+		label1.setFont(MainFrame.font);
 		
 		mbPane.add(label1);
 		
@@ -52,6 +51,7 @@ public class CaseSubFrame extends JDialog {
 		mbSize.setEditable(false);
 		mbSize.setPreferredSize(new Dimension(110, 32));
 		mbSize.setBackground(new Color(215, 225, 238));
+		mbSize.setFont(MainFrame.font);
 		
 		mbSize.addItem("ATX");		
 		mbSize.addItem("MATX");		
@@ -67,7 +67,7 @@ public class CaseSubFrame extends JDialog {
 		vgaPane.setOpaque(true);
 		
 		JLabel label2 = new JLabel("顯卡長度: ");
-		label2.setFont(font);
+		label2.setFont(MainFrame.font);
 		
 		vgaPane.add(label2);
 		
@@ -76,13 +76,13 @@ public class CaseSubFrame extends JDialog {
 		vgaLength.setPreferredSize(new Dimension(95, 32));
 		((JSpinner.NumberEditor)vgaLength.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)vgaLength.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)vgaLength.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		vgaLength.addChangeListener(new spinnerListener());
 		vgaPane.add(vgaLength);
 		
 		JLabel unitCm = new JLabel("cm");
-		unitCm.setFont(font);
+		unitCm.setFont(MainFrame.font);
 		
 		vgaPane.add(unitCm);
 		
@@ -93,7 +93,7 @@ public class CaseSubFrame extends JDialog {
 		psuPane.setOpaque(true);
 		
 		JLabel label3 = new JLabel("電源大小: ");
-		label3.setFont(font);
+		label3.setFont(MainFrame.font);
 		
 		psuPane.add(label3);
 		
@@ -101,6 +101,7 @@ public class CaseSubFrame extends JDialog {
 		psuSize.setEditable(false);
 		psuSize.setPreferredSize(new Dimension(70, 32));
 		psuSize.setBackground(new Color(215, 225, 238));
+		psuSize.setFont(MainFrame.font);
 
 		psuSize.addItem("ATX");
 		psuSize.addItem("SFX");
@@ -108,7 +109,7 @@ public class CaseSubFrame extends JDialog {
 		psuPane.add(psuSize);
 		
 		JLabel label4 = new JLabel("電源長度: ");
-		label4.setFont(font);
+		label4.setFont(MainFrame.font);
 		
 		psuPane.add(label4);
 		
@@ -117,7 +118,7 @@ public class CaseSubFrame extends JDialog {
 		psuLength.setPreferredSize(new Dimension(70, 32));
 		((JSpinner.NumberEditor)psuLength.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)psuLength.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)psuLength.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		psuLength.addChangeListener(new spinnerListener());
 		psuPane.add(psuLength);
@@ -131,7 +132,7 @@ public class CaseSubFrame extends JDialog {
 		coolerPane.setOpaque(true);
 		
 		JLabel label5 = new JLabel("散熱器高度: ");
-		label5.setFont(font);
+		label5.setFont(MainFrame.font);
 		
 		coolerPane.add(label5);
 		
@@ -140,7 +141,7 @@ public class CaseSubFrame extends JDialog {
 		coolerHeight.setPreferredSize(new Dimension(95, 32));
 		((JSpinner.NumberEditor)coolerHeight.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)coolerHeight.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)coolerHeight.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		coolerHeight.addChangeListener(new spinnerListener());
 		coolerPane.add(coolerHeight);
@@ -154,7 +155,7 @@ public class CaseSubFrame extends JDialog {
 		diskPane.setOpaque(true);
 		
 		JLabel label6 = new JLabel("3.5\"硬碟位: ");
-		label6.setFont(font);
+		label6.setFont(MainFrame.font);
 		
 		diskPane.add(label6);
 		
@@ -163,13 +164,13 @@ public class CaseSubFrame extends JDialog {
 		diskQuantity.setPreferredSize(new Dimension(105, 32));
 		((JSpinner.NumberEditor)diskQuantity.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		((JSpinner.NumberEditor)diskQuantity.getEditor()).getTextField().setFont(font);
+		((JSpinner.NumberEditor)diskQuantity.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		diskQuantity.addChangeListener(new spinnerListener());
 		diskPane.add(diskQuantity);
 		
 		JLabel unitNum = new JLabel("個");
-		unitNum.setFont(font);
+		unitNum.setFont(MainFrame.font);
 		diskPane.add(unitNum);
 		
 		this.add(diskPane);

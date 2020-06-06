@@ -55,14 +55,12 @@ public class UpdateMb
 
     private static Mb getInnerMessages(String url)
     {
-        try
-        {
         Mb mb;
-
-        // org.bson.Document nowMb = new org.bson.Document();
-
+        
         org.bson.Document nowMb = initMbDocument();
 
+        try
+        {
         Document doc = Jsoup.connect(url).get();
 
         nowMb.append("name", doc.select("h1").get(0).text());
@@ -357,19 +355,26 @@ public class UpdateMb
 
         System.out.println(nowMb);
 
-        // mb = Mb.toObject(nowMb);
-
-        // return mb;
-
         }
         catch(Exception e)
         {
             System.out.println(":error documenting...");
-            
+
             return null;
         }
 
-        return null;
+        try
+        {
+            mb = Mb.toObject(nowMb);
+        }
+        catch(Exception e)
+        {
+            System.out.println(":error toObjecting...");
+
+            return null;
+        }
+
+        return mb;
     }
 
     private static org.bson.Document initMbDocument()

@@ -22,8 +22,8 @@ public class UpdateMb
 
         Elements pageLinks = doc.select("a.page-link");
 
-        // int pages = Integer.parseInt(pageLinks.get(pageLinks.size() - 2).text());
-        int pages = 1;
+        int pages = Integer.parseInt(pageLinks.get(pageLinks.size() - 2).text());
+        // int pages = 1;
 
         for(int i = 0 ; i < pages ; i++)
         {
@@ -364,6 +364,8 @@ public class UpdateMb
         }
         catch(Exception e)
         {
+            System.out.println(":error documenting...");
+            
             return null;
         }
 

@@ -41,20 +41,22 @@ public class UpdateMb
 
         Elements links = doc.select("div.mb-1 a");
 
-        // for(Element link : links)
-        // {
-        //     // System.out.println(link.absUrl("href"));
+        for(Element link : links)
+        {
+            // System.out.println(link.absUrl("href"));
 
-        //     result.add(getInnerMessages(link.absUrl("href")));
-        // }
+            result.add(getInnerMessages(link.absUrl("href")));
+        }
 
-        result.add(getInnerMessages(links.get(0).absUrl("href")));
+        // result.add(getInnerMessages(links.get(0).absUrl("href")));
 
         return result;
     }
 
-    private static Mb getInnerMessages(String url) throws IOException
+    private static Mb getInnerMessages(String url)
     {
+        try
+        {
         Mb mb;
 
         // org.bson.Document nowMb = new org.bson.Document();
@@ -358,6 +360,12 @@ public class UpdateMb
         // mb = Mb.toObject(nowMb);
 
         // return mb;
+
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
 
         return null;
     }

@@ -14,13 +14,13 @@ import mainlogic.Cpu;
 
 public class UpdateCpu
 {
-    public static ArrayList<Cpu> getCpuList() throws IOException 
+    public static ArrayList<org.bson.Document> getCpuList() throws IOException 
     {
         Document doc = Jsoup.connect("https://www.coolpc.com.tw/AMD.htm").get();
 
         Elements tables = doc.select("table tbody");
 
-        ArrayList<Cpu> result = new ArrayList<Cpu>();
+        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
 
         result.addAll(getIntelCpuList(tables.get(2)));
         result.addAll(getAmdCpuList(tables.get(6)));        
@@ -30,9 +30,9 @@ public class UpdateCpu
 
     // {{0, 2, 3, 4, 9, 12, 13}, {0, 2, 3, 4, 10, 13, 14}}
 
-    private static ArrayList<Cpu> getAmdCpuList(Element table) 
+    private static ArrayList<org.bson.Document> getAmdCpuList(Element table) 
     {
-        ArrayList<Cpu> result = new ArrayList<Cpu>();
+        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
 
         Elements trs = table.select("tr");
 
@@ -153,7 +153,16 @@ public class UpdateCpu
 
                 if(nowCpu.getString("name").length() > 5)
                 {
-                    result.add(Cpu.toObject(nowCpu));
+                    try
+                    {
+                        Cpu.toObject(nowCpu);
+
+                        result.add(nowCpu);
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                     
                     System.out.println(nowCpu.toString());
                 }
@@ -171,9 +180,9 @@ public class UpdateCpu
         return result;
     }
 
-    private static ArrayList<Cpu> getIntelCpuList(Element table) 
+    private static ArrayList<org.bson.Document> getIntelCpuList(Element table) 
     {
-        ArrayList<Cpu> result = new ArrayList<Cpu>();
+        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
 
         Elements trs = table.select("tr");
 
@@ -338,7 +347,16 @@ public class UpdateCpu
                 
                 if(nowCpu.getString("name").length() > 5)
                 {
-                    result.add(Cpu.toObject(nowCpu));
+                    try
+                    {
+                        Cpu.toObject(nowCpu);
+
+                        result.add(nowCpu);
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                     
                     System.out.println(nowCpu.toString());
                 }

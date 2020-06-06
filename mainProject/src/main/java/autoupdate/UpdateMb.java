@@ -14,16 +14,16 @@ import mainlogic.Mb;
 
 public class UpdateMb
 {
-    public static ArrayList<Mb> getMbList() throws IOException
+    public static ArrayList<org.bson.Document> getMbList() throws IOException
     {
         Document doc = Jsoup.connect("https://www.motherboarddb.com/motherboards/ajax/table/").get();
 
-        ArrayList<Mb> result = new ArrayList<Mb>();
+        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
 
         Elements pageLinks = doc.select("a.page-link");
 
-        int pages = Integer.parseInt(pageLinks.get(pageLinks.size() - 2).text());
-        // int pages = 1;
+        // int pages = Integer.parseInt(pageLinks.get(pageLinks.size() - 2).text());
+        int pages = 1;
 
         for(int i = 0 ; i < pages ; i++)
         {
@@ -33,27 +33,27 @@ public class UpdateMb
         return result;
     }
 
-    private static ArrayList<Mb> getPageList(int page) throws IOException
+    private static ArrayList<org.bson.Document> getPageList(int page) throws IOException
     {
-        ArrayList<Mb> result = new ArrayList<Mb>();
+        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
         
         Document doc = Jsoup.connect("https://www.motherboarddb.com/motherboards/ajax/table/?page=" + String.valueOf(page)).get();
 
         Elements links = doc.select("div.mb-1 a");
 
-        for(Element link : links)
-        {
-            // System.out.println(link.absUrl("href"));
+        // for(Element link : links)
+        // {
+        //     // System.out.println(link.absUrl("href"));
 
-            result.add(getInnerMessages(link.absUrl("href")));
-        }
+        //     result.add(getInnerMessages(link.absUrl("href")));
+        // }
 
-        // result.add(getInnerMessages(links.get(0).absUrl("href")));
+        result.add(getInnerMessages(links.get(0).absUrl("href")));
 
         return result;
     }
 
-    private static Mb getInnerMessages(String url)
+    private static org.bson.Document getInnerMessages(String url)
     {
         Mb mb;
         
@@ -374,7 +374,7 @@ public class UpdateMb
             return null;
         }
 
-        return mb;
+        return nowMb;
     }
 
     private static org.bson.Document initMbDocument()

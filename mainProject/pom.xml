@@ -92,7 +92,7 @@
               <arguments>
                   <argument>-classpath</argument>
                   "<classpath /> "
-                  <argument>autoupdate.mainTest</argument>
+                  <argument>autoupdate.MainTest</argument>
               </arguments>
           </configuration>
         </plugin>

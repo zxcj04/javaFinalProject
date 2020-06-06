@@ -1,6 +1,9 @@
 package autoupdate;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import org.bson.Document;
 
 import mainlogic.HardwareList;
 
@@ -20,16 +23,21 @@ public class UpdateHardwareList extends HardwareList
 
         try
         {
-            // cpuList      = UpdateCpu.getCpuList();
-            mbList       = UpdateMb.getMbList();
-            // coolerList   = UpdateCooler.getCoolerList();
-            // ramList      = UpdateRam.getRamList();
-            // vgaList      = UpdateVga.getVgaList();
-            // diskList     = UpdateDisk.getDiskList();
-            // psuList      = UpdatePsu.getPsuList();
-            // crateList    = UpdateCrate.getCrateList();
+            ArrayList<Document> cpuDocumentList, mbDocumentList, coolerDocumentList;
+            ArrayList<Document> ramDocumentList, vgaDocumentList, diskDocumentList;
+            ArrayList<Document> psuDocumentList, crateDocumentList;
 
-            // crateList = new UpdateCase().getInfo();
+            cpuDocumentList      = UpdateCpu.getCpuList();
+            mbDocumentList       = UpdateMb.getMbList();
+            // coolerDocumentList   = UpdateCooler.getCoolerList();
+            // ramDocumentList      = UpdateRam.getRamList();
+            // vgaDocumentList      = UpdateVga.getVgaList();
+            // diskDocumentList     = UpdateDisk.getDiskList();
+            // psuDocumentList      = UpdatePsu.getPsuList();
+            // crateDocumentList    = UpdateCrate.getCrateList();
+
+            // ramDocumentList = new UpdateRam().getInfo();
+            // crateDocumentList = new UpdateCase().getInfo();
         }
         catch (IOException e)
         {

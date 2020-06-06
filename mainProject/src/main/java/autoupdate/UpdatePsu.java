@@ -6,7 +6,9 @@ import org.jsoup.Jsoup;
 //import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
- 
+
+import mainlogic.Psu;
+
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -116,6 +118,23 @@ public class UpdatePsu {
     }
     
     public ArrayList<Document> getInfo(){
+		ArrayList<Document> info = new ArrayList<Document>();
+
+		for(Document ele : this.info)
+		{
+			try
+			{
+				Psu.toObject(ele);
+
+				info.add(ele);
+			}
+			catch(Exception e)
+			{
+				// e.printStackTrace();
+			}
+		}
+
+    	
     	return info;
     }
     

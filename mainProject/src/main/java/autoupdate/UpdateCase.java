@@ -17,11 +17,11 @@ import java.util.regex.*;
 
 public class UpdateCase {
     private String url;
-	private ArrayList<Crate> info;
+	private ArrayList<Document> info;
 	private Document nowCase;
 
     public UpdateCase(){
-        info = new  ArrayList<Crate>();
+        info = new  ArrayList<Document>();
 
         url = "https://www.coolpc.com.tw/case.php";
 
@@ -88,9 +88,18 @@ public class UpdateCase {
             		
 					nowCase.append("name", name);
 
-					System.out.println(nowCase);
+					// System.out.println(nowCase);
 					
-					info.add(Crate.toObject(nowCase));
+					try
+					{
+						Crate.toObject(nowCase);
+
+						info.add(nowCase);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
             	}
             }
         }
@@ -205,7 +214,7 @@ public class UpdateCase {
     	return wholeString;
     }
 
-    public ArrayList<Crate> getInfo(){
+    public ArrayList<Document> getInfo(){
         return info;
     }
     

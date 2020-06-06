@@ -6,7 +6,9 @@ import org.jsoup.Jsoup;
 //import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
- 
+
+import mainlogic.Ram;
+
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -108,6 +110,22 @@ public class UpdateRam {
     }
     
     public ArrayList<Document> getInfo(){
+		ArrayList<Document> info = new ArrayList<Document>();
+
+		for(Document ele : this.info)
+		{
+			try
+			{
+				Ram.toObject(ele);
+
+				info.add(ele);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+
     	return info;
     }
     

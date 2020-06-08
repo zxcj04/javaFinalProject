@@ -22,8 +22,8 @@ public class UpdateMb
 
         Elements pageLinks = doc.select("a.page-link");
 
-        // int pages = Integer.parseInt(pageLinks.get(pageLinks.size() - 2).text());
-        int pages = 1;
+        int pages = Integer.parseInt(pageLinks.get(pageLinks.size() - 2).text());
+        // int pages = 1;
 
         for(int i = 0 ; i < pages ; i++)
         {
@@ -41,14 +41,14 @@ public class UpdateMb
 
         Elements links = doc.select("div.mb-1 a");
 
-        // for(Element link : links)
-        // {
-        //     // System.out.println(link.absUrl("href"));
+        for(Element link : links)
+        {
+            // System.out.println(link.absUrl("href"));
 
-        //     result.add(getInnerMessages(link.absUrl("href")));
-        // }
+            result.add(getInnerMessages(link.absUrl("href")));
+        }
 
-        result.add(getInnerMessages(links.get(0).absUrl("href")));
+        // result.add(getInnerMessages(links.get(0).absUrl("href")));
 
         return result;
     }
@@ -373,6 +373,8 @@ public class UpdateMb
 
             return null;
         }
+        
+        nowMb.remove("_id");
 
         return nowMb;
     }

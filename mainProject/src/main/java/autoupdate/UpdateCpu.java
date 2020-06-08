@@ -351,6 +351,7 @@ public class UpdateCpu
                     {
                         Cpu.toObject(nowCpu);
 
+                        nowCpu.remove("_id");
                         result.add(nowCpu);
                     }
                     catch(Exception e)

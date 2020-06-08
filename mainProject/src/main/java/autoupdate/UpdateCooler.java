@@ -25,6 +25,7 @@ public class UpdateCooler
 			{
 				Cooler.toObject(ele);
 
+				ele.remove("_id");
 				info.add(ele);
 			}
 			catch(Exception e)

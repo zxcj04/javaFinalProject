@@ -46,7 +46,9 @@ public class UpdatePsu {
     				matchWatts(title.text());
     				matchSize(title.text());
     				
-    				info.add(nowPsu);
+					info.add(nowPsu);
+					
+					nowPsu = new Document();
     			}
     		}
     	}
@@ -126,6 +128,7 @@ public class UpdatePsu {
 			{
 				Psu.toObject(ele);
 
+				ele.remove("_id");
 				info.add(ele);
 			}
 			catch(Exception e)

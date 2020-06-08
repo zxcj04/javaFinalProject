@@ -51,7 +51,14 @@ public class CollectionList
 
         for(Document cur : psuCollection.find())
         {
-            list.psuList.add(Psu.toObject(cur));
+            try
+            {
+                list.psuList.add(Psu.toObject(cur));
+            }
+            catch(Exception e)
+            {
+                System.out.println(cur);
+            }
         }
 
         for(Document cur : crateCollection.find())

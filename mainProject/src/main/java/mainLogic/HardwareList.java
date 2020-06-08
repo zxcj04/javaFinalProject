@@ -1,6 +1,8 @@
 package mainlogic;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoIterable;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -220,6 +222,48 @@ public class HardwareList
         }
     }
 
+    // public void filterCpu(HardwareList selected, CollectionList db)
+    // {
+    //     // if(!selected.cpuList.isEmpty())
+    //     // {
+    //     //     this.cpuList.addAll(origin.cpuList);
+
+    //     //     return;
+    //     // }
+
+    //     MongoCollection<Document> collection = db.getCpuCollection();
+
+    //     ArrayList<Bson> filters = new ArrayList<Bson>();
+
+    //     if(!selected.mbList.isEmpty())
+    //     {
+    //         filters.add(eq("pin", selected.mbList.get(0).getPin()));
+    //     }
+
+    //     if(!selected.ramList.isEmpty())
+    //     {
+    //         int ramCapacity = 0;
+
+    //         for(Ram r : selected.ramList)
+    //         {
+    //             ramCapacity += r.getCapacity();
+    //         }
+
+    //         filters.add(gte("ramMaximumSupport", ramCapacity));
+    //         filters.add(eq("ramGenerationSupport", selected.ramList.get(0).getRamType()));
+    //     }
+        
+    //     if(filters.isEmpty())
+    //     {
+    //         filters.add(or(eq("", ""), ne("", "")));
+    //     }
+
+    //     for(Document d: collection.find(and(filters)))
+    //     {
+    //         this.cpuList.add(Cpu.toObject(d));
+    //     }
+    // }
+
     public void filterCpu(HardwareList selected, CollectionList db)
     {
         // if(!selected.cpuList.isEmpty())
@@ -230,6 +274,8 @@ public class HardwareList
         // }
 
         MongoCollection<Document> collection = db.getCpuCollection();
+
+        FindIterable<Document> findIterable = collection.find();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
 
@@ -256,7 +302,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d: collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             this.cpuList.add(Cpu.toObject(d));
         }
@@ -272,6 +320,8 @@ public class HardwareList
         // }
         
         MongoCollection<Document> collection = db.getMbCollection();
+
+        FindIterable<Document> findIterable = collection.find();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
@@ -378,7 +428,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             mbList.add(Mb.toObject(d));
         }
@@ -395,6 +447,8 @@ public class HardwareList
         
         MongoCollection<Document> collection = db.getCoolerCollection();
 
+        FindIterable<Document> findIterable = collection.find();
+
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
         if(!selected.crateList.isEmpty())
@@ -407,7 +461,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             coolerList.add(Cooler.toObject(d));
         }
@@ -423,6 +479,8 @@ public class HardwareList
         // }
         
         MongoCollection<Document> collection = db.getRamCollection();
+
+        FindIterable<Document> findIterable = collection.find();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
@@ -446,7 +504,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             ramList.add(Ram.toObject(d));
         }
@@ -462,6 +522,8 @@ public class HardwareList
         // }
         
         MongoCollection<Document> collection = db.getVgaCollection();
+
+        FindIterable<Document> findIterable = collection.find();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
@@ -481,7 +543,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
         
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             vgaList.add(Vga.toObject(d));
         }
@@ -498,6 +562,8 @@ public class HardwareList
         
         MongoCollection<Document> collection = db.getDiskCollection();
 
+        FindIterable<Document> findIterable = collection.find();
+
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
         if(filters.isEmpty())
@@ -505,7 +571,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             diskList.add(Disk.toObject(d));
         }
@@ -521,6 +589,8 @@ public class HardwareList
         // }
         
         MongoCollection<Document> collection = db.getPsuCollection();
+
+        FindIterable<Document> findIterable = collection.find();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
@@ -549,7 +619,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             psuList.add(Psu.toObject(d));
         }
@@ -565,6 +637,8 @@ public class HardwareList
         // }
         
         MongoCollection<Document> collection = db.getCrateCollection();
+
+        FindIterable<Document> findIterable = collection.find();
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
         
@@ -645,7 +719,9 @@ public class HardwareList
             filters.add(or(eq("", ""), ne("", "")));
         }
 
-        for(Document d : collection.find(and(filters)))
+        MongoIterable<Document> it = findIterable.filter(and(filters));
+
+        for(Document d: it)
         {
             crateList.add(Crate.toObject(d));
         }

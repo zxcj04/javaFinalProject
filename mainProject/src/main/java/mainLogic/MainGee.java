@@ -56,7 +56,7 @@ public class MainGee
             }
             else
             {
-                mongoClient = MongoClients.create("mongodb://ec2-54-248-132-195.ap-northeast-1.compute.amazonaws.com");
+                mongoClient = MongoClients.create("mongodb://javaUser:noHackPlz@ec2-54-150-211-20.ap-northeast-1.compute.amazonaws.com/?authSource=javaTest2");
     
                 javaTestDB = mongoClient.getDatabase("javaTest2");
 

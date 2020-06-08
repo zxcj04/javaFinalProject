@@ -38,7 +38,9 @@ public class UpdateRam {
     				matchRamType(title.text());
     				matchName(title.text());
     				
-    				info.add(nowRam);
+					info.add(nowRam);
+					
+					nowRam = new Document();
     			}
     			
 //    			System.out.println("-----------------");
@@ -50,7 +52,7 @@ public class UpdateRam {
     }
     
     public boolean matchCapacity(String inp) {
-    	Matcher capacity = findstr(inp, "GB?[*]");
+    	Matcher capacity = findstr(inp, "(GB?[*])");
     	
     	if(capacity.find()){
             return false;
@@ -100,7 +102,7 @@ public class UpdateRam {
 			nowRam.append("name", inp);
 		}
     	
-//    	System.out.println(nowRam.getString("name"));
+   	// System.out.println(nowRam.getString("name"));
     }
     	
     public Matcher findstr(String inp, String pattern) {
@@ -114,10 +116,16 @@ public class UpdateRam {
 
 		for(Document ele : this.info)
 		{
+			if(ele.getString("name").toLowerCase().contains("ecc"))
+			{
+				continue;
+			}
+
 			try
 			{
 				Ram.toObject(ele);
 
+				ele.remove("_id");
 				info.add(ele);
 			}
 			catch(Exception e)

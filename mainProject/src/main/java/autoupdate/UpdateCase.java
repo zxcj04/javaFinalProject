@@ -94,7 +94,10 @@ public class UpdateCase {
 					{
 						Crate.toObject(nowCase);
 
+						nowCase.remove("_id");
 						info.add(nowCase);
+
+						nowCase = new Document();
 					}
 					catch(Exception e)
 					{

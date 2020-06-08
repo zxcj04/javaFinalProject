@@ -46,7 +46,9 @@ public class UpdateVga {
     					
     					if(matchVga(div.text())) {
     						matchName(title.text());
-        					info.add(nowVga);
+							info.add(nowVga);
+							
+							nowVga = new Document();
     						
     						break;
     					}
@@ -107,7 +109,7 @@ public class UpdateVga {
 				ele.append("TDP", 0);
 
 				// System.out.println(ele);
-				
+				ele.remove("_id");
 				Vga.toObject(ele);
 
 				info.add(ele);

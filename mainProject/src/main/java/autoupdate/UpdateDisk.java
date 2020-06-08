@@ -38,7 +38,9 @@ public class UpdateDisk {
 	    			matchDiskType(title.text());
 	    			matchSsdSize(title.text());
 	    			
-	    			info.add(nowDisk);
+					info.add(nowDisk);
+					
+					nowDisk = new Document();
     			}
     			
 //    			System.out.println("-----------------------------------------");
@@ -56,7 +58,9 @@ public class UpdateDisk {
 	    			matchDiskType(title.text());
 	    			matchHddSize(title.text());
 
-	    			info.add(nowDisk);
+					info.add(nowDisk);
+					
+					nowDisk = new Document();
     			}
     			
 //    			System.out.println("-----------------------------------------");
@@ -179,7 +183,8 @@ public class UpdateDisk {
 			try
 			{
 				Disk.toObject(ele);
-
+				
+				ele.remove("_id");
 				info.add(ele);
 			}
 			catch(Exception e)

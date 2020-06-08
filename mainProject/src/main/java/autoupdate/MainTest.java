@@ -6,6 +6,10 @@ public class MainTest
     {
         UpdateHardwareList updateHardwareList = new UpdateHardwareList();
 
+        UpdateMongo updateMongo = new UpdateMongo();
+
         updateHardwareList.update();
+
+        updateMongo.updateMongo(updateHardwareList);
     }
 }

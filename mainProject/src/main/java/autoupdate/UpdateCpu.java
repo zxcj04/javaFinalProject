@@ -164,7 +164,7 @@ public class UpdateCpu
                         e.printStackTrace();
                     }
                     
-                    System.out.println(nowCpu.toString());
+                    // System.out.println(nowCpu.toString());
                 }
                 else
                 {
@@ -358,7 +358,7 @@ public class UpdateCpu
                         e.printStackTrace();
                     }
                     
-                    System.out.println(nowCpu.toString());
+                    // System.out.println(nowCpu.toString());
                 }
                 else
                 {

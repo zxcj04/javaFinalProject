@@ -1,17 +1,14 @@
 package autoupdate;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 import org.bson.Document;
 
-import mainlogic.HardwareList;
-
-public class UpdateHardwareList extends HardwareList
+public class UpdateHardwareList
 {
-    public UpdateHardwareList()
-    {
-        super();
-    }
+    ArrayList<Document> cpuDocumentList, mbDocumentList, coolerDocumentList;
+    ArrayList<Document> ramDocumentList, vgaDocumentList, diskDocumentList;
+    ArrayList<Document> psuDocumentList, crateDocumentList;
 
     /**
      * get data from online webpages
@@ -22,21 +19,14 @@ public class UpdateHardwareList extends HardwareList
 
         try
         {
-            ArrayList<Document> cpuDocumentList, mbDocumentList, coolerDocumentList;
-            ArrayList<Document> ramDocumentList, vgaDocumentList, diskDocumentList;
-            ArrayList<Document> psuDocumentList, crateDocumentList;
 
-            // cpuDocumentList      = UpdateCpu.getCpuList();
+            cpuDocumentList      = UpdateCpu.getCpuList();
             // mbDocumentList       = UpdateMb.getMbList();
-            // coolerDocumentList   = UpdateCooler.getCoolerList();
-            // ramDocumentList      = UpdateRam.getRamList();
-            // vgaDocumentList      = UpdateVga.getVgaList();
-            // diskDocumentList     = UpdateDisk.getDiskList();
-            // psuDocumentList      = UpdatePsu.getPsuList();
-            // crateDocumentList    = UpdateCrate.getCrateList();
+            coolerDocumentList   = UpdateCooler.getCoolerList();
 
             ramDocumentList     = new UpdateRam().getInfo();
             vgaDocumentList     = new UpdateVga().getInfo();
+            diskDocumentList    = new UpdateDisk().getInfo();
             psuDocumentList     = new UpdatePsu().getInfo();
             crateDocumentList   = new UpdateCase().getInfo();
         }

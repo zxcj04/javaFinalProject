@@ -537,7 +537,7 @@ public class HardwareList
                 costTDP += v.getTDP();
             }
 
-            filters.add(eq("watts", costTDP));        
+            filters.add(gte("watts", costTDP));        
         }
 
         if(!selected.crateList.isEmpty())

@@ -131,7 +131,7 @@ public class OptionPanel extends JPanel
 			if(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2).equals("1"))
 			{
 				for(int i = 0; i < spinners.size(); i++) {
-					if((Integer)spinners.get(i).getValue() > spinnersNumber.get(i)) {
+					if((Integer)spinners.get(i).getValue() >= spinnersNumber.get(i)) {
 						
 						if(event.getSource() == spinners.get(i)) {
 							spinners.get(i).setValue(spinnersNumber.get(i) + 1);

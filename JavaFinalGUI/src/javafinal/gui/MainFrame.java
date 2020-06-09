@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 
 import java.util.ArrayList;
 
@@ -167,8 +168,13 @@ public class MainFrame extends JFrame
 					
 					smartModeBtnPanel.setToRefresh(false);
 					
+					
 					content.initLists();
 					mainPanel.getOptionPanel().updateComboBoxes(smartModeBtnPanel.getToRefresh());
+
+					for(JSpinner spinner : mainPanel.getOptionPanel().getSpinners()) {
+						spinner.setEnabled(true);
+					}
 				}
 			}
 			else { // switch to smart mode

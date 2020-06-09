@@ -188,7 +188,7 @@ public class MainGee
             addConflict("mb");
             addConflict("cpu");
 
-            suggest.add(String.format("CPU與主機板不符合歐 cpu: '%s', mb: '%s'"
+            suggest.add(String.format("CPU與主機板不符合歐\ncpu: '%s', mb: '%s'"
                                       , selected.cpuList.get(0).getPin(), selected.mbList.get(0).getPin()));
         }
 
@@ -206,7 +206,7 @@ public class MainGee
                 addConflict("cpu");
                 addConflict("ram");
 
-                suggest.add(String.format("記憶體容量超出CPU最大支援的大小囉 ram capacity: %sG, cpu ramCapacity: %sG"
+                suggest.add(String.format("記憶體容量超出CPU最大支援的大小囉\nram capacity: %sG, cpu ramCapacity: %sG"
                                             , ramCapacity, selected.cpuList.get(0).getRamMaximumSupport()));
             }
             
@@ -215,7 +215,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("cpu");
 
-                suggest.add(String.format("CPU支援的代數與記憶體不符合歐 cpu generation: %s, ram generation: %s"
+                suggest.add(String.format("CPU支援的代數與記憶體不符合歐\ncpu generation: %s, ram generation: %s"
                                             , selected.cpuList.get(0).getRamGenerationSupport(), selected.ramList.get(0).getRamType()));
             }
         }
@@ -246,7 +246,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("ram");
 
-                suggest.add(String.format("主機板支援的代數與記憶體不符合歐 mb generation: %s, ram generation: %s"
+                suggest.add(String.format("主機板支援的代數與記憶體不符合歐\nmb generation: %s, ram generation: %s"
                                             , selected.mbList.get(0).getRamType(), selected.ramList.get(0).getRamType()));
             }
 
@@ -255,7 +255,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("ram");
 
-                suggest.add(String.format("記憶體容量超出主機板最大支援的大小囉 ram capacity: %sG, mb ramCapacity: %sG"
+                suggest.add(String.format("記憶體容量超出主機板最大支援的大小囉\nram capacity: %sG, mb ramCapacity: %sG"
                                 , ramCapacity, selected.mbList.get(0).getRamMaximum()));
             }
 
@@ -264,7 +264,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("ram");
 
-                suggest.add(String.format("主機板的記憶體插槽不夠插歐 mb quantity: %s, ram quantity: %s"
+                suggest.add(String.format("主機板的記憶體插槽不夠插歐\nmb quantity: %s, ram quantity: %s"
                                             , selected.mbList.get(0).getRamQuantity(), selected.ramList.size()));
             }
             else if(selected.mbList.get(0).getRamQuantity() == selected.ramList.size())
@@ -280,7 +280,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("vga");
 
-                suggest.add(String.format("主機板的PCIE插槽不夠插顯卡囉 mb pcie: %s, graphic cards: %s"
+                suggest.add(String.format("主機板的PCIE插槽不夠插顯卡囉\nmb pcie: %s, graphic cards: %s"
                                             , selected.mbList.get(0).getPcieQuantity(), selected.vgaList.size()));
             }
         }
@@ -318,7 +318,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("disk");
 
-                suggest.add(String.format("主機板的m.2插槽不能插這個m.2硬碟歐 mb m.2 type: %s, disk type: %s"
+                suggest.add(String.format("主機板的m.2插槽不能插這個m.2硬碟歐\nmb m.2 type: %s, disk type: %s"
                                             , selected.mbList.get(0).getM2Type(), m2Type));
             }
 
@@ -327,7 +327,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("disk");
 
-                suggest.add(String.format("主機板的sata接口不夠囉 mb sata: %s, sata disk: %s"
+                suggest.add(String.format("主機板的sata接口不夠囉\nmb sata: %s, sata disk: %s"
                                             , selected.mbList.get(0).getSata3Quantity(), sataDisk));
             }
             
@@ -336,7 +336,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("disk");
 
-                suggest.add(String.format("主機板的m.2接口不夠囉 mb m.2: %s, m.2 disk: %s"
+                suggest.add(String.format("主機板的m.2接口不夠囉\nmb m.2: %s, m.2 disk: %s"
                                             , selected.mbList.get(0).getM2Quantity(), m2Disk));
             }
         }
@@ -351,7 +351,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("crate");
 
-                suggest.add(String.format("機殼裝不下主機板歐 mb size: %s, case size: %s"
+                suggest.add(String.format("機殼裝不下主機板歐\nmb size: %s, case size: %s"
                                             , selected.mbList.get(0).getSize(), selected.crateList.get(0).getMbSize()));
             }
         }
@@ -375,7 +375,7 @@ public class MainGee
             addConflict("crate");
             addConflict("cooler");
 
-            suggest.add(String.format("機殼裝不下CPU散熱器耶 case height: %s, cooler height: %s"
+            suggest.add(String.format("機殼裝不下CPU散熱器耶\ncase height: %s, cooler height: %s"
                                 , selected.crateList.get(0).getCoolerHeight(), selected.coolerList.get(0).getHeight()));
         }
 
@@ -421,7 +421,7 @@ public class MainGee
                 addConflict("vga");
                 addConflict("crate");
 
-                suggest.add(String.format("有顯卡塞不進機殼唷 case length: %s, graphic card length: %d"
+                suggest.add(String.format("有顯卡塞不進機殼唷\ncase length: %s, graphic card length: %d"
                         , selected.crateList.get(0).getVgaLength(), maxLength));
             }
         }
@@ -455,7 +455,7 @@ public class MainGee
                 addConflict("crate");
                 addConflict("disk");
 
-                suggest.add(String.format("機殼的3.5\"硬碟架不夠捏 case disk quantity: %s, 3.5\" disk quantity: %s"
+                suggest.add(String.format("機殼的3.5\"硬碟架不夠捏\ncase disk quantity: %s, 3.5\" disk quantity: %s"
                                 , selected.crateList.get(0).getDiskQuantity(), disk35));
             }
         }
@@ -479,7 +479,7 @@ public class MainGee
                 addConflict("crate");
                 addConflict("psu");
 
-                suggest.add(String.format("機殼跟電供的size不合>< case psu size: %s, psu size: %s"
+                suggest.add(String.format("機殼跟電供的size不合><\ncase psu size: %s, psu size: %s"
                     , selected.crateList.get(0).getPsuSize(), selected.psuList.get(0).getSize()));
             }
 
@@ -488,7 +488,7 @@ public class MainGee
                 addConflict("crate");
                 addConflict("psu");
 
-                suggest.add(String.format("機殼裝不下電供啦 case psu length: %s, psu length: %s"
+                suggest.add(String.format("機殼裝不下電供啦\ncase psu length: %s, psu length: %s"
                     , selected.crateList.get(0).getPsuLength(), selected.psuList.get(0).getLength()));
             }
         }

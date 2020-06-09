@@ -245,7 +245,9 @@ public class OptionPanel extends JPanel
 				if(i == Content.MEM) {
 					spinners.get(j).setEnabled(op && spinnersEnable.get(j));
 					
-					updateSpinners(parent.content.getSuggestions());
+					if(op) {
+						updateSpinners(parent.content.getSuggestions());
+					}
 				}
 			}
 		}

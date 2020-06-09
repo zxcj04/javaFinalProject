@@ -126,7 +126,7 @@ public class MainFrame extends JFrame
 		ArrayList<String> sugg = new ArrayList<String>(content.getSuggestions());
 		String text = "";
 		
-		for(int i = 0; i < sugg.size() - 1; i++) {
+		for(int i = 0; i < sugg.size() - 3; i++) {
 			text += String.format("%s%n", sugg.get(i));
 		}
 		suggestionPanel.getSuggestion().setText("");

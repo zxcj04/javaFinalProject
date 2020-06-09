@@ -66,7 +66,7 @@ public class ComponentPanel extends JPanel
 		comboBox.setVisible(visableSet[cur][0]);
 		
 		// spinner
-		SpinnerModel spinnerModel = new SpinnerNumberModel(1, 1, 16, 1);
+		SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 16, 1);
 		counter = new JSpinner(spinnerModel);
 		
 		counter.setPreferredSize(new Dimension(100, 25));

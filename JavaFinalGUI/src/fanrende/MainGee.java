@@ -115,12 +115,16 @@ public class MainGee
 	        suggestion.add("Cooler blablabla...");
 	        suggestion.add("Disk   blablabla...");
 	        suggestion.add("Grafic blablabla...");
+	        suggestion.add("0");
+	        suggestion.add("0");
 	        suggestion.add("ddr4");
         }
         else {
         	suggestion.add("MEM    blablabla...");
 	        suggestion.add("PSU    blablabla...");
 	        suggestion.add("Case   blablabla...");
+	        suggestion.add("cooler");
+	        suggestion.add("1");
 	        suggestion.add("");
         }
         

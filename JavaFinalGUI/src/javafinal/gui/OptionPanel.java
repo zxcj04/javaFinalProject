@@ -13,6 +13,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -30,6 +32,12 @@ public class OptionPanel extends JPanel
 	private String subFrameFeedback;
 	private boolean memoryIsCustomized;
 	private String memoryType;
+	
+	private ArrayList<Boolean> spinnersEnable;
+	private ArrayList<Integer> spinnersNumber;
+	
+	private int nowGeari;
+	private int nowGearj;
 	
 	public OptionPanel(MainFrame parent) {
 		this.parent = parent;
@@ -81,8 +89,18 @@ public class OptionPanel extends JPanel
 			}
 		});
 		
+		nowGeari = -1;
+		nowGearj = -1;
+		
 		spinners = new ArrayList<JSpinner>();
+		spinnersEnable = new ArrayList<Boolean>();
+		spinnersNumber = new ArrayList<Integer>();
+		
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());
+		spinners.get(spinners.size()-1).setEnabled(false);
+		spinnersNumber.add(0);
+		spinnersEnable.add(false);
+		
 		spinners.get(0).addChangeListener(new SpinnerListener());
 	}
 	
@@ -109,6 +127,21 @@ public class OptionPanel extends JPanel
 		@Override
 		public void stateChanged(ChangeEvent event) {
 			parent.refresh();
+			
+			if(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2).equals("1"))
+			{
+				for(int i = 0; i < spinners.size(); i++) {
+					if((Integer)spinners.get(i).getValue() >= spinnersNumber.get(i)) {
+						spinners.get(i).setValue(spinnersNumber.get(i));
+					}
+				}
+			}
+			else {
+				for(int i = 0; i < spinners.size(); i++) {
+					int number = (Integer)spinners.get(i).getValue();
+					spinnersNumber.set(i, number);
+				}
+			}
 		}
 	}
 	private class GearListener implements ActionListener{
@@ -123,6 +156,8 @@ public class OptionPanel extends JPanel
 						new RunCustomDialogs(parent, OptionPanel.this, i);
 						
 						if(!subFrameFeedback.isEmpty()) {
+							nowGeari = i;
+							nowGearj = j;
 
 							if(i ==  Content.MEM && !memoryIsCustomized) {
 								memoryType = subFrameFeedback.substring(7,11);
@@ -142,9 +177,15 @@ public class OptionPanel extends JPanel
 		subComponentPanes.get(choice).
 			add(new ComponentPanel(parent.content.getLists().get(choice), choice));
 		
-		spinners.
-			add(subComponentPanes.get(choice).get(subComponentPanes.get(choice).size() - 1).getSpinner());
-		spinners.get(spinners.size() - 1).addChangeListener(new SpinnerListener());
+		if(choice == Content.MEM) {
+			spinners.
+				add(subComponentPanes.get(choice).get(subComponentPanes.get(choice).size() - 1).getSpinner());
+			
+			spinners.get(spinners.size()-1).setEnabled(false);
+			spinnersNumber.add(0);
+			spinnersEnable.add(false);
+			spinners.get(spinners.size() - 1).addChangeListener(new SpinnerListener());
+		}
 		
 		gearButtons.get(choice).
 			add(subComponentPanes.get(choice).get(subComponentPanes.get(choice).size() - 1).getGear());
@@ -184,6 +225,8 @@ public class OptionPanel extends JPanel
 		
 		if(i == Content.MEM) {
 			spinners.remove(j);
+			spinnersEnable.remove(j);
+			spinnersNumber.remove(j);
 		}
 		
 		if(j == 0) {
@@ -206,7 +249,7 @@ public class OptionPanel extends JPanel
 				subButtons.get(i).get(j).setEnabled(op);
 				
 				if(i == Content.MEM) {
-					spinners.get(j).setEnabled(op);
+					spinners.get(j).setEnabled(op & spinnersEnable.get(j));
 				}
 			}
 		}
@@ -226,6 +269,10 @@ public class OptionPanel extends JPanel
 					comboBoxes.get(i).get(j).updateEntries(parent.content.getLists().get(i));
 					parent.content.getLists().get(i).remove(0);
 					parent.content.getLists().get(i).add(index, current);
+					
+					if(i == Content.MEM) {
+						spinnersEnable.set(j, true);
+					}
 				}
 				else if(current.indexOf("custom") == 0) {
 					if(parent.content.customMatched(current, i)) {
@@ -233,10 +280,18 @@ public class OptionPanel extends JPanel
 						comboBoxes.get(i).get(j).updateEntries(parent.content.getLists().get(i));
 						parent.content.getLists().get(i).remove(0);
 						parent.content.getLists().get(i).add(current);
+
+						if(i == Content.MEM) {
+							spinnersEnable.set(j, true);
+						}
 					}
 				}
 				else {
 					comboBoxes.get(i).get(j).updateEntries(parent.content.getLists().get(i));
+					
+					if(i == Content.MEM) {
+						spinnersEnable.set(j, false);
+					}
 				}
 			}
 		}
@@ -269,7 +324,23 @@ public class OptionPanel extends JPanel
 	public boolean getMemoryIsCustomized() {
 		return memoryIsCustomized;
 	}
+	
 	public String getMemoryType() {
 		return memoryType;
+	}
+
+	public void initNowGeari() {
+		nowGeari = -1;
+	}
+	
+	public void initNowGearj() {
+		nowGearj = -1;
+	}
+	public int getNowGeari() {
+		return nowGeari;
+	}
+	
+	public int getNowGearj() {
+		return nowGearj;
 	}
 }

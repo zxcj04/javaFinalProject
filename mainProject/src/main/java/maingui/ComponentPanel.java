@@ -94,6 +94,7 @@ public class ComponentPanel extends JPanel
 			
 			private Component createArrowButton(int direction) {
 			    JButton b = new BasicArrowButton(direction);
+			    
 			    Border buttonBorder = UIManager.getBorder("Spinner.arrowButtonBorder");
 			    if (buttonBorder instanceof UIResource) {
 			      b.setBorder(new CompoundBorder(buttonBorder, null));

@@ -3,6 +3,7 @@ package maingui;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 import mainlogic.MainGee;
 
@@ -10,6 +11,13 @@ public class MainFrameTest
 {
 	public static void main(String[] args)
 	{
+		try {
+	    	UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+	    }
+	    catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+		
 		MainGee code = new MainGee();
 		code.init();
 		MainFrame mainFrame = new MainFrame(code, code.getList());
@@ -23,6 +31,7 @@ public class MainFrameTest
 		LoadingFrame loading = new LoadingFrame();
 		loading.setLocationRelativeTo(mainFrame);
 		loading.setVisible(true);
+		
 		
 		mainFrame.init();
 		

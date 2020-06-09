@@ -1,5 +1,6 @@
 package maingui;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,10 +33,9 @@ public class OptionPanel extends JPanel
 	private String subFrameFeedback;
 	private boolean memoryIsCustomized;
 	private String memoryType;
-	
+
 	private ArrayList<Boolean> spinnersEnable;
 	private ArrayList<Integer> spinnersNumber;
-	private boolean spinnerIsBlocked;
 	
 	private int nowGeari;
 	private int nowGearj;
@@ -99,9 +99,8 @@ public class OptionPanel extends JPanel
 		
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());
 		spinners.get(spinners.size()-1).setEnabled(false);
-		spinnersNumber.add(0);
 		spinnersEnable.add(false);
-		spinnerIsBlocked = false;
+		spinnersNumber.add(0);
 		
 		spinners.get(0).addChangeListener(new SpinnerListener());
 	}
@@ -128,7 +127,12 @@ public class OptionPanel extends JPanel
 	private class SpinnerListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent event) {
-			parent.refresh();
+			for(int i = 0; i < spinners.size(); i++) {
+				if(!((Integer)spinners.get(i).getValue()).equals(spinnersNumber.get(i))) {
+					parent.refresh();
+					break;
+				}
+			}
 		}
 	}
 	private class GearListener implements ActionListener{
@@ -169,8 +173,8 @@ public class OptionPanel extends JPanel
 				add(subComponentPanes.get(choice).get(subComponentPanes.get(choice).size() - 1).getSpinner());
 			
 			spinners.get(spinners.size()-1).setEnabled(false);
-			spinnersNumber.add(0);
 			spinnersEnable.add(false);
+			spinnersNumber.add(0);
 			spinners.get(spinners.size() - 1).addChangeListener(new SpinnerListener());
 		}
 		
@@ -294,8 +298,9 @@ public class OptionPanel extends JPanel
 	
 	public void updateSpinners(ArrayList<String> suggestions) {
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
-			for(JSpinner spinner : spinners) {
-				((SpinnerNumberModel)(spinner.getModel())).setMaximum((Integer)spinner.getValue());
+			for(int i = 0; i < spinners.size(); i++) {
+				spinnersNumber.set(i, (Integer)spinners.get(i).getValue()); 
+				((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum((Integer)spinners.get(i).getValue());
 			}
 		}
 		else {

@@ -16,6 +16,7 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 		parent.content.setSuggestions();
 		
 		if(parent.getSmartModeBtnPanel().getToRefresh()) {
+			
 			parent.getMainPanel().getOptionPanel().updateSpinners(parent.content.getSuggestions());
 
 			for(JSpinner spinner: parent.getMainPanel().getOptionPanel().getSpinners())

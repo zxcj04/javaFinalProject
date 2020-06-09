@@ -164,7 +164,7 @@ public class MainGee
         suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
 
-        System.out.println("\t" + ramExceed);
+        // System.out.println("\t" + ramExceed);
 
         return suggestion;
     }

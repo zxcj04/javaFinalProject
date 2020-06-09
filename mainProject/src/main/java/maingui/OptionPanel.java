@@ -297,11 +297,11 @@ public class OptionPanel extends JPanel
 	}
 	
 	public void updateSpinners(ArrayList<String> suggestions) {
-		System.out.println(suggestions.get(suggestions.size() - 2));
+		// System.out.println(suggestions.get(suggestions.size() - 2));
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
-					System.out.println("name: " + component.getName());
+					// System.out.println("name: " + component.getName());
 			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
 			        	component.setEnabled(false);
 			        }
@@ -312,7 +312,7 @@ public class OptionPanel extends JPanel
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
 					if (component.getName() != null && component.getName().endsWith("nextButton")) {
-						System.out.println(spinnersEnable.get(i));
+						// System.out.println(spinnersEnable.get(i));
 						component.setEnabled(spinnersEnable.get(i));
 						
 			        }

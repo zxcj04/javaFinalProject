@@ -19,10 +19,10 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 			
 			parent.getMainPanel().getOptionPanel().updateSpinners(parent.content.getSuggestions());
 
-			for(JSpinner spinner: parent.getMainPanel().getOptionPanel().getSpinners())
-			{
-				System.out.println("\t\t" + (Integer)spinner.getValue());
-			}
+			// for(JSpinner spinner: parent.getMainPanel().getOptionPanel().getSpinners())
+			// {
+			// 	System.out.println("\t\t" + (Integer)spinner.getValue());
+			// }
 			
 			checkCustom();
 			parent.content.setLists();

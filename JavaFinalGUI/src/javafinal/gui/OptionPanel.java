@@ -134,15 +134,12 @@ public class OptionPanel extends JPanel
 				if(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2).equals("1"))
 				{
 					for(int i = 0; i < spinners.size(); i++) {
-						
 						if(event.getSource() == spinners.get(i) && !spinnerIsBlocked) {
 							spinnersNumber.set(i, (spinnersNumber.get(i) + 1));
 							spinnerIsBlocked = true;
 						}
 						
-						if((Integer)spinners.get(i).getValue() >= spinnersNumber.get(i)) {
-							spinners.get(i).setValue(spinnersNumber.get(i));
-						}
+						((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(spinnersNumber.get(i));
 					}
 				}
 				else {
@@ -150,6 +147,8 @@ public class OptionPanel extends JPanel
 					for(int i = 0; i < spinners.size(); i++) {
 						int number = (Integer)spinners.get(i).getValue();
 						spinnersNumber.set(i, number);
+						
+						((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(16);
 					}
 				}
 			}

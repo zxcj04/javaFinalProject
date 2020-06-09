@@ -1,5 +1,6 @@
 package maingui;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 public class RefreshWorker extends SwingWorker<Void, Void>{
@@ -12,6 +13,28 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 	@Override
 	protected Void doInBackground() throws Exception {
 		parent.content.setSuggestions();
+		
+		String customFailed = parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 3);
+		
+		int i = parent.getMainPanel().getOptionPanel().getNowGeari();
+		int j = parent.getMainPanel().getOptionPanel().getNowGearj();
+		parent.getMainPanel().getOptionPanel().initNowGeari();
+		parent.getMainPanel().getOptionPanel().initNowGearj();
+		
+		if((customFailed.contains("cooler") && i == Content.COOL) ||
+		   (customFailed.contains("ram")    && i == Content.MEM ) ||
+		   (customFailed.contains("disk")   && i == Content.DISK) ||
+		   (customFailed.contains("vga")    && i == Content.VGA ) ||
+		   (customFailed.contains("psu")    && i == Content.PSU ) ||
+		   (customFailed.contains("crate")  && i == Content.CASE)) {
+		
+			parent.getMainPanel().getOptionPanel().getComboBoxes().get(i).get(j).getTextField().setText("請選擇");
+			
+			JOptionPane.showMessageDialog(parent, "cannot customize");
+		}
+		
+		parent.content.setInputs(parent.getMainPanel().getOptionPanel().getComboBoxes(),
+								 parent.getMainPanel().getOptionPanel().getSpinners());
 		
 		if(parent.getSmartModeBtnPanel().getToRefresh()) {
 			parent.content.setLists();

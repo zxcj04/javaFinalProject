@@ -14,6 +14,25 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 	protected Void doInBackground() throws Exception {
 		parent.content.setSuggestions();
 		
+		if(parent.getSmartModeBtnPanel().getToRefresh()) {
+			checkCustom();
+			parent.content.setLists();
+		}
+		else {
+			parent.content.initLists();
+		}
+
+		parent.setSuggestion();
+		parent.getMainPanel().getOptionPanel().updateComboBoxes(parent.getSmartModeBtnPanel().getToRefresh());
+		return null;
+	}
+	@Override
+    protected void done() {
+//      parent.switchCards("MAIN");
+		parent.enableSwitch(true);
+    }
+	
+	private void checkCustom() {
 		String customFailed = parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 3);
 		
 		int i = parent.getMainPanel().getOptionPanel().getNowGeari();
@@ -35,21 +54,5 @@ public class RefreshWorker extends SwingWorker<Void, Void>{
 		
 		parent.content.setInputs(parent.getMainPanel().getOptionPanel().getComboBoxes(),
 								 parent.getMainPanel().getOptionPanel().getSpinners());
-		
-		if(parent.getSmartModeBtnPanel().getToRefresh()) {
-			parent.content.setLists();
-		}
-		else {
-			parent.content.initLists();
-		}
-
-		parent.setSuggestion();
-		parent.getMainPanel().getOptionPanel().updateComboBoxes(parent.getSmartModeBtnPanel().getToRefresh());
-		return null;
 	}
-	@Override
-    protected void done() {
-//      parent.switchCards("MAIN");
-		parent.enableSwitch(true);
-    }
 }

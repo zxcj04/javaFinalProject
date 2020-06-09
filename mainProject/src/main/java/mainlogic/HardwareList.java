@@ -222,7 +222,7 @@ public class HardwareList
         }
     }
 
-    // public void filterCpu(HardwareList selected, CollectionList db)
+    // public void filterCpu(HardwareList selected, CollectionList db, MainGee gee)
     // {
     //     // if(!selected.cpuList.isEmpty())
     //     // {
@@ -264,7 +264,7 @@ public class HardwareList
     //     }
     // }
 
-    public void filterCpu(HardwareList selected, CollectionList db)
+    public void filterCpu(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.cpuList.isEmpty())
         // {
@@ -310,7 +310,7 @@ public class HardwareList
         }
     }
 
-    public void filterMb(HardwareList selected, CollectionList db)
+    public void filterMb(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.mbList.isEmpty())
         // {
@@ -342,6 +342,16 @@ public class HardwareList
             filters.add(eq("ramType", selected.ramList.get(0).getRamType()));    
             filters.add(gte("ramMaximum", ramCapacity));
             filters.add(gte("ramQuantity", selected.ramList.size()));
+
+            if(!selected.mbList.isEmpty() 
+                    && selected.mbList.get(0).getRamQuantity() == ramCapacity)
+            {
+                gee.setRamExceed(true);
+            }
+            else
+            {
+                gee.setRamExceed(false);
+            }
         }
 
         if(!selected.vgaList.isEmpty())
@@ -436,7 +446,7 @@ public class HardwareList
         }
     }
 
-    public void filterCooler(HardwareList selected, CollectionList db)
+    public void filterCooler(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.coolerList.isEmpty())
         // {
@@ -469,7 +479,7 @@ public class HardwareList
         }
     }
 
-    public void filterRam(HardwareList selected, CollectionList db)
+    public void filterRam(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.ramList.isEmpty())
         // {
@@ -512,7 +522,7 @@ public class HardwareList
         }
     }
 
-    public void filterVga(HardwareList selected, CollectionList db)
+    public void filterVga(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.vgaList.isEmpty())
         // {
@@ -551,7 +561,7 @@ public class HardwareList
         }
     }
 
-    public void filterDisk(HardwareList selected, CollectionList db)
+    public void filterDisk(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.diskList.isEmpty())
         // {
@@ -579,7 +589,7 @@ public class HardwareList
         }
     }
     
-    public void filterPsu(HardwareList selected, CollectionList db)
+    public void filterPsu(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.psuList.isEmpty())
         // {
@@ -627,7 +637,7 @@ public class HardwareList
         }
     }
 
-    public void filterCrate(HardwareList selected, CollectionList db)
+    public void filterCrate(HardwareList selected, CollectionList db, MainGee gee)
     {
         // if(!selected.crateList.isEmpty())
         // {

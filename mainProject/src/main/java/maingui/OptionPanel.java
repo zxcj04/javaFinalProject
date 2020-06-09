@@ -102,7 +102,7 @@ public class OptionPanel extends JPanel
 		spinnersEnable.add(false);
 		spinnersNumber.add(0);
 		
-		spinners.get(0).getComponent(1).setName("nextButton");
+		spinners.get(0).getComponent(3).setName("nextButton");
 		
 		spinners.get(0).addChangeListener(new SpinnerListener());
 	}
@@ -175,7 +175,7 @@ public class OptionPanel extends JPanel
 			spinners.
 				add(subComponentPanes.get(choice).get(subComponentPanes.get(choice).size() - 1).getSpinner());
 
-			spinners.get(spinners.size()-1).getComponent(1).setName("nextButton");
+			spinners.get(spinners.size()-1).getComponent(3).setName("nextButton");
 			
 			spinners.get(spinners.size()-1).setEnabled(false);
 			spinnersEnable.add(false);

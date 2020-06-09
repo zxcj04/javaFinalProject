@@ -146,6 +146,8 @@ public class MainGee
         ArrayList<String> suggestion = new ArrayList<String>();
 
         ramSelected = "";
+        conflict = "";
+        ramExceed = "0";
 
         selectList.setHardware(selectedList, nameList, originList);
 
@@ -159,7 +161,6 @@ public class MainGee
         suggestion.addAll(suggestCrate(selectList));
 
         suggestion.add(conflict);
-
         suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
 
@@ -184,6 +185,9 @@ public class MainGee
 
         if(!selected.mbList.isEmpty() && !selected.cpuList.get(0).getPin().equals(selected.mbList.get(0).getPin()))
         {
+            addConflict("mb");
+            addConflict("cpu");
+
             suggest.add(String.format("CPU與主機板不符合歐 cpu: '%s', mb: '%s'"
                                       , selected.cpuList.get(0).getPin(), selected.mbList.get(0).getPin()));
         }
@@ -199,12 +203,18 @@ public class MainGee
 
             if(ramCapacity > selected.cpuList.get(0).getRamMaximumSupport())
             {
+                addConflict("cpu");
+                addConflict("ram");
+
                 suggest.add(String.format("記憶體容量超出CPU最大支援的大小囉 ram capacity: %sG, cpu ramCapacity: %sG"
                                             , ramCapacity, selected.cpuList.get(0).getRamMaximumSupport()));
             }
             
             if(!selected.cpuList.get(0).getRamGenerationSupport().equals(selected.ramList.get(0).getRamType()))
             {
+                addConflict("mb");
+                addConflict("cpu");
+
                 suggest.add(String.format("CPU支援的代數與記憶體不符合歐 cpu generation: %s, ram generation: %s"
                                             , selected.cpuList.get(0).getRamGenerationSupport(), selected.ramList.get(0).getRamType()));
             }
@@ -260,10 +270,6 @@ public class MainGee
             else if(selected.mbList.get(0).getRamQuantity() == selected.ramList.size())
             {
                 this.setRamExceed(true);
-            }
-            else
-            {
-                this.setRamExceed(false);
             }
         }
 

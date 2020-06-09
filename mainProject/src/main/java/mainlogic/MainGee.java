@@ -263,13 +263,15 @@ public class MainGee
 
             if(selected.mbList.get(0).getRamQuantity() < selected.ramList.size())
             {
+                this.setRamExceed(true);
+                
                 addConflict("mb");
                 addConflict("ram");
 
                 suggest.add(String.format("主機板的記憶體插槽不夠插歐\nmb quantity: %s, ram quantity: %s\n"
                                             , selected.mbList.get(0).getRamQuantity(), selected.ramList.size()));
             }
-            else if(selected.mbList.get(0).getRamQuantity() >= selected.ramList.size())
+            else if(selected.mbList.get(0).getRamQuantity() == selected.ramList.size())
             {
                 this.setRamExceed(true);
             }

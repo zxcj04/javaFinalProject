@@ -98,9 +98,11 @@ public class OptionPanel extends JPanel
 		spinnersNumber = new ArrayList<Integer>();
 		
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());
-		spinners.get(spinners.size()-1).setEnabled(false);
+		spinners.get(0).setEnabled(false);
 		spinnersEnable.add(false);
 		spinnersNumber.add(0);
+		
+		spinners.get(0).getComponent(1).setName("nextButton");
 		
 		spinners.get(0).addChangeListener(new SpinnerListener());
 	}
@@ -133,7 +135,6 @@ public class OptionPanel extends JPanel
 //					break;
 //				}
 //			}
-			System.out.println("a");
 			parent.refresh();
 		}
 	}
@@ -173,6 +174,8 @@ public class OptionPanel extends JPanel
 		if(choice == Content.MEM) {
 			spinners.
 				add(subComponentPanes.get(choice).get(subComponentPanes.get(choice).size() - 1).getSpinner());
+
+			spinners.get(spinners.size()-1).getComponent(1).setName("nextButton");
 			
 			spinners.get(spinners.size()-1).setEnabled(false);
 			spinnersEnable.add(false);
@@ -313,6 +316,13 @@ public class OptionPanel extends JPanel
 	public void updateSpinners(ArrayList<String> suggestions) {
 		System.out.println(suggestions.get(suggestions.size() - 2));
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
+			for (Component component : spinners.get(0).getComponents()) {
+//		        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+//		        	component.setEnabled(false);
+		        	System.out.println(component.getName());
+//		        }
+		    } 
+			System.out.println();
 //			for(int i = 0; i < spinners.size(); i++) {
 //				spinnersNumber.set(i, (Integer)spinners.get(i).getValue()); 
 //			}
@@ -324,7 +334,7 @@ public class OptionPanel extends JPanel
 				for (Component component : spinners.get(i).getComponents()) {
 					System.out.println("name: " + component.getName());
 			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-						System.out.println("disabled");
+			        	
 			        	component.setEnabled(false);
 			        }
 			    } 

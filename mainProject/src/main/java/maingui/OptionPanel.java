@@ -343,11 +343,14 @@ public class OptionPanel extends JPanel
 //			for(JSpinner spinner : spinners) {
 //				((SpinnerNumberModel)(spinner.getModel())).setMaximum(16);
 //			}
-			
+			System.out.println("\"0\"");
+
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
-			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-			        	component.setEnabled(spinnersEnable.get(i));
+					if (component.getName() != null && component.getName().endsWith("nextButton")) {
+						System.out.println(spinnersEnable.get(i));
+						component.setEnabled(spinnersEnable.get(i));
+						
 			        }
 			    } 
 			}

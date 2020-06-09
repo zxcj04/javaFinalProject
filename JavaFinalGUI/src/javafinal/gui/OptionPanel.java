@@ -251,11 +251,13 @@ public class OptionPanel extends JPanel
 				    }
 					spinners.get(j).setEnabled(op & spinnersEnable.get(j));
 					
-					for (Component component : spinners.get(j).getComponents()) {
-				        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-				        	component.setEnabled(nextButton);
-				        }
-				    }
+					if(op & spinnersEnable.get(j) == true) {
+						for (Component component : spinners.get(j).getComponents()) {
+					        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+					        	component.setEnabled(nextButton);
+					        }
+					    }
+					}
 				}
 			}
 		}

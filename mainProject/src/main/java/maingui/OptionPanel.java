@@ -35,6 +35,7 @@ public class OptionPanel extends JPanel
 	
 	private ArrayList<Boolean> spinnersEnable;
 	private ArrayList<Integer> spinnersNumber;
+	private boolean spinnerIsBlocked;
 	
 	private int nowGeari;
 	private int nowGearj;
@@ -100,6 +101,7 @@ public class OptionPanel extends JPanel
 		spinners.get(spinners.size()-1).setEnabled(false);
 		spinnersNumber.add(0);
 		spinnersEnable.add(false);
+		spinnerIsBlocked = false;
 		
 		spinners.get(0).addChangeListener(new SpinnerListener());
 	}
@@ -135,8 +137,9 @@ public class OptionPanel extends JPanel
 				{
 					for(int i = 0; i < spinners.size(); i++) {
 						
-						if(event.getSource() == spinners.get(i)) {
+						if(event.getSource() == spinners.get(i) && !spinnerIsBlocked) {
 							spinnersNumber.set(i, (spinnersNumber.get(i) + 1));
+							spinnerIsBlocked = true;
 						}
 						
 						if((Integer)spinners.get(i).getValue() >= spinnersNumber.get(i)) {
@@ -148,6 +151,7 @@ public class OptionPanel extends JPanel
 					}
 				}
 				else {
+					spinnerIsBlocked = false;
 					for(int i = 0; i < spinners.size(); i++) {
 						int number = (Integer)spinners.get(i).getValue();
 						spinnersNumber.set(i, number);

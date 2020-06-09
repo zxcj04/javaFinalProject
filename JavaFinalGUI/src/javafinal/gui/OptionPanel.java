@@ -132,7 +132,13 @@ public class OptionPanel extends JPanel
 			{
 				for(int i = 0; i < spinners.size(); i++) {
 					if((Integer)spinners.get(i).getValue() > spinnersNumber.get(i)) {
-						spinners.get(i).setValue(spinnersNumber.get(i) + 1);
+						
+						if(event.getSource() == spinners.get(i)) {
+							spinners.get(i).setValue(spinnersNumber.get(i) + 1);
+						}
+						else {
+							spinners.get(i).setValue(spinnersNumber.get(i));
+						}
 					}
 				}
 			}

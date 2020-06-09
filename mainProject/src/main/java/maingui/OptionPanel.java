@@ -129,31 +129,6 @@ public class OptionPanel extends JPanel
 		@Override
 		public void stateChanged(ChangeEvent event) {
 			parent.refresh();
-			
-			System.out.println(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2));
-
-			if(parent.getSmartModeBtnPanel().getToRefresh()) {
-				if(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2).equals("1"))
-				{
-					for(int i = 0; i < spinners.size(); i++) {
-						if(event.getSource() == spinners.get(i) && !spinnerIsBlocked) {
-							spinnersNumber.set(i, (spinnersNumber.get(i) + 1));
-							spinnerIsBlocked = true;
-						}
-						
-						((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(spinnersNumber.get(i));
-					}
-				}
-				else {
-					spinnerIsBlocked = false;
-					for(int i = 0; i < spinners.size(); i++) {
-						int number = (Integer)spinners.get(i).getValue();
-						spinnersNumber.set(i, number);
-						
-						((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(16);
-					}
-				}
-			}
 		}
 	}
 	private class GearListener implements ActionListener{
@@ -313,6 +288,19 @@ public class OptionPanel extends JPanel
 			if(s.contains("custom")) {
 				memoryIsCustomized = true;
 				break;
+			}
+		}
+	}
+	
+	public void updateSpinners(ArrayList<String> suggestions) {
+		if(suggestions.get(suggestions.size() - 2).equals("1")) {
+			for(JSpinner spinner : spinners) {
+				((SpinnerNumberModel)(spinner.getModel())).setMaximum((Integer)spinner.getValue());
+			}
+		}
+		else {
+			for(JSpinner spinner : spinners) {
+				((SpinnerNumberModel)(spinner.getModel())).setMaximum(16);
 			}
 		}
 	}

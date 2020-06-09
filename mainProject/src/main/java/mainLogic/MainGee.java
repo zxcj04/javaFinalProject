@@ -127,14 +127,14 @@ public class MainGee
 
         selectList.setHardware(selectedList, nameList, originList);
 
-        filteredList.filterCpu(selectList, collectionList, this);
-        filteredList.filterMb(selectList, collectionList, this);
-        filteredList.filterCooler(selectList, collectionList, this);
-        filteredList.filterRam(selectList, collectionList, this);
-        filteredList.filterVga(selectList, collectionList, this);
-        filteredList.filterDisk(selectList, collectionList, this);
-        filteredList.filterPsu(selectList, collectionList, this);
-        filteredList.filterCrate(selectList, collectionList, this);
+        filteredList.filterCpu(selectList, collectionList);
+        filteredList.filterMb(selectList, collectionList);
+        filteredList.filterCooler(selectList, collectionList);
+        filteredList.filterRam(selectList, collectionList);
+        filteredList.filterVga(selectList, collectionList);
+        filteredList.filterDisk(selectList, collectionList);
+        filteredList.filterPsu(selectList, collectionList);
+        filteredList.filterCrate(selectList, collectionList);
 
         return HardwareNameList.toNameList(filteredList);
     }
@@ -157,6 +157,8 @@ public class MainGee
         suggestion.addAll(suggestDisk(selectList));
         suggestion.addAll(suggestPsu(selectList));
         suggestion.addAll(suggestCrate(selectList));
+
+        suggestion.add(conflict);
 
         suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
@@ -231,20 +233,37 @@ public class MainGee
 
             if(!selected.mbList.get(0).getRamType().equals(selected.ramList.get(0).getRamType()))
             {
+                addConflict("mb");
+                addConflict("ram");
+
                 suggest.add(String.format("主機板支援的代數與記憶體不符合歐 mb generation: %s, ram generation: %s"
                                             , selected.mbList.get(0).getRamType(), selected.ramList.get(0).getRamType()));
             }
 
             if(selected.mbList.get(0).getRamMaximum() < ramCapacity)
             {
+                addConflict("mb");
+                addConflict("ram");
+
                 suggest.add(String.format("記憶體容量超出主機板最大支援的大小囉 ram capacity: %sG, mb ramCapacity: %sG"
                                 , ramCapacity, selected.mbList.get(0).getRamMaximum()));
             }
 
             if(selected.mbList.get(0).getRamQuantity() < selected.ramList.size())
             {
+                addConflict("mb");
+                addConflict("ram");
+
                 suggest.add(String.format("主機板的記憶體插槽不夠插歐 mb quantity: %s, ram quantity: %s"
                                             , selected.mbList.get(0).getRamQuantity(), selected.ramList.size()));
+            }
+            else if(selected.mbList.get(0).getRamQuantity() == selected.ramList.size())
+            {
+                this.setRamExceed(true);
+            }
+            else
+            {
+                this.setRamExceed(false);
             }
         }
 
@@ -252,6 +271,9 @@ public class MainGee
         {
             if(selected.mbList.get(0).getPcieQuantity() < selected.vgaList.size())
             {
+                addConflict("mb");
+                addConflict("vga");
+
                 suggest.add(String.format("主機板的PCIE插槽不夠插顯卡囉 mb pcie: %s, graphic cards: %s"
                                             , selected.mbList.get(0).getPcieQuantity(), selected.vgaList.size()));
             }
@@ -287,18 +309,27 @@ public class MainGee
 
             if(m2Type != selected.mbList.get(0).getM2Type() && !selected.mbList.get(0).getM2Type().equals("pcie/sata") && !m2Type.equals("default"))
             {
+                addConflict("mb");
+                addConflict("disk");
+
                 suggest.add(String.format("主機板的m.2插槽不能插這個m.2硬碟歐 mb m.2 type: %s, disk type: %s"
                                             , selected.mbList.get(0).getM2Type(), m2Type));
             }
 
             if(selected.mbList.get(0).getSata3Quantity() < sataDisk)
             {
+                addConflict("mb");
+                addConflict("disk");
+
                 suggest.add(String.format("主機板的sata接口不夠囉 mb sata: %s, sata disk: %s"
                                             , selected.mbList.get(0).getSata3Quantity(), sataDisk));
             }
             
             if(selected.mbList.get(0).getM2Quantity() < m2Disk)
             {
+                addConflict("mb");
+                addConflict("disk");
+
                 suggest.add(String.format("主機板的m.2接口不夠囉 mb m.2: %s, m.2 disk: %s"
                                             , selected.mbList.get(0).getM2Quantity(), m2Disk));
             }
@@ -311,6 +342,9 @@ public class MainGee
 
             if(mbSize.indexOf(selected.crateList.get(0).getMbSize()) > mbSize.indexOf(selected.mbList.get(0).getSize()))
             {
+                addConflict("mb");
+                addConflict("crate");
+
                 suggest.add(String.format("機殼裝不下主機板歐 mb size: %s, case size: %s"
                                             , selected.mbList.get(0).getSize(), selected.crateList.get(0).getMbSize()));
             }
@@ -332,6 +366,9 @@ public class MainGee
 
         if(!selected.crateList.isEmpty() && selected.crateList.get(0).getCoolerHeight() < selected.coolerList.get(0).getHeight())
         {
+            addConflict("crate");
+            addConflict("cooler");
+
             suggest.add(String.format("機殼裝不下CPU散熱器耶 case height: %s, cooler height: %s"
                                 , selected.crateList.get(0).getCoolerHeight(), selected.coolerList.get(0).getHeight()));
         }
@@ -375,6 +412,9 @@ public class MainGee
 
             if(selected.crateList.get(0).getVgaLength() < maxLength)
             {
+                addConflict("vga");
+                addConflict("crate");
+
                 suggest.add(String.format("有顯卡塞不進機殼唷 case length: %s, graphic card length: %d"
                         , selected.crateList.get(0).getVgaLength(), maxLength));
             }
@@ -406,6 +446,9 @@ public class MainGee
 
             if(selected.crateList.get(0).getDiskQuantity() < disk35)
             {
+                addConflict("crate");
+                addConflict("disk");
+
                 suggest.add(String.format("機殼的3.5\"硬碟架不夠捏 case disk quantity: %s, 3.5\" disk quantity: %s"
                                 , selected.crateList.get(0).getDiskQuantity(), disk35));
             }
@@ -427,12 +470,18 @@ public class MainGee
         {
             if(!selected.psuList.get(0).getSize().equals(selected.crateList.get(0).getPsuSize()))
             {
+                addConflict("crate");
+                addConflict("psu");
+
                 suggest.add(String.format("機殼跟電供的size不合>< case psu size: %s, psu size: %s"
                     , selected.crateList.get(0).getPsuSize(), selected.psuList.get(0).getSize()));
             }
 
             if(selected.psuList.get(0).getLength() > selected.crateList.get(0).getPsuLength())
             {
+                addConflict("crate");
+                addConflict("psu");
+
                 suggest.add(String.format("機殼裝不下電供啦 case psu length: %s, psu length: %s"
                     , selected.crateList.get(0).getPsuLength(), selected.psuList.get(0).getLength()));
             }
@@ -466,7 +515,7 @@ public class MainGee
         }
         else
         {
-            this.conflict += value + " ";
+            this.conflict +=  " " + value;
         }
     }
 

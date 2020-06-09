@@ -146,6 +146,8 @@ public class MainGee
         ArrayList<String> suggestion = new ArrayList<String>();
 
         ramSelected = "";
+        conflict = "";
+        ramExceed = "0";
 
         selectList.setHardware(selectedList, nameList, originList);
 
@@ -159,7 +161,6 @@ public class MainGee
         suggestion.addAll(suggestCrate(selectList));
 
         suggestion.add(conflict);
-
         suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
 

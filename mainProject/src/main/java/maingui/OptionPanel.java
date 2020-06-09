@@ -181,6 +181,11 @@ public class OptionPanel extends JPanel
 		gearButtons.get(i).remove(j);
 		subButtons.get(i).remove(j);
 		comboBoxes.get(i).remove(j);
+		
+		if(i == Content.MEM) {
+			spinners.remove(j);
+		}
+		
 		if(j == 0) {
 			subComponentPanes.get(i).get(j).setBorder(BorderFactory.createTitledBorder(MainFrame.names[i]));
 			((TitledBorder)subComponentPanes.get(i).get(j).getBorder()).setTitleFont(MainFrame.title);

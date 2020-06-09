@@ -35,7 +35,6 @@ public class OptionPanel extends JPanel
 	private String memoryType;
 
 	private ArrayList<Boolean> spinnersEnable;
-	private ArrayList<Integer> spinnersNumber;
 	
 	private int nowGeari;
 	private int nowGearj;
@@ -95,12 +94,10 @@ public class OptionPanel extends JPanel
 		
 		spinners = new ArrayList<JSpinner>();
 		spinnersEnable = new ArrayList<Boolean>();
-		spinnersNumber = new ArrayList<Integer>();
 		
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());
 		spinners.get(0).setEnabled(!parent.getSmartModeBtnPanel().getToRefresh());
 		spinnersEnable.add(false);
-		spinnersNumber.add(0);
 		
 		spinners.get(0).addChangeListener(new SpinnerListener()); 
 	}
@@ -127,12 +124,6 @@ public class OptionPanel extends JPanel
 	private class SpinnerListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent event) {
-//			for(int i = 0; i < spinners.size(); i++) {
-//				if(!((Integer)spinners.get(i).getValue()).equals(spinnersNumber.get(i))) {
-//					parent.refresh();
-//					break;
-//				}
-//			}
 			parent.refresh();
 		}
 	}
@@ -175,7 +166,6 @@ public class OptionPanel extends JPanel
 			
 			spinners.get(spinners.size()-1).setEnabled(false);
 			spinnersEnable.add(false);
-			spinnersNumber.add(0);
 			spinners.get(spinners.size() - 1).addChangeListener(new SpinnerListener());
 		}
 		
@@ -218,7 +208,6 @@ public class OptionPanel extends JPanel
 		if(i == Content.MEM) {
 			spinners.remove(j);
 			spinnersEnable.remove(j);
-			spinnersNumber.remove(j);
 		}
 		
 		if(j == 0) {
@@ -244,16 +233,16 @@ public class OptionPanel extends JPanel
 					
 					if(parent.getSmartModeBtnPanel().getToRefresh()) {
 						spinners.get(j).setEnabled(op && spinnersEnable.get(j));
-						
-						if(op) {
-							updateSpinners(parent.content.getSuggestions());
-						}
 					}
 					else {
 						spinners.get(j).setEnabled(op);
 					}
 				}
 			}
+		}
+		
+		if(parent.getSmartModeBtnPanel().getToRefresh() && op) {
+			updateSpinners(parent.content.getSuggestions());
 		}
 	}
 	public void updateComboBoxes(boolean toRefresh) {
@@ -314,15 +303,12 @@ public class OptionPanel extends JPanel
 				for (Component component : spinners.get(i).getComponents()) {
 					System.out.println("name: " + component.getName());
 			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-			        	
 			        	component.setEnabled(false);
 			        }
 			    } 
 			}
-			
 		}
 		else {
-			
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
 					if (component.getName() != null && component.getName().endsWith("nextButton")) {

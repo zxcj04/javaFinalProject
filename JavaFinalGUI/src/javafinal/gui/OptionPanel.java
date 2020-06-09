@@ -347,7 +347,7 @@ public class OptionPanel extends JPanel
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
 			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-			        	component.setEnabled(true);
+			        	component.setEnabled(spinnersEnable.get(i));
 			        }
 			    } 
 			}

@@ -241,21 +241,9 @@ public class OptionPanel extends JPanel
 				subButtons.get(i).get(j).setEnabled(op);
 				
 				if(i == Content.MEM) {
-					boolean nextButton = true;
-					for (Component component : spinners.get(j).getComponents()) {
-				        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-				        	nextButton = component.isEnabled();
-				        }
-				    }
-					spinners.get(j).setEnabled(op & spinnersEnable.get(j));
+					spinners.get(j).setEnabled(op && spinnersEnable.get(j));
 					
-					if(op & spinnersEnable.get(j) == true) {
-						for (Component component : spinners.get(j).getComponents()) {
-					        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-					        	component.setEnabled(nextButton);
-					        }
-					    }
-					}
+					updateSpinners(parent.content.getSuggestions());
 				}
 			}
 		}

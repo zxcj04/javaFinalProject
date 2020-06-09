@@ -127,6 +127,11 @@ public class OptionPanel extends JPanel
 		@Override
 		public void stateChanged(ChangeEvent event) {
 			parent.refresh();
+
+			for(int i = 0; i < spinners.size(); i++) {
+				int number = (Integer)spinners.get(i).getValue();
+				spinnersNumber.set(i, number);
+			}
 			
 			if(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2).equals("1"))
 			{
@@ -134,12 +139,6 @@ public class OptionPanel extends JPanel
 					if((Integer)spinners.get(i).getValue() >= spinnersNumber.get(i)) {
 						spinners.get(i).setValue(spinnersNumber.get(i));
 					}
-				}
-			}
-			else {
-				for(int i = 0; i < spinners.size(); i++) {
-					int number = (Integer)spinners.get(i).getValue();
-					spinnersNumber.set(i, number);
 				}
 			}
 		}

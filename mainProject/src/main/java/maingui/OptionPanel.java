@@ -98,7 +98,7 @@ public class OptionPanel extends JPanel
 		spinnersNumber = new ArrayList<Integer>();
 		
 		spinners.add(subComponentPanes.get(Content.MEM).get(0).getSpinner());
-		spinners.get(0).setEnabled(false);
+		spinners.get(0).setEnabled(!parent.getSmartModeBtnPanel().getToRefresh());
 		spinnersEnable.add(false);
 		spinnersNumber.add(0);
 		

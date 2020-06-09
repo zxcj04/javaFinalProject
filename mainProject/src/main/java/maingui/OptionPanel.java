@@ -128,6 +128,8 @@ public class OptionPanel extends JPanel
 		public void stateChanged(ChangeEvent event) {
 			parent.refresh();
 			
+			System.out.println(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2));
+
 			if(parent.getSmartModeBtnPanel().getToRefresh()) {
 				if(parent.content.getSuggestions().get(parent.content.getSuggestions().size() - 2).equals("1"))
 				{
@@ -140,6 +142,9 @@ public class OptionPanel extends JPanel
 						if((Integer)spinners.get(i).getValue() >= spinnersNumber.get(i)) {
 							spinners.get(i).setValue(spinnersNumber.get(i));
 						}
+
+						System.out.println((Integer)spinners.get(i).getValue());
+						System.out.println(spinnersNumber.get(i) + "\n");
 					}
 				}
 				else {

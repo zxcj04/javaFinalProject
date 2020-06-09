@@ -164,6 +164,8 @@ public class MainGee
         suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
 
+        System.out.println("\t" + ramExceed);
+
         return suggestion;
     }
 
@@ -267,7 +269,7 @@ public class MainGee
                 suggest.add(String.format("主機板的記憶體插槽不夠插歐\nmb quantity: %s, ram quantity: %s\n"
                                             , selected.mbList.get(0).getRamQuantity(), selected.ramList.size()));
             }
-            else if(selected.mbList.get(0).getRamQuantity() == selected.ramList.size())
+            else if(selected.mbList.get(0).getRamQuantity() >= selected.ramList.size())
             {
                 this.setRamExceed(true);
             }

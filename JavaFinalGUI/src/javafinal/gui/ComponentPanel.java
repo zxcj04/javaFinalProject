@@ -5,14 +5,22 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListCellRenderer.UIResource;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.plaf.basic.BasicSpinnerUI;
+import javax.swing.plaf.basic.BasicArrowButton;
 
 public class ComponentPanel extends JPanel
 {
@@ -68,6 +76,34 @@ public class ComponentPanel extends JPanel
 		// spinner
 		SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 16, 1);
 		counter = new JSpinner(spinnerModel);
+		counter.setUI(new BasicSpinnerUI() {
+			@Override
+			protected Component createNextButton() {
+				Component c = createArrowButton(SwingConstants.NORTH);
+			    c.setName("nextButton");
+			    installNextButtonListeners(c);
+			    return c;
+		    }
+			@Override
+			protected Component createPreviousButton() {
+		        Component c = createArrowButton(SwingConstants.SOUTH);
+		        c.setName("previousButton");
+		        installPreviousButtonListeners(c);
+		        return c;
+		    }
+			
+			private Component createArrowButton(int direction) {
+			    JButton b = new BasicArrowButton(direction);
+			    Border buttonBorder = UIManager.getBorder("Spinner.arrowButtonBorder");
+			    if (buttonBorder instanceof UIResource) {
+			      b.setBorder(new CompoundBorder(buttonBorder, null));
+			    } else {
+			      b.setBorder(buttonBorder);
+			    }
+			    b.setInheritsPopupMenu(true);
+			    return b;
+			}
+		});
 		
 		counter.setPreferredSize(new Dimension(100, 25));
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setEditable(false);

@@ -127,14 +127,14 @@ public class MainGee
 
         selectList.setHardware(selectedList, nameList, originList);
 
-        filteredList.filterCpu(selectList, collectionList);
-        filteredList.filterMb(selectList, collectionList);
-        filteredList.filterCooler(selectList, collectionList);
-        filteredList.filterRam(selectList, collectionList);
-        filteredList.filterVga(selectList, collectionList);
-        filteredList.filterDisk(selectList, collectionList);
-        filteredList.filterPsu(selectList, collectionList);
-        filteredList.filterCrate(selectList, collectionList);
+        filteredList.filterCpu(selectList, collectionList, this);
+        filteredList.filterMb(selectList, collectionList, this);
+        filteredList.filterCooler(selectList, collectionList, this);
+        filteredList.filterRam(selectList, collectionList, this);
+        filteredList.filterVga(selectList, collectionList, this);
+        filteredList.filterDisk(selectList, collectionList, this);
+        filteredList.filterPsu(selectList, collectionList, this);
+        filteredList.filterCrate(selectList, collectionList, this);
 
         return HardwareNameList.toNameList(filteredList);
     }

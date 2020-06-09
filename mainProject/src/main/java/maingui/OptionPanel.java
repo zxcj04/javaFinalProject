@@ -241,10 +241,16 @@ public class OptionPanel extends JPanel
 				subButtons.get(i).get(j).setEnabled(op);
 				
 				if(i == Content.MEM) {
-					spinners.get(j).setEnabled(op && spinnersEnable.get(j));
 					
-					if(op) {
-						updateSpinners(parent.content.getSuggestions());
+					if(parent.getSmartModeBtnPanel().getToRefresh()) {
+						spinners.get(j).setEnabled(op && spinnersEnable.get(j));
+						
+						if(op) {
+							updateSpinners(parent.content.getSuggestions());
+						}
+					}
+					else {
+						spinners.get(j).setEnabled(op);
 					}
 				}
 			}
@@ -304,20 +310,6 @@ public class OptionPanel extends JPanel
 	public void updateSpinners(ArrayList<String> suggestions) {
 		System.out.println(suggestions.get(suggestions.size() - 2));
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
-			for (Component component : spinners.get(0).getComponents()) {
-//		        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-//		        	component.setEnabled(false);
-//		        	System.out.println(component.getName());
-//		        }
-		    } 
-			System.out.println();
-//			for(int i = 0; i < spinners.size(); i++) {
-//				spinnersNumber.set(i, (Integer)spinners.get(i).getValue()); 
-//			}
-//			for(int i = 0; i < spinners.size(); i++) {
-//				((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(spinnersNumber.get(i));				
-//			}
-			
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
 					System.out.println("name: " + component.getName());
@@ -330,11 +322,7 @@ public class OptionPanel extends JPanel
 			
 		}
 		else {
-//			for(JSpinner spinner : spinners) {
-//				((SpinnerNumberModel)(spinner.getModel())).setMaximum(16);
-//			}
-			System.out.println("\"0\"");
-
+			
 			for(int i = 0; i < spinners.size(); i++) {
 				for (Component component : spinners.get(i).getComponents()) {
 					if (component.getName() != null && component.getName().endsWith("nextButton")) {

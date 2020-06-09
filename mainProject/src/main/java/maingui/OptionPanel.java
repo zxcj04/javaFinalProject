@@ -300,7 +300,9 @@ public class OptionPanel extends JPanel
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
 			for(int i = 0; i < spinners.size(); i++) {
 				spinnersNumber.set(i, (Integer)spinners.get(i).getValue()); 
-				((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum((Integer)spinners.get(i).getValue());
+			}
+			for(int i = 0; i < spinners.size(); i++) {
+				((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(spinnersNumber.get(i));				
 			}
 		}
 		else {

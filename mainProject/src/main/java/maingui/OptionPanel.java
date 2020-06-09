@@ -127,12 +127,14 @@ public class OptionPanel extends JPanel
 	private class SpinnerListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent event) {
-			for(int i = 0; i < spinners.size(); i++) {
-				if(!((Integer)spinners.get(i).getValue()).equals(spinnersNumber.get(i))) {
-					parent.refresh();
-					break;
-				}
-			}
+//			for(int i = 0; i < spinners.size(); i++) {
+//				if(!((Integer)spinners.get(i).getValue()).equals(spinnersNumber.get(i))) {
+//					parent.refresh();
+//					break;
+//				}
+//			}
+			System.out.println("a");
+			parent.refresh();
 		}
 	}
 	private class GearListener implements ActionListener{
@@ -240,7 +242,19 @@ public class OptionPanel extends JPanel
 				subButtons.get(i).get(j).setEnabled(op);
 				
 				if(i == Content.MEM) {
+					boolean nextButton = true;
+					for (Component component : spinners.get(j).getComponents()) {
+				        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+				        	nextButton = component.isEnabled();
+				        }
+				    }
 					spinners.get(j).setEnabled(op & spinnersEnable.get(j));
+					
+					for (Component component : spinners.get(j).getComponents()) {
+				        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+				        	component.setEnabled(nextButton);
+				        }
+				    }
 				}
 			}
 		}
@@ -298,16 +312,33 @@ public class OptionPanel extends JPanel
 	
 	public void updateSpinners(ArrayList<String> suggestions) {
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
+//			for(int i = 0; i < spinners.size(); i++) {
+//				spinnersNumber.set(i, (Integer)spinners.get(i).getValue()); 
+//			}
+//			for(int i = 0; i < spinners.size(); i++) {
+//				((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(spinnersNumber.get(i));				
+//			}
+			
 			for(int i = 0; i < spinners.size(); i++) {
-				spinnersNumber.set(i, (Integer)spinners.get(i).getValue()); 
+				for (Component component : spinners.get(i).getComponents()) {
+			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+			        	component.setEnabled(false);
+			        }
+			    } 
 			}
-			for(int i = 0; i < spinners.size(); i++) {
-				((SpinnerNumberModel)(spinners.get(i).getModel())).setMaximum(spinnersNumber.get(i));				
-			}
+			
 		}
 		else {
-			for(JSpinner spinner : spinners) {
-				((SpinnerNumberModel)(spinner.getModel())).setMaximum(16);
+//			for(JSpinner spinner : spinners) {
+//				((SpinnerNumberModel)(spinner.getModel())).setMaximum(16);
+//			}
+			
+			for(int i = 0; i < spinners.size(); i++) {
+				for (Component component : spinners.get(i).getComponents()) {
+			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+			        	component.setEnabled(true);
+			        }
+			    } 
 			}
 		}
 	}

@@ -27,6 +27,10 @@ public class MainGee
 
     private String ramSelected;
 
+    private String ramExceed;
+
+    private String conflict;
+
     public MainGee()
     {
         originList = new HardwareList();
@@ -154,6 +158,7 @@ public class MainGee
         suggestion.addAll(suggestPsu(selectList));
         suggestion.addAll(suggestCrate(selectList));
 
+        suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
 
         return suggestion;
@@ -446,6 +451,23 @@ public class MainGee
         }
 
         return suggest;
+    }
+
+    public void setRamExceed(Boolean value)
+    {
+        this.ramExceed = (value == true)? "1": "0";
+    }
+
+    public void addConflict(String value)
+    {
+        if(this.conflict.equals(""))
+        {
+            this.conflict = value;
+        }
+        else
+        {
+            this.conflict += value + " ";
+        }
     }
 
     public void test()

@@ -178,13 +178,13 @@ public class MainFrame extends JFrame
 				if(option == JOptionPane.YES_OPTION) {
 					smartModeBtnPanel.getSmartModeBtn().setIcon(toggleOn);
 					
+					smartModeBtnPanel.setToRefresh(true);
+
 					content.initLists();
 					mainPanel.getOptionPanel().init();
 					mainPanel.getPlusBtnPanel().init();
 					mainPanel.init();
 					suggestionPanel.init();
-					
-					smartModeBtnPanel.setToRefresh(true);
 				}
 			}
 		}

@@ -215,7 +215,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("cpu");
 
-                suggest.add(String.format("CPU支援的代數與記憶體不符合歐\ncpu generation: %s, ram generation: %s"
+                suggest.add(String.format("CPU支援的代數與記憶體不符合歐\ncpu generation: %s, ram generation: %s\n"
                                             , selected.cpuList.get(0).getRamGenerationSupport(), selected.ramList.get(0).getRamType()));
             }
         }
@@ -255,7 +255,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("ram");
 
-                suggest.add(String.format("記憶體容量超出主機板最大支援的大小囉\nram capacity: %sG, mb ramCapacity: %sG"
+                suggest.add(String.format("記憶體容量超出主機板最大支援的大小囉\nram capacity: %sG, mb ramCapacity: %sG\n"
                                 , ramCapacity, selected.mbList.get(0).getRamMaximum()));
             }
 
@@ -336,7 +336,7 @@ public class MainGee
                 addConflict("mb");
                 addConflict("disk");
 
-                suggest.add(String.format("主機板的m.2接口不夠囉\nmb m.2: %s, m.2 disk: %s"
+                suggest.add(String.format("主機板的m.2接口不夠囉\nmb m.2: %s, m.2 disk: %s\n"
                                             , selected.mbList.get(0).getM2Quantity(), m2Disk));
             }
         }

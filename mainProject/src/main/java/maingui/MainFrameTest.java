@@ -2,6 +2,8 @@ package maingui;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -17,6 +19,11 @@ public class MainFrameTest
 	    catch(Exception e) {
 	    	e.printStackTrace();
 	    }
+
+		LoadingFrame loading = new LoadingFrame();
+		
+		loading.setLocationRelativeTo(null);
+		loading.setVisible(true);
 		
 		MainGee code = new MainGee();
 		code.init();
@@ -28,10 +35,8 @@ public class MainFrameTest
 //		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		
-		LoadingFrame loading = new LoadingFrame();
-		loading.setLocationRelativeTo(mainFrame);
-		loading.setVisible(true);
-		
+		ImageIcon icon = new ImageIcon(mainFrame.getClass().getResource("icon.png"));
+		mainFrame.setIconImage(icon.getImage());
 		
 		mainFrame.init();
 		

@@ -21,9 +21,10 @@ public class UpdateHardwareList
         {
 
             cpuDocumentList     = UpdateCpu.getCpuList();
-            mbDocumentList      = UpdateMb.getMbList();
-            // mbDocumentList      = new ArrayList<Document>();
             coolerDocumentList  = UpdateCooler.getCoolerList();
+
+            mbDocumentList      = new UpdateMb().getResult();
+            // mbDocumentList      = new ArrayList<Document>();
 
             ramDocumentList     = new UpdateRam().getInfo();
             vgaDocumentList     = new UpdateVga().getInfo();

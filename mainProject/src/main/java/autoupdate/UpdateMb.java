@@ -2,6 +2,8 @@ package autoupdate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,11 +16,22 @@ import mainlogic.Mb;
 
 public class UpdateMb
 {
-    public static ArrayList<org.bson.Document> getMbList() throws IOException
+    ArrayList<org.bson.Document> result;
+
+    ExecutorService executor;
+
+    public UpdateMb() throws IOException
+    {
+        result = new ArrayList<org.bson.Document>();
+        
+        executor = Executors.newCachedThreadPool();
+
+        getMbList();
+    }
+
+    public void getMbList() throws IOException
     {
         Document doc = Jsoup.connect("https://www.motherboarddb.com/motherboards/ajax/table/").get();
-
-        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
 
         Elements pageLinks = doc.select("a.page-link");
 
@@ -27,16 +40,16 @@ public class UpdateMb
 
         for(int i = 0 ; i < pages ; i++)
         {
-            result.addAll(getPageList(i));
+            this.getPageList(i);
         }
-        
-        return result;
+
+        executor.shutdown();
+
+        while(!executor.isTerminated());
     }
 
-    private static ArrayList<org.bson.Document> getPageList(int page) throws IOException
-    {
-        ArrayList<org.bson.Document> result = new ArrayList<org.bson.Document>();
-        
+    private void getPageList(int page) throws IOException
+    {        
         Document doc = Jsoup.connect("https://www.motherboarddb.com/motherboards/ajax/table/?page=" + String.valueOf(page)).get();
 
         Elements links = doc.select("div.mb-1 a");
@@ -45,18 +58,16 @@ public class UpdateMb
         {
             // System.out.println(link.absUrl("href"));
 
-            result.add(getInnerMessages(link.absUrl("href")));
+            // result.add(getInnerMessages(link.absUrl("href")));
+
+            executor.execute(new UpdateMbWorker(link.absUrl("href"), this.result));
         }
 
         // result.add(getInnerMessages(links.get(0).absUrl("href")));
-
-        return result;
     }
 
-    private static org.bson.Document getInnerMessages(String url)
+    public static org.bson.Document getInnerMessages(String url)
     {
-        Mb mb;
-        
         org.bson.Document nowMb = initMbDocument();
 
         try
@@ -399,5 +410,10 @@ public class UpdateMb
         Matcher m = p.matcher(inp);
         
         return m;
+	}
+
+    public ArrayList<org.bson.Document> getResult() 
+    {
+		return this.result;
 	}
 }

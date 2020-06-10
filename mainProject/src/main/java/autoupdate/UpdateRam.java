@@ -116,7 +116,7 @@ public class UpdateRam {
 
 		for(Document ele : this.info)
 		{
-			if(ele.getString("name").toLowerCase().contains("ecc"))
+			if(ele.getString("name").toLowerCase().contains("ecc") || ele.getString("name").toLowerCase().contains(" nb "))
 			{
 				continue;
 			}

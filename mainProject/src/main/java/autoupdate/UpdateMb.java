@@ -45,7 +45,10 @@ public class UpdateMb
         {
             // System.out.println(link.absUrl("href"));
 
-            result.add(getInnerMessages(link.absUrl("href")));
+            org.bson.Document tmp = getInnerMessages(link.absUrl("href"));
+
+            if(tmp != null)
+                result.add(tmp);
         }
 
         // result.add(getInnerMessages(links.get(0).absUrl("href")));

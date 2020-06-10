@@ -2,6 +2,7 @@ package autoupdate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -19,6 +20,16 @@ public class UpdateMb
     ArrayList<org.bson.Document> result;
 
     ExecutorService executor;
+
+    private static final ArrayList<String> lg2 = new ArrayList<String>(
+        Arrays.asList("z370", 
+                      "h310", 
+                      "b360", 
+                      "b365", 
+                      "h370", 
+                      "q370", 
+                      "z390"
+        ));
 
     public UpdateMb() throws IOException
     {
@@ -157,6 +168,16 @@ public class UpdateMb
                     else
                     {
                         nowMb.append("pin", eles.get(i).select("a").text().toLowerCase());
+                    }
+
+                    if(m.group(1).equals("1151"))
+                    {
+                        m = findstr(nowMb.getString("name"), "(.*?) ([A-Z]([0-9]+))");
+
+                        if(m.find() && lg2.indexOf(m.group(2).toLowerCase()) >= 0)
+                        {
+                            nowMb.append("pin", nowMb.getString("pin") + "-2");
+                        }
                     }
 
                     // System.out.print("\t");

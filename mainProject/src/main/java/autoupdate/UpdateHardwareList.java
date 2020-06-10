@@ -20,7 +20,8 @@ public class UpdateHardwareList
         try
         {
 
-            cpuDocumentList     = UpdateCpu.getCpuList();
+            cpuDocumentList     = new UpdateCpu().getResult();
+            
             coolerDocumentList  = UpdateCooler.getCoolerList();
 
             mbDocumentList      = new UpdateMb().getResult();

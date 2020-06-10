@@ -40,15 +40,17 @@ public class UpdateMb
 
         for(int i = 0 ; i < pages ; i++)
         {
-            this.getPageList(i);
+            // executor.execute(new UpdateMbListWorker(this, i));
+
+            getPageList(i);
         }
 
         executor.shutdown();
 
-        while(!executor.isTerminated());
+        while(!executor.isTerminated()); 
     }
 
-    private void getPageList(int page) throws IOException
+    public void getPageList(int page) throws IOException
     {        
         Document doc = Jsoup.connect("https://www.motherboarddb.com/motherboards/ajax/table/?page=" + String.valueOf(page)).get();
 
@@ -229,7 +231,8 @@ public class UpdateMb
                         tmp += "DVI-D/";
                     }
 
-                    if(!eles.get(i).select("ul").text().isEmpty())
+                    // if(!eles.get(i).select("ul").text().isEmpty())
+                    if(!tmp.equals(""))
                     {
                         tmp = tmp.substring(0, tmp.length() - 1);
                     }
@@ -370,6 +373,7 @@ public class UpdateMb
         catch(Exception e)
         {
             System.out.println(":error documenting...");
+            e.printStackTrace();
 
             return null;
         }

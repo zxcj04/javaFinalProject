@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class UpdateMbWorker implements Runnable
 {
-    String url;
-    ArrayList<org.bson.Document> result;
+    private String url;
+    private ArrayList<org.bson.Document> result;
     
     public UpdateMbWorker(String url,ArrayList<org.bson.Document> result)
     {
@@ -16,6 +16,13 @@ public class UpdateMbWorker implements Runnable
     @Override
     public void run() 
     {
-        result.add(UpdateMb.getInnerMessages(url));
+        try
+        {
+            result.add(UpdateMb.getInnerMessages(url));
+        }
+        catch(Exception e)
+        {
+            System.out.println("error working");
+        }
     }    
 }

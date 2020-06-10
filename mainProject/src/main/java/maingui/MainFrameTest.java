@@ -35,7 +35,7 @@ public class MainFrameTest
 //		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		
-		ImageIcon icon = new ImageIcon(mainFrame.getClass().getResource("icon.png"));
+		ImageIcon icon = new ImageIcon(mainFrame.getClass().getResource("/icon.png"));
 		mainFrame.setIconImage(icon.getImage());
 		
 		mainFrame.init();

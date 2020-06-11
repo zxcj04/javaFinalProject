@@ -100,10 +100,6 @@ public class OptionPanel extends JPanel
 		spinnersEnable.add(false);
 		
 		spinners.get(0).addChangeListener(new SpinnerListener());
-		
-		for(Component c: spinners.get(0).getComponents()) {
-			System.out.println(c.toString());
-		}
 	}
 	
 	private class ComboBoxListener implements ItemListener {
@@ -305,20 +301,24 @@ public class OptionPanel extends JPanel
 	public void updateSpinners(ArrayList<String> suggestions) {
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
 			for(int i = 0; i < spinners.size(); i++) {
-				for (Component component : spinners.get(i).getComponents()) {
-			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-			        	component.setEnabled(false);
-			        }
-			    } 
+//				for (Component component : spinners.get(i).getComponents()) {
+//			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+//			        	component.setEnabled(false);
+//			        }
+//			    } 
+				
+				spinners.get(i).getComponent(0).setEnabled(false);
 			}
 		}
 		else {
 			for(int i = 0; i < spinners.size(); i++) {
-				for (Component component : spinners.get(i).getComponents()) {
-			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-			        	component.setEnabled(spinnersEnable.get(i));
-			        }
-			    } 
+//				for (Component component : spinners.get(i).getComponents()) {
+//			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+//			        	component.setEnabled(spinnersEnable.get(i));
+//			        }
+//			    } 
+
+				spinners.get(i).getComponent(0).setEnabled(true);
 			}
 		}
 	}

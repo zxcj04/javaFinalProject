@@ -110,7 +110,7 @@ public class ComponentPanel extends JPanel
 //			}
 //		});
 		
-		counter.setPreferredSize(new Dimension(100, 25));
+		counter.setPreferredSize(new Dimension(100, 32));
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setEditable(false);
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		

@@ -14,17 +14,11 @@ public class MainFrameTest
 	public static void main(String[] args)
 	{
 		try {
-	    	UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-	    }
-	    catch(Exception e) {
-	    	e.printStackTrace();
-	    	try {
-	    		UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-	    	}
-	    	catch(Exception e2) {
-	    		e2.printStackTrace();
-	    	}
-	    }
+    		UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+    	}
+    	catch(Exception e2) {
+    		e2.printStackTrace();
+    	}
 
 		LoadingFrame loading = new LoadingFrame();
 		

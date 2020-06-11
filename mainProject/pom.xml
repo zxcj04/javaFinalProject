@@ -44,6 +44,21 @@
       <artifactId>guava</artifactId>
       <version>29.0-jre</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -100,6 +115,15 @@
                   "<classpath /> "
                   <argument>autoupdate.MainTest</argument>
               </arguments>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <configuration>
+            <!-- 對丟失web.xml檢測機制進行忽略， Dynamic Web Module 3.0 工程時代不需要web.xml檔案註冊相關內容的，所以工程預設不生成web.xml。-->
+            <failOnMissingWebXml>false</failOnMissingWebXml>
           </configuration>
         </plugin>
       </plugins>

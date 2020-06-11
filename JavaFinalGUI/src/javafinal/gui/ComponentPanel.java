@@ -76,35 +76,39 @@ public class ComponentPanel extends JPanel
 		// spinner
 		SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 16, 1);
 		counter = new JSpinner(spinnerModel);
-		counter.setUI(new BasicSpinnerUI() {
-			@Override
-			protected Component createNextButton() {
-				Component c = createArrowButton(SwingConstants.NORTH);
-			    c.setName("nextButton");
-			    installNextButtonListeners(c);
-			    return c;
-		    }
-			@Override
-			protected Component createPreviousButton() {
-		        Component c = createArrowButton(SwingConstants.SOUTH);
-		        c.setName("previousButton");
-		        installPreviousButtonListeners(c);
-		        return c;
-		    }
-			
-			private Component createArrowButton(int direction) {
-			    JButton b = new BasicArrowButton(direction);
-			    
-			    Border buttonBorder = UIManager.getBorder("Spinner.arrowButtonBorder");
-			    if (buttonBorder instanceof UIResource) {
-			      b.setBorder(new CompoundBorder(buttonBorder, null));
-			    } else {
-			      b.setBorder(buttonBorder);
-			    }
-			    b.setInheritsPopupMenu(true);
-			    return b;
-			}
-		});
+//		counter.setUI(new BasicSpinnerUI() {
+//			@Override
+//			protected Component createNextButton() {
+//				Component c = createArrowButton(SwingConstants.NORTH);
+//			    c.setName("nextButton");
+//			    installNextButtonListeners(c);
+//			    return c;
+//		    }
+//			@Override
+//			protected Component createPreviousButton() {
+//		        Component c = createArrowButton(SwingConstants.SOUTH);
+//		        c.setName("previousButton");
+//		        installPreviousButtonListeners(c);
+//		        return c;
+//		    }
+//			
+//			private Component createArrowButton(int direction) {
+//			    JButton b = new BasicArrowButton(direction);
+//			    
+//			    Border buttonBorder = UIManager.getBorder("Spinner.arrowButtonBorder");
+//			    if (buttonBorder instanceof UIResource) {
+//			      b.setBorder(new CompoundBorder(buttonBorder, null));
+//			      b.setBorderPainted(false);
+//			      b.setFocusPainted(false);
+//			    } else {
+//			      b.setBorder(buttonBorder);
+//			      b.setBorderPainted(false);
+//			      b.setFocusPainted(false);
+//			    }
+//			    b.setInheritsPopupMenu(true);
+//			    return b;
+//			}
+//		});
 		
 		counter.setPreferredSize(new Dimension(100, 25));
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setEditable(false);

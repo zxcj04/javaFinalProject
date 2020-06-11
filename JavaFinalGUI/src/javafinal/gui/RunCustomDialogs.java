@@ -107,7 +107,7 @@ public class RunCustomDialogs
 		
 		caseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		caseFrame.setSize(380, 280);
+		caseFrame.setSize(420, 300);
 		caseFrame.setResizable(false);
 		caseFrame.setLocationRelativeTo(parent);
 		caseFrame.setVisible(true);

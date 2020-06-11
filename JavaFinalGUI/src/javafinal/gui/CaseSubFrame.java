@@ -99,7 +99,7 @@ public class CaseSubFrame extends JDialog {
 		
 		psuSize = new JComboBox<String>();
 		psuSize.setEditable(false);
-		psuSize.setPreferredSize(new Dimension(70, 32));
+		psuSize.setPreferredSize(new Dimension(100, 32));
 		psuSize.setBackground(new Color(215, 225, 238));
 		psuSize.setFont(MainFrame.font);
 

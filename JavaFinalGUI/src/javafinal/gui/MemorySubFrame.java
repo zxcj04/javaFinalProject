@@ -72,6 +72,7 @@ public class MemorySubFrame extends JDialog {
 		
 		capacity = new JComboBox<String>();
 		capacity.setEditable(false);
+		capacity.setPreferredSize(new Dimension(70, 32));
 		capacity.setBackground(new Color(215, 225, 238));
 		capacity.setFont(MainFrame.font);
 		

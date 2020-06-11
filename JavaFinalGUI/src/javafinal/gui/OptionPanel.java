@@ -100,6 +100,10 @@ public class OptionPanel extends JPanel
 		spinnersEnable.add(false);
 		
 		spinners.get(0).addChangeListener(new SpinnerListener());
+		
+		for(Component c: spinners.get(0).getComponents()) {
+			System.out.println(c.toString());
+		}
 	}
 	
 	private class ComboBoxListener implements ItemListener {

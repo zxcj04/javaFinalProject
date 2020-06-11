@@ -14,10 +14,16 @@ public class MainFrameTest
 	public static void main(String[] args)
 	{
 		try {
-	    	UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+	    	UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	    }
 	    catch(Exception e) {
 	    	e.printStackTrace();
+	    	try {
+	    		UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+	    	}
+	    	catch(Exception e2) {
+	    		e2.printStackTrace();
+	    	}
 	    }
 
 		LoadingFrame loading = new LoadingFrame();
@@ -30,7 +36,7 @@ public class MainFrameTest
 		
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(1000, 705);
-		mainFrame.setMinimumSize(new Dimension(1000, 705));
+		mainFrame.setMinimumSize(new Dimension(1000, 730));
 //		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		

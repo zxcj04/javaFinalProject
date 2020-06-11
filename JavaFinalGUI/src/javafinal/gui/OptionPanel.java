@@ -318,7 +318,7 @@ public class OptionPanel extends JPanel
 //			        }
 //			    } 
 
-				spinners.get(i).getComponent(0).setEnabled(true);
+				spinners.get(i).getComponent(0).setEnabled(spinnersEnable.get(i));
 			}
 		}
 	}

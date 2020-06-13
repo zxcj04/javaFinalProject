@@ -18,7 +18,12 @@ public class UpdateMbWorker implements Runnable
     {
         try
         {
-            result.add(UpdateMb.getInnerMessages(url));
+            org.bson.Document tmp = UpdateMb.getInnerMessages(url);
+
+            if(tmp != null)
+            {
+                result.add(UpdateMb.getInnerMessages(url));
+            }
         }
         catch(Exception e)
         {

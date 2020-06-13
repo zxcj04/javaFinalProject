@@ -63,7 +63,12 @@ public class UpdateCpu
 
         for(Element page : pages.get(0).select("a"))
         {
-            result.add(getInnerMessages(page.absUrl("href"), page.parent().parent().children().get(1).text()));
+            org.bson.Document tmp = getInnerMessages(page.absUrl("href"), page.parent().parent().children().get(1).text());
+            
+            if(tmp == null)
+                continue;
+
+            result.add(tmp);
             
             // executor.execute(new UpdateCpuWorker(page.absUrl("href"), this.result, page.parent().parent().children().get(1).text()));
         }
@@ -84,6 +89,30 @@ public class UpdateCpu
                                 .get();
     
             nowCpu.append("name", doc.select("h1 a").get(0).text());
+
+            if(nowCpu.getString("name").toLowerCase().contains("intel")) 
+            {                           
+                m = findstr(nowCpu.getString("name").toLowerCase(), "-[0-9]+(.*?)$");
+
+                if(m.find())
+                {                    
+                    if( m.group(1).toLowerCase().contains("g") ||
+                        m.group(1).toLowerCase().contains("e") ||
+                        m.group(1).toLowerCase().contains("u") ||
+                        m.group(1).toLowerCase().contains("h") ||
+                        m.group(1).toLowerCase().contains("y") ||
+                        m.group(1).toLowerCase().contains("q") ||
+                        m.group(1).toLowerCase().contains("m") ||
+                        m.group(1).toLowerCase().contains("h") ||
+                        m.group(1).toLowerCase().contains("p") ||
+                        m.group(1).toLowerCase().contains("c") ||
+                        m.group(1).toLowerCase().contains("b")                                                           
+                        )
+                    {
+                        return null;
+                    }
+                }
+            }
 
             String s = "-1";
 

@@ -15,8 +15,6 @@ public class UpdateHardwareList
      */
     public void update()
     {
-        double init = System.currentTimeMillis();
-
         try
         {
 
@@ -37,7 +35,5 @@ public class UpdateHardwareList
         {
             e.printStackTrace();
         }
-
-        System.out.println(System.currentTimeMillis() - init);
     }
 }

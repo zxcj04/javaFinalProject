@@ -1,6 +1,7 @@
 package mainlogic;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Sorts;
 
 import org.bson.Document;
 
@@ -19,7 +20,7 @@ public class CollectionList
     {
         HardwareList list = new HardwareList();
 
-        for(Document cur : cpuCollection.find())
+        for(Document cur : cpuCollection.find().sort(Sorts.descending("generation")))
         {
             list.cpuList.add(Cpu.toObject(cur));
         }

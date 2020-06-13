@@ -304,7 +304,11 @@ public class OptionPanel extends JPanel
 					// System.out.println("name: " + component.getName());
 			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
 			        	component.setEnabled(false);
-			        }
+					}
+					
+					if(i == 0){
+						System.out.println(component.toString());
+					}
 			    } 
 			}
 		}

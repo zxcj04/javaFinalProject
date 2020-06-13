@@ -3,6 +3,7 @@ package mainlogic;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoIterable;
+import com.mongodb.client.model.Sorts;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -275,7 +276,7 @@ public class HardwareList
 
         MongoCollection<Document> collection = db.getCpuCollection();
 
-        FindIterable<Document> findIterable = collection.find();
+        FindIterable<Document> findIterable = collection.find().sort(Sorts.descending("generation"));
 
         ArrayList<Bson> filters = new ArrayList<Bson>();
 

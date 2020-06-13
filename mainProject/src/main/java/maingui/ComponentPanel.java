@@ -80,14 +80,14 @@ public class ComponentPanel extends JPanel
 			@Override
 			protected Component createNextButton() {
 				Component c = createArrowButton(SwingConstants.NORTH);
-			    c.setName("nextButton");
+			    //c.setName("nextButton");
 			    installNextButtonListeners(c);
 			    return c;
 		    }
 			@Override
 			protected Component createPreviousButton() {
 		        Component c = createArrowButton(SwingConstants.SOUTH);
-		        c.setName("previousButton");
+		        //c.setName("previousButton");
 		        installPreviousButtonListeners(c);
 		        return c;
 		    }

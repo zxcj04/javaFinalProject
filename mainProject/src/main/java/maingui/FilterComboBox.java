@@ -60,6 +60,8 @@ public class FilterComboBox
                          * If there is "text" entered in text field of this combo use that "text" for filtering.
                          */
                         comboFilter(textfield.getText());
+                        
+                        System.out.println("run: " + textfield.getText());
                     }
                 });
             }

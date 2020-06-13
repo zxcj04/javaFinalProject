@@ -300,27 +300,24 @@ public class OptionPanel extends JPanel
 		// System.out.println(suggestions.get(suggestions.size() - 2));
 		if(suggestions.get(suggestions.size() - 2).equals("1")) {
 			for(int i = 0; i < spinners.size(); i++) {
-				for (Component component : spinners.get(i).getComponents()) {
-					// System.out.println("name: " + component.getName());
-			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
-			        	component.setEnabled(false);
-					}
-					
-					if(i == 0){
-						System.out.println(component.toString());
-					}
-			    } 
+//				for (Component component : spinners.get(i).getComponents()) {
+//			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+//			        	component.setEnabled(false);
+//			        }
+//			    } 
+				
+				spinners.get(i).getComponent(0).setEnabled(false);
 			}
 		}
 		else {
 			for(int i = 0; i < spinners.size(); i++) {
-				for (Component component : spinners.get(i).getComponents()) {
-					if (component.getName() != null && component.getName().endsWith("nextButton")) {
-						// System.out.println(spinnersEnable.get(i));
-						component.setEnabled(spinnersEnable.get(i));
-						
-			        }
-			    } 
+//				for (Component component : spinners.get(i).getComponents()) {
+//			        if (component.getName() != null && component.getName().endsWith("nextButton")) {
+//			        	component.setEnabled(spinnersEnable.get(i));
+//			        }
+//			    } 
+
+				spinners.get(i).getComponent(0).setEnabled(spinnersEnable.get(i));
 			}
 		}
 	}

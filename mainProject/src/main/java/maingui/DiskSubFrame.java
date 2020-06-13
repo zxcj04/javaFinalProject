@@ -130,7 +130,7 @@ public class DiskSubFrame extends JDialog {
 
 		unit = new JComboBox<String>();
 		unit.setEditable(false);
-		unit.setPreferredSize(new Dimension(50, 32));
+		unit.setPreferredSize(new Dimension(70, 32));
 		unit.setBackground(new Color(215, 225, 238));
 		unit.setFont(MainFrame.font);
 		

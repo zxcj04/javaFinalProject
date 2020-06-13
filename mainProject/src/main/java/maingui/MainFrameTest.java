@@ -18,10 +18,13 @@ public class MainFrameTest
 	    }
 	    catch(Exception e) {
 	    	e.printStackTrace();
-	    }
+		}
 
 		LoadingFrame loading = new LoadingFrame();
 		
+		ImageIcon icon = new ImageIcon(loading.getClass().getResource("/icon.png"));
+		
+		loading.setIconImage(icon.getImage());
 		loading.setLocationRelativeTo(null);
 		loading.setVisible(true);
 		
@@ -35,7 +38,6 @@ public class MainFrameTest
 //		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		
-		ImageIcon icon = new ImageIcon(mainFrame.getClass().getResource("/icon.png"));
 		mainFrame.setIconImage(icon.getImage());
 		
 		mainFrame.init();

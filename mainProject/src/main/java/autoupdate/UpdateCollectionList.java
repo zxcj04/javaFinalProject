@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.ReplaceOptions;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -45,7 +46,7 @@ public class UpdateCollectionList extends CollectionList {
         // executor.execute(new UpdateInsertWorker(list.psuDocumentList      , db, "psu"   ));
         // executor.execute(new UpdateInsertWorker(list.crateDocumentList    , db, "crate" ));
 
-        // executor.shutdown();
+        executor.shutdown();
 
         // while(!executor.isTerminated());
 
@@ -57,6 +58,19 @@ public class UpdateCollectionList extends CollectionList {
         insertOneDocument(list.vgaDocumentList      , db, "vga"   );
         insertOneDocument(list.psuDocumentList      , db, "psu"   );
         insertOneDocument(list.crateDocumentList    , db, "crate" );
+
+        // MongoCollection<Document> collection = db.getCollection("cpu");
+
+        // FindIterable<Document> exist = collection.find(eq("name", "AMD Ryzen 3 1300X"));
+
+        // if(exist.first() == null)
+        // {
+        //     System.out.println(exist.first());
+        // }
+        // else
+        // {
+        //     System.out.println("already exists : " + exist.first());
+        // }
     }
 
     private class UpdateInsertWorker implements Runnable 
@@ -83,20 +97,25 @@ public class UpdateCollectionList extends CollectionList {
     {
         MongoCollection<Document> collection = db.getCollection(collectionName);
 
-        FindIterable<Document> exist;
+        // FindIterable<Document> exist;
         
+        // for(Document d : documentList)
+        // {
+        //     exist = collection.find(eq("name", d.getString("name")));
+
+        //     if(exist.first() == null)
+        //     {
+        //         collection.insertOne(d);
+        //     }
+        //     else
+        //     {
+        //         System.out.println("already exists : " + d.getString("name"));
+        //     }
+        // }
+
         for(Document d : documentList)
         {
-            exist = collection.find(eq("name", d.getString("name")));
-
-            if(exist.first() == null)
-            {
-                collection.insertOne(d);
-            }
-            else
-            {
-                System.out.println("already exists : " + d.getString("name"));
-            }
+            collection.replaceOne(eq("name", d.getString("name")), d, new ReplaceOptions().upsert(true));
         }
     }
 

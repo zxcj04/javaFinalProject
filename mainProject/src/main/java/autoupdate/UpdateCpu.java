@@ -139,6 +139,10 @@ public class UpdateCpu
                         {
                             nowCpu.append("pin", m.group(1));
                         }
+                        else
+                        {
+                            nowCpu.append("pin", tds.get(i).text().toLowerCase());
+                        }
 
                         break;
 
@@ -206,7 +210,8 @@ public class UpdateCpu
                     case "GPU name:" :
                         i++;
                         
-                        nowCpu.append("internalGraphic", tds.get(i).text());
+                        if(!tds.get(i).text().equals(""))
+                            nowCpu.append("internalGraphic", tds.get(i).text());
 
                         break;
 

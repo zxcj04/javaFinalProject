@@ -256,9 +256,9 @@ public class UpdateMb
                     if(!tmp.equals(""))
                     {
                         tmp = tmp.substring(0, tmp.length() - 1);
-                    }
 
-                    nowMb.append("graphicOutput", tmp);
+                        nowMb.append("graphicOutput", tmp);
+                    }
 
                     break;
 
@@ -378,7 +378,9 @@ public class UpdateMb
                         }
                     }
 
-                    nowMb.append("m2Type", tmp);
+                    if(!tmp.equals(""))
+                        nowMb.append("m2Type", tmp);
+                        
                     nowMb.append("m2Quantity", tmpi);
 
                     break;

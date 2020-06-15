@@ -198,11 +198,11 @@ public class UpdateCpu
                     case "Memory type:" :
                         i++;
 
-                        m = findstr(tds.get(i).text(), "^(.*?)(DDR[0-9]+)");
+                        m = findstr(tds.get(i).text(), "(DDR[0-9])");
 
-                        if(m.find())
+                        while(m.find())
                         {
-                            nowCpu.append("ramGenerationSupport", m.group(2).toLowerCase());
+                            nowCpu.append("ramGenerationSupport", m.group(1).toLowerCase());
                         }
 
                         break;

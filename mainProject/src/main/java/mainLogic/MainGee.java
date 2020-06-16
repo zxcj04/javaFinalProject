@@ -187,42 +187,45 @@ public class MainGee
 
         if(!selected.cpuList.isEmpty())
         {
-            result.add(String.format("%s", selected.cpuList.get(0).getName()));
+            result.add(String.format("%s%n", selected.cpuList.get(0).getName()));
         }
 
         if(!selected.mbList.isEmpty())
         {
-            result.add(String.format("%s", selected.mbList.get(0).getName()));
+            result.add(String.format("%s%n", selected.mbList.get(0).getName()));
         }
 
         if(!selected.coolerList.isEmpty())
         {
-            result.add(String.format("%s", selected.coolerList.get(0).getName()));
+            result.add(String.format("%s%n", selected.coolerList.get(0).getName()));
         }
 
         if(!selected.ramList.isEmpty())
         {
-            result.add(String.format("%s", selected.ramList.get(0).getName()));
+            for(Ram m : selected.ramList)
+                result.add(String.format("%s%n", m.getName()));
         }
 
         if(!selected.vgaList.isEmpty())
         {
-            result.add(String.format("%s", selected.vgaList.get(0).getName()));
+            for(Vga v : selected.vgaList)
+                result.add(String.format("%s%n", v.getName()));
         }
 
         if(!selected.diskList.isEmpty())
         {
-            result.add(String.format("%s", selected.diskList.get(0).getName()));
+            for(Disk d : selected.diskList)
+                result.add(String.format("%s%n", d.getName()));
         }
 
         if(!selected.psuList.isEmpty())
         {
-            result.add(String.format("%s", selected.psuList.get(0).getName()));
+            result.add(String.format("%s%n", selected.psuList.get(0).getName()));
         }
 
         if(!selected.crateList.isEmpty())
         {
-            result.add(String.format("%s", selected.crateList.get(0).getName()));
+            result.add(String.format("%s%n", selected.crateList.get(0).getName()));
         }        
 
         return result;

@@ -210,7 +210,7 @@ public class MainGee
                 if(!last.equals(m.getName()))
                 {
                     if(!last.equals(""))
-                        result.add(String.format("%s * %n%n", last, now));
+                        result.add(String.format("%s * %d%n", last, now));
 
                     last = m.getName();
                     now = 1;
@@ -220,6 +220,8 @@ public class MainGee
                     now++;
                 }
             }
+
+            result.add(String.format("%s * %d%n", last, now));
         }
 
         if(!selected.vgaList.isEmpty())

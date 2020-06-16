@@ -205,15 +205,17 @@ public class MainGee
         if(!selected.ramList.isEmpty())
         {
             String last = "";
-            int now = 0;
+            int now = 1;
 
             for(Ram m : selected.ramList)
             {
-                if(!last.equals(m.getName()) && !last.equals(""))
+                if(!last.equals(m.getName()))
                 {
-                    result.add(String.format("%s * %n%n", last, now));
+                    if(!last.equals(""))
+                        result.add(String.format("%s * %n%n", last, now));
 
                     last = m.getName();
+                    now = 1;
                 }
                 else
                 {

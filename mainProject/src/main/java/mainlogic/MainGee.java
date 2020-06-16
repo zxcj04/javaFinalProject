@@ -204,8 +204,22 @@ public class MainGee
 
         if(!selected.ramList.isEmpty())
         {
+            String last = "";
+            int now = 0;
+
             for(Ram m : selected.ramList)
-                result.add(String.format("%s%n", m.getName()));
+            {
+                if(!last.equals(m.getName()) && !last.equals(""))
+                {
+                    result.add(String.format("%s * %n%n", last, now));
+
+                    last = m.getName();
+                }
+                else
+                {
+                    now++;
+                }
+            }
         }
 
         if(!selected.vgaList.isEmpty())

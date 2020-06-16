@@ -160,6 +160,11 @@ public class MainGee
         suggestion.addAll(suggestPsu(selectList));
         suggestion.addAll(suggestCrate(selectList));
 
+        if(suggestion.size() == 0)
+        {
+            suggestion.addAll(totalHardware(selectList));
+        }
+
         suggestion.add(conflict);
         suggestion.add(ramExceed);  // "1" "0"
         suggestion.add(ramSelected);
@@ -174,6 +179,53 @@ public class MainGee
         nowList.setHardware(selectedList, nameList, originList);
 
         return nowList;
+    }
+
+    private ArrayList<String> totalHardware(HardwareList selected)
+    {
+        ArrayList<String> result = new ArrayList<String>();
+
+        if(!selected.cpuList.isEmpty())
+        {
+            result.add(String.format("%s", selected.cpuList.get(0).getName()));
+        }
+
+        if(!selected.mbList.isEmpty())
+        {
+            result.add(String.format("%s", selected.mbList.get(0).getName()));
+        }
+
+        if(!selected.coolerList.isEmpty())
+        {
+            result.add(String.format("%s", selected.coolerList.get(0).getName()));
+        }
+
+        if(!selected.ramList.isEmpty())
+        {
+            result.add(String.format("%s", selected.ramList.get(0).getName()));
+        }
+
+        if(!selected.vgaList.isEmpty())
+        {
+            result.add(String.format("%s", selected.vgaList.get(0).getName()));
+        }
+
+        if(!selected.diskList.isEmpty())
+        {
+            result.add(String.format("%s", selected.diskList.get(0).getName()));
+        }
+
+        if(!selected.psuList.isEmpty())
+        {
+            result.add(String.format("%s", selected.psuList.get(0).getName()));
+        }
+
+        if(!selected.crateList.isEmpty())
+        {
+            result.add(String.format("%s", selected.crateList.get(0).getName()));
+        }        
+
+        return result;
     }
 
     public ArrayList<String> suggestCpu(HardwareList selected)

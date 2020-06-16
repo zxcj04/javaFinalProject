@@ -3,6 +3,7 @@ package maingui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,8 +32,17 @@ public class LoadingFrame extends JFrame
 		textPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		JLabel text = new JLabel("Loading...");
-		Font f = new Font("Monospaced", Font.BOLD, 32);
-		text.setFont(f);
+
+		try
+		{
+			text.setFont(Loadfont.loadFont(Paths.get(getClass().getResource("/sarasa-fixed-cl-bold.ttf").toURI()).toString(), 32));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+
+			text.setFont(new Font("Monospaced", Font.BOLD, 32));
+		}
 		
 		textPane.add(text);
 		

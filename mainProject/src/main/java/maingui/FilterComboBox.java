@@ -2,6 +2,8 @@ package maingui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -14,57 +16,69 @@ import javax.swing.SwingUtilities;
 /**
  * A class for filtered combo box.
  */
-public class FilterComboBox
-    extends JComboBox
-{
+public class FilterComboBox extends JComboBox {
     /**
      * Entries to the combobox ArrayList.
      */
     private ArrayList<String> entries;
-    
-    private final JTextField textfield =
-            (JTextField) this.getEditor().getEditorComponent();
 
-    public ArrayList<String> getEntries()
-    {
+    private final JTextField textfield = (JTextField) this.getEditor().getEditorComponent();
+
+    public ArrayList<String> getEntries() {
         return entries;
     }
 
-    public FilterComboBox(ArrayList<String> entries)
-    {
+    public FilterComboBox(ArrayList<String> entries) {
         super(entries.toArray());
-        this.entries = entries  ;
+        this.entries = entries;
         this.setEditable(true);
 
-        final JTextField textfield =
-            (JTextField) this.getEditor().getEditorComponent();
-                
+        final JTextField textfield = (JTextField) this.getEditor().getEditorComponent();
+
         textfield.setBackground(new Color(215, 225, 238));
-        
+
         Font font = new Font("Monospaced", Font.BOLD, 16);
         textfield.setFont(font);
 
         /**
          * Listen for key presses.
          */
-        textfield.addKeyListener(new KeyAdapter()
-        {
-            public void keyReleased(KeyEvent ke)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
+        textfield.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent ke) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
                         /**
-                         * On key press filter the ArrayList.
-                         * If there is "text" entered in text field of this combo use that "text" for filtering.
+                         * On key press filter the ArrayList. If there is "text" entered in text field
+                         * of this combo use that "text" for filtering.
                          */
                         comboFilter(textfield.getText());
-                        
+
                         System.out.println("run: " + textfield.getText());
                     }
                 });
             }
+        });
+
+        textfield.addFocusListener(new FocusListener() {
+            String tmp;
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                tmp = textfield.getText();
+
+                textfield.setText("");
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+                if(textfield.getText().equals(""))
+                {
+                    textfield.setText(tmp);
+                }
+            }
+            
         });
 
     }

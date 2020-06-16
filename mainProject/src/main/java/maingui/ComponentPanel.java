@@ -71,6 +71,8 @@ public class ComponentPanel extends JPanel
 
 		comboBox.setPreferredSize(new Dimension(420, 25));
 		panel1.add(comboBox);
+		comboBox.getTextField().setFont(MainFrame.font);
+
 		comboBox.setVisible(visableSet[cur][0]);
 		
 		// spinner
@@ -114,8 +116,8 @@ public class ComponentPanel extends JPanel
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setEditable(false);
 		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setBackground(new Color(215, 225, 238));
 		
-		Font font = new Font("Monospaced", Font.BOLD, 16);
-		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setFont(font);
+		// Font font = new Font("Monospaced", Font.BOLD, 16);
+		((JSpinner.NumberEditor)counter.getEditor()).getTextField().setFont(MainFrame.font);
 		
 		panel1.add(counter);
 		counter.setVisible(visableSet[cur][1]);

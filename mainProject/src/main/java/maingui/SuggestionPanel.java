@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 public class SuggestionPanel extends JPanel
 {
@@ -16,6 +17,7 @@ public class SuggestionPanel extends JPanel
 	public SuggestionPanel(){
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createTitledBorder("Suggestions"));
+		((TitledBorder)this.getBorder()).setTitleFont(MainFrame.title);
 		this.setPreferredSize(new Dimension(300, 600));
 		this.setBackground(new Color(231, 242, 255));
 		this.setOpaque(true);

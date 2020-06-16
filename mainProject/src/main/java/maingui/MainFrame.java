@@ -4,42 +4,45 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 
-import java.util.ArrayList;
-
-import mainlogic.MainGee;
 import mainlogic.HardwareNameList;
+import mainlogic.MainGee;
 
-public class MainFrame extends JFrame
-{
+public class MainFrame extends JFrame {
 	public Content content;
-	
-	public static final String[] names = {"CPU", "CPU Cooler", "MotherBoard", "Memory", "Disk", "Graphic",
-										  "PSU", "Computer Case"};
-	
-	public static final Font title =  new Font("Monospaced", Font.BOLD, 20);
-	public static final Font font =  new Font("Monospaced", Font.BOLD, 16);
-	
+
+	public static final String[] names = { "CPU", "CPU Cooler", "MotherBoard", "Memory", "Disk", "Graphic", "PSU",
+			"Computer Case" };
+
+	// public static final Font title = new Font("Monospaced", Font.BOLD, 20);
+	// public static final Font font = new Font("Monospaced", Font.BOLD, 16);
+
+	public static Font title;
+	public static Font font;
+
 	private final Container contentPane;
 	private CardLayout card;
-	
+
 	private RefreshWorker worker;
-	
+
 	private SmartModeBtnPanel smartModeBtnPanel;
-	
+
 	private MainPanel mainPanel;
-	
+
 	private SuggestionPanel suggestionPanel;
-	
+
 	public MainFrame(MainGee source, HardwareNameList content)
 	{
 		super("大力出奇機");
@@ -52,6 +55,15 @@ public class MainFrame extends JFrame
 		card = new CardLayout();
 		contentPane = this.getContentPane();
 		contentPane.setLayout(card);
+
+		try {
+
+			title 		= Loadfont.loadFont(Paths.get(getClass().getResource("/sarasa-fixed-cl-bold.ttf").toURI()).toString(), 22);
+			font 		= Loadfont.loadFont(Paths.get(getClass().getResource("/sarasa-fixed-cl-bold.ttf").toURI()).toString(), 16);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void init() {

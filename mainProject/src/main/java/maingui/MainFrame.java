@@ -6,6 +6,13 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GraphicsEnvironment;
+import java.awt.FontFormatException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,8 +33,8 @@ public class MainFrame extends JFrame {
 	public static final String[] names = { "CPU", "CPU Cooler", "MotherBoard", "Memory", "Disk", "Graphic", "PSU",
 			"Computer Case" };
 
-	// public static final Font title = new Font("Monospaced", Font.BOLD, 20);
-	// public static final Font font = new Font("Monospaced", Font.BOLD, 16);
+	// public static final Font title = new Font("Greek", Font.BOLD, 20);
+	// public static final Font font = new Font("Greek", Font.BOLD, 16);
 
 	public static Font title;
 	public static Font font;
@@ -56,10 +63,51 @@ public class MainFrame extends JFrame {
 		contentPane = this.getContentPane();
 		contentPane.setLayout(card);
 
-		try {
+		// try {
+		// 	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-			title 		= Loadfont.loadFont(Paths.get(getClass().getResource("/sarasa-fixed-cl-bold.ttf").toURI()).toString(), 22);
-			font 		= Loadfont.loadFont(Paths.get(getClass().getResource("/sarasa-fixed-cl-bold.ttf").toURI()).toString(), 16);
+		// 	ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("/sarasa-fixed-cl-bold.ttf")));
+		// } 
+		// catch (IOException|FontFormatException e) {
+		// 	e.printStackTrace();
+		// }
+
+		try {
+			// FileInputStream stream = getClass().getResourceAsStream("/sarasa-fixed-cl-bold.ttf");
+			// System.out.println(Paths.get(getClass().getResource("/sarasa-fixed-cl-bold.ttf").toURI()).toString());
+			// File f = new File("/sarasa-fixed-cl-bold.ttf");
+			// System.out.println(f.getAbsolutePath());
+
+			InputStream is = getClass().getResourceAsStream("/sarasa-fixed-cl-bold.ttf");
+
+			Font fT = Font.createFont(Font.TRUETYPE_FONT, is);
+			// Font f = Font.createFont(Font.TRUETYPE_FONT, is);
+
+			is.close();
+
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(fT);
+			// ge.registerFont(f);
+
+			// System.out.println(Paths.get(getClass().getResource("/circle.gif").toURI()).toString());
+
+			// title 		= Loadfont.loadFont(Paths.get(getClass().getResource("../sarasa-fixed-cl-bold.ttf").toURI()).toString(), 22);
+			// font 		= Loadfont.loadFont(Paths.get(getClass().getResource("../sarasa-fixed-cl-bold.ttf").toURI()).toString(), 16);
+			
+
+			// String path = System.getProperty("java.class.path");
+			// String fileseparator = System.getProperty("file.separator");
+			// int pathlength = path.length();
+			// if (path.charAt(pathlength-1) != fileseparator.charAt(0)) { path += fileseparator; }
+			// path += "sarasa-fixed-cl-bold.ttf";
+
+			// System.out.println("\""+ path+ "\"");
+
+			// Font f = Font.createFont(Font.TRUETYPE_FONT, new File(path));
+
+			// // stream.close();
+			title 		= fT.deriveFont(22f);
+			font 		= fT.deriveFont(16f);			
 
 		} catch (Exception e) {
 			e.printStackTrace();
